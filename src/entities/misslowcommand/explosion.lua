@@ -13,6 +13,10 @@ function Explosion:init(pos_x, pos_y)
 
     local g = anim8.newGrid(50, 50, self.sprite:getWidth(), self.sprite:getHeight())
     self.animation = anim8.newAnimation(g('1-3', 1), 0.1)
+    self.offset = {
+        x = 50 / 2,
+        y = 50 / 2,
+    }
 end
 
 function Explosion:process(dt)

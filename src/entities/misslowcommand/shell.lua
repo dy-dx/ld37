@@ -23,6 +23,10 @@ function Shell:init(dest_x, dest_y)
     }
     self.pos = {x = start_x, y = start_y}
     self.sprite = love.graphics.newImage('assets/images/bullet.png')
+    self.offset = {
+        x = self.sprite:getWidth() / 2,
+        y = self.sprite:getHeight() / 2,
+    }
 end
 
 function Shell:process(dt)
