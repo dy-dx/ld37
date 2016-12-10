@@ -13,20 +13,43 @@ function VentGas:init()
     self.r = 10
     self.g = 175
     self.b = 35
-    self.maxGasPressure = 300
+
+    -- gas pressure
+    self.gasPressureDecrease = 100
     self.gasGrowthRate = 1
-    self.gasPressureBox = {x = screenWidth/3
+    self.maxGasPressure = 300
+    self.currentGasPressure = 0
+    self.gasPressureBox = {x = screenWidth*1/4
         , y = 20, width = 60
         , height = self.maxGasPressure, r=25, g=25, b=75
         }
-    self.currentGasPressure = 0
     self.gasPressureButton = {x=self.gasPressureBox.x + 30
         , y=self.gasPressureBox.y + self.gasPressureBox.height + 40
         , radius=30, r=0, g=255, b=40, text='Press Here'}
-    self.gasPressureMeter = {r=255, g=0, b=0
-        , x=self.gasPressureBox.x
-        , y=self.gasPressureBox.y + self.gasPressureBox.height
-        , width=self.gasPressureBox.width, height=10}
+
+    -- oxygen
+    self.maxOxygenPressure = 300
+    self.oxygenPressureBox = {x = screenWidth*2/4
+        , y = 20, width = 60
+        , height = self.maxOxygenPressure, r=25, g=25, b=75
+        }
+    self.oxygenPressureButton = {x=self.oxygenPressureBox.x + 30
+        , y=self.oxygenPressureBox.y + self.oxygenPressureBox.height + 40
+        , radius=30, r=0, g=255, b=40, text='DO NOT Press Here'}
+
+    -- unknown pressure
+    self.unknownPressureDecrease = 50
+    self.unknownGrowthRate = 1.5
+    self.maxUnknownPressure = 300
+    self.currentUnknownPressure = 0
+    self.unknownPressureBox = {x = screenWidth*3/4
+        , y = 20, width = 60
+        , height = self.maxUnknownPressure, r=25, g=25, b=75
+        }
+    self.currentunknownPressure = 0
+    self.unknownPressureButton = {x=self.unknownPressureBox.x + 30
+        , y=self.unknownPressureBox.y + self.unknownPressureBox.height + 40
+        , radius=30, r=0, g=255, b=40, text='Press Here'}
 end
 
 return VentGas
