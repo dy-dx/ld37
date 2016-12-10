@@ -9,8 +9,8 @@ function Level:load()
     world = tiny.world(
         require ("systems/playercontrolsystem")(),
         require ("systems/spritesystem")(),
-        require ("systems/panelsystem")(),
-        require ("systems/debughitboxsystem")()
+        require ("systems/drawsystems/panelsystem")(),
+        require ("systems/drawsystems/debughitboxsystem")()
     )
 
     local panel = Panel()
