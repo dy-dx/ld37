@@ -13,10 +13,7 @@ function Shell:init(dest_x, dest_y)
     local offset_x = dest_x - start_x
     local offset_y = dest_y - start_y
     local total_hypotenuse = math.sqrt(offset_x * offset_x + offset_y * offset_y)
-    angle = math.atan(offset_y / offset_x)
-    if offset_x < 0 then
-        angle = angle - math.pi
-    end
+    angle = math.atan2(offset_y, offset_x)
 
     self.velocity = {
         x = math.cos(angle) * Shell.SPEED,
