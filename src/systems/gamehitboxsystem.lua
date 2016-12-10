@@ -1,3 +1,5 @@
+local Utils = require 'utils'
+
 GameHitboxSystem = tiny.processingSystem(Class{})
 
 function GameHitboxSystem:init()
@@ -18,14 +20,10 @@ function GameHitboxSystem:process(e, dt)
     if self.input:released('left_click') then
         clickX, clickY = love.mouse.getPosition()
 
-        if(e.hitbox.x < clickX and
-            clickX < e.hitbox.x + e.hitbox.w and
-            e.hitbox.y < clickY and
-            clickY < e.hitbox.y + e.hitbox.h) then
+        local point = {x = clickX, y = clickY}
 
+        if(Utils.isInside(point, e.hitbox)) then
             printTable(e)
-
-
             Global.currentGame = e.gName
         end
     end
