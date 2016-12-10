@@ -15,18 +15,22 @@ Global = {
 function Level:load()
     -- ordering of systems really matters
     world = tiny.world(
-        require ("systems/playercontrolsystem")(),
+        require ("systems/misslowcommand/playercontrolsystem")(),
         require ("systems/navpanelcontrolsystem")(),
         require ("systems/gamehitboxsystem")(),
+        require ("systems/misslowcommand/motionsystem")(),
+        require ("systems/misslowcommand/collisionsystem")(),
 
         -- draw systems
+
         require ("systems/drawsystems/spritesystem")(),
         require ("systems/drawsystems/panelsystem")(),
         require ("systems/drawsystems/debughitboxsystem")(),
         require ("systems/drawsystems/drawnavpanelsystem")(),
 
         require ("systems/overlaySystem")(),
-        require ("systems/overlayInputSystem")()
+        require ("systems/overlayInputSystem")(),
+        require ("systems/drawsystems/misslowspritesystem")()
     )
 
     local windowWidth  = love.graphics.getWidth()
@@ -44,6 +48,7 @@ function Level:load()
 
     world:addEntity(NavPanel())
     world:addEntity(Panel({x = 90, y = 120, w = 110, h = 200}, "TESTGAME")) -- needs to take panel graphis
+    world:addEntity(Panel({x = 90, y = 120, w = 110, h = 200}, "misslowcommand")) -- needs to take panel graphis
     world:addEntity(Environment())
 end
 

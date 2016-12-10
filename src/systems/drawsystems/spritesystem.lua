@@ -3,7 +3,7 @@ SpriteSystem = tiny.processingSystem(SpriteSystem)
 
 function SpriteSystem:init()
     self.isDrawingSystem = true
-    self.filter = tiny.requireAll('sprite', 'pos')
+    self.filter = tiny.requireAll('sprite', 'pos', 'global')
 end
 
 function SpriteSystem:preProcess(dt)

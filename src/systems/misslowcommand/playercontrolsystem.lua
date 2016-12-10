@@ -3,6 +3,7 @@ local Shell = require 'entities/misslowcommand/shell'
 PlayerControlSystem = tiny.processingSystem(Class{})
 
 function PlayerControlSystem:init()
+    self.name = "misslowcommand"
     self.filter = tiny.requireAll('controllable')
     self.input = Input()
     self.input:bind('mouse1', 'mouse1')
@@ -17,6 +18,9 @@ function PlayerControlSystem:postProcess(dt)
 end
 
 function PlayerControlSystem:process(e, dt)
+    if Global.currentGame ~= self.name then
+        return
+    end
     if self.input:pressed("mouse1") then
         -- self.mouseDown = true
         -- if self.mouseDown then

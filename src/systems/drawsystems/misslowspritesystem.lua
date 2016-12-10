@@ -2,8 +2,9 @@ local SpriteSystem = Class{}
 SpriteSystem = tiny.processingSystem(SpriteSystem)
 
 function SpriteSystem:init()
+    self.name = "misslowcommand"
     self.isDrawingSystem = true
-    self.filter = tiny.requireAll('sprite', 'pos')
+    self.filter = tiny.requireAll('sprite', 'pos', self.name)
 end
 
 function SpriteSystem:preProcess(dt)
@@ -14,6 +15,9 @@ function SpriteSystem:postProcess(dt)
 end
 
 function SpriteSystem:process(e, dt)
+    if Global.currentGame ~= self.name then
+        return
+    end
     local an = e.animation
     local alpha = e.alpha or 1
     local pos, sprite, scale, rot, offset = e.pos, e.sprite, e.scale, e.rot, e.offset
