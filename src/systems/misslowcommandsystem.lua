@@ -1,7 +1,7 @@
 MisslowCommandSystem = tiny.processingSystem(Class{})
 
 function MisslowCommandSystem:init()
-    self.filter = tiny.requireAll('pos', 'velocity', 'destination', 'misslowcommand')
+    self.filter = tiny.requireAll('pos', 'velocity', 'process', 'isDead', 'misslowcommand')
 end
 
 function MisslowCommandSystem:preProcess(dt)
@@ -11,16 +11,13 @@ function MisslowCommandSystem:postProcess(dt)
 end
 
 function MisslowCommandSystem:process(e, dt)
-    e.pos.x = e.velocity.x + e.pos.x
-    e.pos.y = e.velocity.y + e.pos.y
+    e.pos.x = e.velocity.x * dt + e.pos.x
+    e.pos.y = e.velocity.y * dt + e.pos.y
 
-    local ox = e.pos.x - e.destination.x
-    local oy = e.pos.y - e.destination.y
-    if ox * ox + oy * oy < e.SPEED * e.SPEED then
-        print "BOOM"
+    e:process(dt)
+    if e.isDead then
         world:remove(e)
     end
-    -- e:process(dt)
 end
 
 return MisslowCommandSystem
