@@ -16,15 +16,19 @@ end
 
 function overlayInputSystem:overlayActive(e, dt)
   if self.input:released('left_click') then
-    print("click happened")
     clickX, clickY = love.mouse.getPosition()
+    local position = {x = clickX, y = clickY}
 
     local closeHit = lume.any(e.closeHitboxes, function(cHitbox)
-      return Utils.isInside({x = clickX, y = clickY}, cHitbox)
+      return Utils.isInside(position, cHitbox)
     end)
 
     if(closeHit) then
       Global.currentGame = nil
+    end
+
+    if(not Utils.isInside(position, e.hitbox)) then
+        Global.currentGame = nil
     end
   end
 end
