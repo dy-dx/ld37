@@ -2,7 +2,7 @@ local bump = require('vendor/bump')
 local Environment = require 'entities/environment'
 local Panel = require 'entities/panel'
 local NavPanel = require 'entities/navpanel'
-local MisslowCommandPlayer = require 'entities/misslowcommandplayer'
+local MisslowCommandPlayer = require 'entities/misslowcommand/player'
 
 
 local Level = Class{}
