@@ -1,5 +1,5 @@
 local DrawNavPanelSystem = Class{}
-DrawNavPanelSystem = tiny.system(DrawNavPanelSystem)
+DrawNavPanelSystem = tiny.processingSystem(DrawNavPanelSystem)
 
 function DrawNavPanelSystem:init()
     self.isDrawingSystem = true
@@ -15,8 +15,9 @@ function DrawNavPanelSystem:postProcess(dt)
 end
 
 function DrawNavPanelSystem:process(e, dt)
-    print('hi')
-    love.graphics.rectangle('fill', 0, 300, 800, 200)
+    love.graphics.rectangle('fill', 100, 450, 600, 150)
+    love.graphics.setColor(0, 0, 0, 255)
+    love.graphics.rectangle('fill', 250, 480, 400, 90)
 end
 
 return DrawNavPanelSystem
