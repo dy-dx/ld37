@@ -46,7 +46,7 @@ function Level:load()
                 x = padding,
                 y = padding,
                 w = windowWidth - 2 * padding,
-                h = windowHeight - 2 * padding
+                h = windowHeight - 2 * padding * 1.5
             },
             {
                 {
@@ -56,10 +56,10 @@ function Level:load()
                     h = closeRadius * 2
                 },
                 {
-                    x = windowWidth / 2 - (largCloseButtonWidth / 2),
-                    y = windowHeight - padding,
-                    w = largCloseButtonWidth,
-                    h = largCloseButtonHeight
+                    x = 100,
+                    y = windowHeight - 2 * padding,
+                    w = 600,
+                    h = 100
                 }
             }
         ));
