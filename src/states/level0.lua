@@ -14,7 +14,6 @@ function Level:load()
         -- draw systems
         require ("systems/drawsystems/panelsystem")(),
         require ("systems/drawsystems/debughitboxsystem")(),
-        require ("systems/drawsystems/environmentsystem")(),
         require ("systems/drawsystems/drawnavpanelsystem")(),
         require ("systems/drawsystems/spritesystem")()
     )
