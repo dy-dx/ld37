@@ -2,9 +2,18 @@
 
 local Overlay = Class{}
 
-function Overlay:init(hitbox)
-    self.isOverlay = true;
-    self.hitbox = hitbox;
+function Overlay:init()
+    self.isOverlay = true
+    local windowWidth  = love.graphics.getWidth()
+    local windowHeight = love.graphics.getHeight()
+    local padding = 40
+    local bottomPadding = 120
+    self.hitbox = {
+        x = padding,
+        y = padding,
+        w = windowWidth - 2 * padding,
+        h = windowHeight - bottomPadding
+    }
 end
 
 function Overlay:draw(dt)

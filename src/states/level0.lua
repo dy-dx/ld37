@@ -32,19 +32,7 @@ function Level:load()
         require ("systems/drawsystems/misslowspritesystem")()
     )
 
-    local windowWidth  = love.graphics.getWidth()
-    local windowHeight = love.graphics.getHeight()
-    local padding = 40;
-
-    -- fixme
-    world:addEntity(
-        Overlay({
-            x = padding,
-            y = padding,
-            w = windowWidth - 2 * padding,
-            h = windowHeight - 2 * padding
-        }));
-
+    world:addEntity(Overlay())
     world:addEntity(NavPanel())
     world:addEntity(Panel({x = 90, y = 120, w = 110, h = 200}, "TESTGAME")) -- needs to take panel graphis
     world:addEntity(Panel({x = 90, y = 120, w = 110, h = 200}, "misslowcommand")) -- needs to take panel graphis
