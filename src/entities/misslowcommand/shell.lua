@@ -19,7 +19,6 @@ function Shell:init(dest_x, dest_y)
         x = math.cos(angle) * Shell.SPEED,
         y = math.sin(angle) * Shell.SPEED,
     }
-    print(self.velocity.x)
     self.pos = {x = start_x, y = start_y}
     self.sprite = love.graphics.newImage('assets/images/bullet.png')
 end

@@ -11,7 +11,6 @@ function MisslowCommandSystem:postProcess(dt)
 end
 
 function MisslowCommandSystem:process(e, dt)
-    print(e.velocity.x)
     e.pos.x = e.velocity.x + e.pos.x
     e.pos.y = e.velocity.y + e.pos.y
 

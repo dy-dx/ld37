@@ -21,7 +21,6 @@ function PlayerControlSystem:process(e, dt)
         -- self.mouseDown = true
         -- if self.mouseDown then
         local x, y = love.mouse.getPosition()
-        print (x, y)
         world:addEntity(Shell(x, y))
         -- end
     end
