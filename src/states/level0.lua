@@ -1,8 +1,7 @@
 local bump = require('vendor/bump')
-local Player = require 'entities/player'
-local Met = require 'entities/met'
 local CollisionBox = require 'entities/collisionbox'
 local Environment = require 'entities/environment'
+local Panel = require 'entities/panel'
 
 local Level = Class{}
 function Level:init()
@@ -15,8 +14,6 @@ function Level:load()
     -- ordering of systems really matters
     world = tiny.world(
         require ("systems/playercontrolsystem")(),
-        require ("systems/projectilephysicssystem")(),
-        require ("systems/bumpphysicssystem")(bumpWorld),
         require ("systems/spritesystem")(),
         require ("systems/environmentsystem")(),
         require ("systems/panelsystem")(),
@@ -24,12 +21,8 @@ function Level:load()
     )
     print("beginning of world")
 
-    local environment = Environment()
-    local player = Player()
-    
     -- fixme
-
-    world:addEntity(environment)
+    world:addEntity(Environment())
 end
 
 return Level
