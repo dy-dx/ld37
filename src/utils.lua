@@ -7,4 +7,8 @@ function Utils.isInside(point, hitbox)
         point.y < hitbox.y + hitbox.h;
 end
 
+function Utils.isInCircle(x, y, radius)
+    return x * x + y * y < radius * radius
+end
+
 return Utils

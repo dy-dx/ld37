@@ -1,4 +1,5 @@
 -- local gamestate = require "lib.gamestate"
+local Utils = (require 'utils')()
 
 local Missile = Class{}
 Missile.SPEED = 60
@@ -29,7 +30,7 @@ end
 function Missile:process(dt)
     local ox = self.pos.x - self.destination.x
     local oy = self.pos.y - self.destination.y
-    if ox * ox + oy * oy < dt * Missile.SPEED * dt * Missile.SPEED then
+    if Utils.isInCircle(ox, oy, dt * Missile.SPEED) then
         self.isDead = true
     end
 end
