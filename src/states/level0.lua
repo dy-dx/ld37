@@ -2,6 +2,7 @@ local Environment = require 'entities/environment'
 local Panel = require 'entities/panel'
 local Overlay = require 'entities/overlay'
 local NavPanel = require 'entities/navpanel'
+local VentGas = require 'entities/ventgas'
 
 local Level = Class{}
 function Level:init()
@@ -19,6 +20,7 @@ function Level:load()
         require ("systems/gamehitboxsystem")(),
         require ("systems/misslowcommand/motionsystem")(),
         require ("systems/misslowcommand/collisionsystem")(),
+        require ("systems/ventgascontrolsystem")(),
 
         -- draw systems
 
@@ -29,6 +31,7 @@ function Level:load()
 
         require ("systems/overlaySystem")(),
         require ("systems/overlayInputSystem")(),
+        require ("systems/drawsystems/drawventgassystem")(),
         require ("systems/drawsystems/misslowspritesystem")()
     )
 
@@ -36,8 +39,10 @@ function Level:load()
     world:addEntity(Overlay());
 
     world:addEntity(NavPanel())
+    world:addEntity(VentGas())
     world:addEntity(Panel({x = 90, y = 120, w = 110, h = 200}, "TESTGAME")) -- needs to take panel graphis
     world:addEntity(Panel({x = 90, y = 120, w = 110, h = 200}, "misslowcommand")) -- needs to take panel graphis
+    world:addEntity(Panel({x = 570, y = 160, w = 140, h = 210}, "ventgas"))
     world:addEntity(Environment())
 
     -- todo
