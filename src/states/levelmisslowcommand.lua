@@ -18,7 +18,7 @@ function Level:load()
         -- draw systems
         require ("systems/drawsystems/panelsystem")(),
         require ("systems/drawsystems/debughitboxsystem")(),
-        require ("systems/drawsystems/spritesystem")()
+        require ("systems/drawsystems/spritesystem")("misslowcommand")
     )
     print("beginning of world")
 
