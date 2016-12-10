@@ -12,7 +12,6 @@ function Level:load()
     world = tiny.world(
         require ("systems/playercontrolsystem")(),
         require ("systems/navpanelcontrolsystem")(),
-        require ("systems/MisslowCommandSystem")(),
         -- draw systems
         require ("systems/drawsystems/spritesystem")(),
         require ("systems/drawsystems/panelsystem")(),

@@ -9,7 +9,6 @@ end
 
 function Environment:draw(dt)
 	self.isEnvironment = true
-	self.currentPanel = Panel()
     self.controllable = true
 	-- this is where to place the background image
 
@@ -19,7 +18,6 @@ function Environment:draw(dt)
 
     -- this is where environment related state is
 
-    self.currentPanel:draw(dt)
 end
 
 return Environment
