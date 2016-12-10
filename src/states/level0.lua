@@ -25,7 +25,7 @@ function Level:load()
         require ("systems/drawsystems/panelsystem")(),
         require ("systems/drawsystems/debughitboxsystem")(),
         require ("systems/drawsystems/drawnavpanelsystem")(),
-        require ("systems/drawsystems/ventgassystem")(),
+        require ("systems/drawsystems/drawventgassystem")(),
         require ("systems/overlaySystem")()
     )
 
