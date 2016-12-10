@@ -4,6 +4,8 @@ local Panel = require 'entities/panel'
 local NavPanel = require 'entities/navpanel'
 local MisslowCommandPlayer = require 'entities/misslowcommandplayer'
 
+local Missile = require 'entities/misslowcommand/missile'
+
 
 local Level = Class{}
 function Level:init()
@@ -25,6 +27,8 @@ function Level:load()
     world:addEntity(NavPanel())
     world:addEntity(MisslowCommandPlayer())
     world:addEntity(Environment())
+    world:addEntity(Missile(200, 30, 400, 500))
+    world:addEntity(Missile(500, 30, 400, 500))
 end
 
 return Level
