@@ -1,7 +1,6 @@
 PanelSystem = tiny.processingSystem(Class{})
 
 function PanelSystem:init()
-	print("hello ispanel")
 	self.filter = tiny.requireAll('isPanel')
 	self.isDrawingSystem = true
 end

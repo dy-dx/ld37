@@ -2,7 +2,7 @@ local bump = require('vendor/bump')
 local Player = require 'entities/player'
 local Met = require 'entities/met'
 local CollisionBox = require 'entities/collisionbox'
-local Panel1 = require 'entities/panel1'
+local Panel = require 'entities/panel'
 
 local Level = Class{}
 function Level:init()
@@ -23,14 +23,14 @@ function Level:load()
 
     local player = Player()
 
-    local panel1 = Panel1()
+    local panel = Panel()
     -- fixme
     Global.map = tileMap
 
     world:addEntity(player)
     world:addEntity(Met(700, 500))
-    world:addEntity(panel1)
-    
+    world:addEntity(panel)
+
 end
 
 return Level

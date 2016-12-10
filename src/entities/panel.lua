@@ -1,12 +1,12 @@
 -- local gamestate = require "lib.gamestate"
 
-local Panel1 = Class{}
+local Panel = Class{}
 
-function Panel1:init()
+function Panel:init()
 	self.isPanel = true
 end
 
-function Panel1:draw(dt)
+function Panel:draw(dt)
 
 	print("panel draw called")
 	print(dt)
@@ -16,4 +16,4 @@ function Panel1:draw(dt)
     love.graphics.setColor(255, 255, 255)
 end
 
-return Panel1
+return Panel
