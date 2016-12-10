@@ -30,7 +30,6 @@ function Missile:process(dt)
     local ox = self.pos.x - self.destination.x
     local oy = self.pos.y - self.destination.y
     if ox * ox + oy * oy < dt * Missile.SPEED * dt * Missile.SPEED then
-        print "BOOM"
         self.isDead = true
     end
 end

@@ -24,7 +24,6 @@ end
 function Explosion:process(dt)
     self.timeTilDeath = self.timeTilDeath - dt
     if self.timeTilDeath <= 0 then
-        print "de-BOOM"
         self.isDead = true
     end
 end

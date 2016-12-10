@@ -22,6 +22,7 @@ function Shell:init(dest_x, dest_y)
     }
     self.pos = {x = start_x, y = start_y}
     self.sprite = love.graphics.newImage('assets/images/bullet.png')
+    self.target_sprite = love.graphics.newImage('assets/images/target.png')
     self.offset = {
         x = self.sprite:getWidth() / 2,
         y = self.sprite:getHeight() / 2,
@@ -32,10 +33,13 @@ function Shell:process(dt)
     local ox = self.pos.x - self.destination.x
     local oy = self.pos.y - self.destination.y
     if ox * ox + oy * oy < dt * Shell.SPEED * dt * Shell.SPEED then
-        print "BOOM"
         world:addEntity(Explosion(self.destination.x, self.destination.y))
         self.isDead = true
     end
 end
 
+function Shell:draw(dt)
+    love.graphics.draw(self.target_sprite,
+        self.destination.x, self.destination.y, 0, 1, 1, 8, 8)
+end
 return Shell
