@@ -1,10 +1,11 @@
 -- local gamestate = require "lib.gamestate"
+local Utils = (require 'utils')()
 local Explosion = require 'entities/misslowcommand/explosion'
 
 local Shell = Class{}
 Shell.SPEED = 120
 start_x = 400
-start_y = 500
+start_y = 300
 
 function Shell:init(dest_x, dest_y)
     self.misslowcommand = true
@@ -32,7 +33,8 @@ end
 function Shell:process(dt)
     local ox = self.pos.x - self.destination.x
     local oy = self.pos.y - self.destination.y
-    if ox * ox + oy * oy < dt * Shell.SPEED * dt * Shell.SPEED then
+    -- if ox * ox + oy * oy < dt * Shell.SPEED * dt * Shell.SPEED then
+    if Utils.isInCircle(ox, oy, dt * Shell.SPEED) then
         world:addEntity(Explosion(self.destination.x, self.destination.y))
         self.isDead = true
     end

@@ -1,4 +1,3 @@
-local bump = require('vendor/bump')
 local Environment = require 'entities/environment'
 local Panel = require 'entities/panel'
 local Overlay = require 'entities/overlay'
@@ -69,6 +68,9 @@ function Level:load()
     world:addEntity(Panel({x = 90, y = 120, w = 110, h = 200}, "TESTGAME")) -- needs to take panel graphis
     world:addEntity(Panel({x = 90, y = 120, w = 110, h = 200}, "misslowcommand")) -- needs to take panel graphis
     world:addEntity(Environment())
+
+    -- todo
+    require 'signalhandlers'
 end
 
 return Level

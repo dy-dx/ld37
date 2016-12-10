@@ -12,9 +12,20 @@ function MisslowCommandSystem:preProcess(dt)
     self.cooldown = self.cooldown - dt
     if self.cooldown <= 0 then
         self.cooldown = 5
+
+        local wall = math.floor(math.random() * 4)
+        local x, y
+        if wall < 2 then
+            x = math.random() * 800
+            y = wall * 600
+        else
+            x = (wall - 2) * 800
+            y = math.random() * 600
+        end
+
         world:add(Missile(
-            math.random() * 800, -30,
-            math.random() * 800, 550
+            x, y,
+            400, 300
         ))
     end
 end
