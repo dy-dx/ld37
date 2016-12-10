@@ -5,6 +5,7 @@ local Utils = require('utils');
 local Overlay = Class{}
 
 function Overlay:init(hitbox, closeHitboxes)
+
     local windowWidth  = love.graphics.getWidth()
     local windowHeight = love.graphics.getHeight()
     local padding = 40;
@@ -17,7 +18,7 @@ function Overlay:init(hitbox, closeHitboxes)
         x = padding,
         y = padding,
         w = windowWidth - 2 * padding,
-        h = windowHeight - 2 * padding
+        h = windowHeight - 2 * padding * 1.5
     }
 
     self.closeHitboxes = {
@@ -28,10 +29,10 @@ function Overlay:init(hitbox, closeHitboxes)
             h = closeRadius * 2
         },
         {
-            x = windowWidth / 2 - (largCloseButtonWidth / 2),
-            y = windowHeight - padding,
-            w = largCloseButtonWidth,
-            h = largCloseButtonHeight
+            x = 100,
+            y = windowHeight - 2 * padding,
+            w = 600,
+            h = 200
         }
     }
 end
