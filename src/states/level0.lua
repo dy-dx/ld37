@@ -40,9 +40,10 @@ function Level:load()
 
     world:addEntity(NavPanel())
     world:addEntity(VentGas())
-    world:addEntity(Panel({x = 90, y = 120, w = 110, h = 200}, "TESTGAME")) -- needs to take panel graphis
-    world:addEntity(Panel({x = 90, y = 120, w = 110, h = 200}, "misslowcommand")) -- needs to take panel graphis
-    world:addEntity(Panel({x = 570, y = 160, w = 140, h = 210}, "ventgas"))
+    world:addEntity(Panel({x = 80, y = 160, w = 160, h = 220}, "misslowcommand")) -- needs to take panel graphis
+    world:addEntity(Panel({x = 560, y = 160, w = 160, h = 220}, "ventgas"))
+    world:addEntity(Panel({x = 10, y = 300, w = 100, h = 250}, "TESTGAME1"))
+    world:addEntity(Panel({x = 690, y = 300, w = 100, h = 250}, "TESTGAME2"))
     world:addEntity(Environment())
 
     -- todo
