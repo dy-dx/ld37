@@ -36,15 +36,34 @@ function Level:load()
     local windowWidth  = love.graphics.getWidth()
     local windowHeight = love.graphics.getHeight()
     local padding = 40;
+    local closeRadius = 20;
+    local largCloseButtonWidth = 300;
+    local largCloseButtonHeight = 20;
 
     -- fixme
     world:addEntity(
-        Overlay({
-            x = padding,
-            y = padding,
-            w = windowWidth - 2 * padding,
-            h = windowHeight - 2 * padding
-        }));
+        Overlay(
+            {
+                x = padding,
+                y = padding,
+                w = windowWidth - 2 * padding,
+                h = windowHeight - 2 * padding
+            },
+            {
+                {
+                    x = windowWidth - padding - closeRadius,
+                    y = padding - closeRadius,
+                    w = closeRadius * 2,
+                    h = closeRadius * 2
+                },
+                {
+                    x = windowWidth / 2 - (largCloseButtonWidth / 2),
+                    y = windowHeight - padding,
+                    w = largCloseButtonWidth,
+                    h = largCloseButtonHeight
+                }
+            }
+        ));
 
     world:addEntity(NavPanel())
     world:addEntity(Panel({x = 90, y = 120, w = 110, h = 200}, "TESTGAME")) -- needs to take panel graphis

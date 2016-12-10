@@ -1,16 +1,21 @@
 -- local gamestate = require "lib.gamestate"
 
+local Utils = require('utils');
+
 local Overlay = Class{}
 
-function Overlay:init(hitbox)
+function Overlay:init(hitbox, closeHitboxes)
     self.isOverlay = true;
     self.hitbox = hitbox;
+    self.closeHitboxes = closeHitboxes;
 end
 
 function Overlay:draw(dt)
-    love.graphics.setColor(0, 255, 0, 255)
-    love.graphics.rectangle('fill', self.hitbox.x, self.hitbox.y, self.hitbox.w, self.hitbox.h)
-    love.graphics.setColor(255, 255, 255)
+    Utils.printFilled(self.hitbox, {r = 0, g = 255, b = 0, a = 255})
+
+    lume.each(self.closeHitboxes, function(cHitbox)
+        Utils.printFilled(cHitbox, {r = 255, g = 0, b = 0, a = 255})
+    end)
 end
 
 return Overlay
