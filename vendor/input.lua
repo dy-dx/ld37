@@ -1,3 +1,4 @@
+-- https://github.com/adonaac/boipushy
 local input_path = (...):match('(.-)[^%.]+$') .. '.'
 local Input = {}
 Input.__index = Input

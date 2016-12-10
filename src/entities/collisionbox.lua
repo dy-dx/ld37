@@ -1,3 +1,4 @@
+-- we don't need this for now.
 local CollisionBox = Class{}
 
 function CollisionBox:init(x, y, w, h)

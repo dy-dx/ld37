@@ -1,3 +1,4 @@
+-- we don't need this for now.
 local DebugHitboxSystem = Class{}
 DebugHitboxSystem = tiny.processingSystem(DebugHitboxSystem)
 
