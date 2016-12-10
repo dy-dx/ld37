@@ -12,7 +12,6 @@ function EnvironmentSystem:postProcess(dt)
 end
 
 function EnvironmentSystem:process(e, dt)
-	printTable(e)
     e:draw(dt)
 end
 

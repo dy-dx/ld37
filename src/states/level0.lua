@@ -18,7 +18,6 @@ function Level:load()
         require ("systems/drawsystems/drawnavpanelsystem")(),
         require ("systems/drawsystems/spritesystem")()
     )
-    print("beginning of world")
 
     -- fixme
     world:addEntity(NavPanel())
