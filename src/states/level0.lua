@@ -3,6 +3,7 @@ local Environment = require 'entities/environment'
 local Panel = require 'entities/panel'
 local Overlay = require 'entities/overlay'
 local NavPanel = require 'entities/navpanel'
+local VentGas = require 'entities/ventgas'
 
 local Level = Class{}
 function Level:init()
@@ -24,7 +25,7 @@ function Level:load()
         require ("systems/drawsystems/panelsystem")(),
         require ("systems/drawsystems/debughitboxsystem")(),
         require ("systems/drawsystems/drawnavpanelsystem")(),
-
+        require ("systems/drawsystems/ventgassystem")(),
         require ("systems/overlaySystem")()
     )
 
@@ -34,6 +35,7 @@ function Level:load()
     world:addEntity(NavPanel())
     world:addEntity(Panel({x = 30, y = 40, w = 50, h = 50}, "TESTGAME")) -- needs to take panel graphis
     world:addEntity(Environment())
+    world:addEntity(VentGas())
 end
 
 return Level
