@@ -23,7 +23,7 @@ function VentGasControlSystem:process(e, dt)
         e.currentUnknownPressure = e.maxUnknownPressure + 1
         Signal.emit('gameover')
     end
-    if self.input:released('left_click') then
+    if Global.currentGame == 'ventgas' and self.input:released('left_click') then
         x, y = love.mouse.getPosition()
         if (x - e.gasPressureButton.x)^2 + (y - e.gasPressureButton.y)^2 < e.gasPressureButton.radius^2 then
             e.currentGasPressure = math.max(0, e.currentGasPressure - e.gasPressureDecrease)

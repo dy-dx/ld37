@@ -16,7 +16,7 @@ function DrawVentGasSystem:postProcess(dt)
 end
 
 function DrawVentGasSystem:process(e, dt)
-    if e.isVisible then
+    if Global.currentGame == 'ventgas' then
         -- drawing background
         love.graphics.setColor(e.r, e.g, e.b)
         love.graphics.rectangle('fill', e.x, e.y, e.width, e.height)
