@@ -25,7 +25,6 @@ function SpriteSystem:process(e, dt)
         an:update(dt)
         an:draw(sprite, pos.x, pos.y, r, sx, sy, ox, oy)
     else
-        print(pos.x, pos.y)
         love.graphics.draw(sprite, pos.x, pos.y, r, sx, sy, ox, oy)
     end
 

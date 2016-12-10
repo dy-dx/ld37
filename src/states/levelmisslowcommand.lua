@@ -11,14 +11,15 @@ function Level:load()
     -- ordering of systems really matters
     world = tiny.world(
         require ("systems/playercontrolsystem")(),
-        require ("systems/navpanelcontrolsystem")(),
         require ("systems/MisslowCommandSystem")(),
         -- draw systems
-        require ("systems/drawsystems/spritesystem")(),
         require ("systems/drawsystems/panelsystem")(),
         require ("systems/drawsystems/debughitboxsystem")(),
-        require ("systems/drawsystems/drawnavpanelsystem")()
+        require ("systems/drawsystems/environmentsystem")(),
+        require ("systems/drawsystems/drawnavpanelsystem")(),
+        require ("systems/drawsystems/spritesystem")()
     )
+    print("beginning of world")
 
     -- fixme
     world:addEntity(NavPanel())

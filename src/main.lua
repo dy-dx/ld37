@@ -16,6 +16,7 @@ function printTable(mytable)
 end
 
 local level = require('states/level0')()
+-- local level = require('states/levelmisslowcommand')()
 
 function love.load()
     level:load()
