@@ -1,10 +1,22 @@
+local Missile = require 'entities/misslowcommand/missile'
+
 MisslowCommandSystem = tiny.processingSystem(Class{})
 
 function MisslowCommandSystem:init()
     self.filter = tiny.requireAll('pos', 'velocity', 'process', 'isDead', 'misslowcommand')
+    self.cooldown = 0
+    math.randomseed(os.time())
 end
 
 function MisslowCommandSystem:preProcess(dt)
+    self.cooldown = self.cooldown - dt
+    if self.cooldown <= 0 then
+        self.cooldown = 5
+        world:add(Missile(
+            math.random() * 800, -30,
+            math.random() * 800, 550
+        ))
+    end
 end
 
 function MisslowCommandSystem:postProcess(dt)
