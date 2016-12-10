@@ -5,6 +5,8 @@ local Explosion = Class{}
 
 function Explosion:init(pos_x, pos_y)
     self.misslowcommand = true
+    self.isExplosion = true
+    self.isCollidable = true
     self.pos = {x = pos_x, y = pos_y}
     self.sprite = love.graphics.newImage('assets/tiles/explosion.png')
     self.velocity = {x = 0, y = 0}

@@ -5,6 +5,8 @@ Missile.SPEED = 60
 
 function Missile:init(src_x, src_y, dest_x, dest_y)
     self.misslowcommand = true
+    self.isMissile = true
+    self.isCollidable = true
     self.destination = {x = dest_x, y = dest_y}
     self.isDead = false
 

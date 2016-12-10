@@ -2,7 +2,7 @@
 local Explosion = require 'entities/misslowcommand/explosion'
 
 local Shell = Class{}
-Shell.SPEED = 60
+Shell.SPEED = 120
 start_x = 400
 start_y = 500
 
