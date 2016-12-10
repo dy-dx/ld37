@@ -11,11 +11,12 @@ function Level:load()
     -- ordering of systems really matters
     world = tiny.world(
         require ("systems/playercontrolsystem")(),
+        require ("systems/navpanelcontrolsystem")(),
         -- draw systems
+        require ("systems/drawsystems/spritesystem")(),
         require ("systems/drawsystems/panelsystem")(),
         require ("systems/drawsystems/debughitboxsystem")(),
-        require ("systems/drawsystems/drawnavpanelsystem")(),
-        require ("systems/drawsystems/spritesystem")()
+        require ("systems/drawsystems/drawnavpanelsystem")()
     )
 
     -- fixme
