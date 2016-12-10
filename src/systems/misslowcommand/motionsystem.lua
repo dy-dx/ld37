@@ -1,3 +1,4 @@
+local Ship = require 'entities/misslowcommand/ship'
 local Missile = require 'entities/misslowcommand/missile'
 
 MisslowCommandSystem = tiny.processingSystem(Class{})
@@ -9,6 +10,11 @@ function MisslowCommandSystem:init()
 end
 
 function MisslowCommandSystem:preProcess(dt)
+    if not self.ship then
+        self.ship = true
+        world:addEntity(Ship())
+    end
+
     self.cooldown = self.cooldown - dt
     if self.cooldown <= 0 then
         self.cooldown = 5
