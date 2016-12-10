@@ -4,7 +4,7 @@ local Panel = Class{}
 
 function Panel:init(hitbox, gameName)
 
-	self.isPanel = true
+    self.isPanel = true
     self.controllable = true
     self.activatable = true
     self.gName = gameName

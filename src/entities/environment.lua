@@ -9,7 +9,7 @@ function Environment:init()
 end
 
 function Environment:draw(dt)
-	self.isEnvironment = true
+    self.isEnvironment = true
     self.controllable = true
 end
 
