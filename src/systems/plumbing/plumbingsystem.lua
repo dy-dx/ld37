@@ -94,6 +94,10 @@ end
 
 function PlumbingSystem:onAdd(e)
     local coord = e.pipeCoordinate.x .. '_' .. e.pipeCoordinate.y
+    local existingPipe = self.pipes[coord]
+    if existingPipe then
+        world:remove(existingPipe)
+    end
     self.pipes[coord] = e
 end
 
