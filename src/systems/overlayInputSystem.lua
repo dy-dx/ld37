@@ -23,6 +23,11 @@ function overlayInputSystem:overlayActive(e, dt)
       return Utils.isInside(position, cHitbox)
     end)
 
+    if love.timer.getTime() - Global.timeSinceOverlayOpened < 0.05 then
+        -- we just opened the overlay so don't close it
+        return
+    end
+
     if(closeHit) then
       Global.currentGame = nil
       return
