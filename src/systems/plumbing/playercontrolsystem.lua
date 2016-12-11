@@ -21,8 +21,8 @@ function PlayerControlSystem:process(e, dt)
         -- self.mouseDown = true
         -- if self.mouseDown then
         local x, y = love.mouse.getPosition()
-        x = math.floor((x - 75) / 50)
-        y = math.floor((y - 75) / 50)
+        x = math.floor((x - 100) / 50)
+        y = math.floor((y - 100) / 50)
         if 0 <= x and x < 10 and 0 <= y and y < 7 then
             print(x, y)
         end
