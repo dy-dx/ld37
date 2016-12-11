@@ -1,4 +1,5 @@
 local Background = require 'entities/plumbing/background'
+local StartBuffer = require 'entities/plumbing/startbuffer'
 local CurvedPipe = require 'entities/plumbing/curvedpipe'
 local StraightPipe = require 'entities/plumbing/straightpipe'
 
@@ -41,6 +42,7 @@ function PlumbingSystem:preProcess(dt)
         self.loaded = true
 
         world:addEntity(Background())
+        world:addEntity(StartBuffer())
         -- Scrap pipe
         world:addEntity(randomPipe(11, 5))
         for y=0,6 do
