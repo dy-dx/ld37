@@ -5,7 +5,7 @@ local Environment = Class{}
 function Environment:init()
     self.global = true
     self.pos = {x = 0, y = 0}
-    -- self.sprite = love.graphics.newImage("assets/images/background.png")
+    self.sprite = love.graphics.newImage("assets/images/background.png")
     Signal.emit('theme')
 end
 

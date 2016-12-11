@@ -101,6 +101,10 @@ function CurvedPipe:predraw(dt)
     love.graphics.setColor(0xFF, 0xFF, 0xFF, 0xFF)
 end
 
+function CurvedPipe:canMove()
+    return not self.filling and self.fluidProgress == 0
+end
+
 function CurvedPipe:outDirection()
     local rot = self.rotation
     if self.clockwise then
