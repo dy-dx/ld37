@@ -95,6 +95,10 @@ function StraightPipe:predraw(dt)
     love.graphics.setColor(0xFF, 0xFF, 0xFF, 0xFF)
 end
 
+function StraightPipe:canMove()
+    return not self.filling and self.fluidProgress == 0
+end
+
 function StraightPipe:outDirection()
     local vector = -1
     if self.readingDirection then
