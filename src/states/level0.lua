@@ -50,7 +50,7 @@ function Level:load()
         require ("systems/drawsystems/drawnavpanelsystem")(),
 
         require ("systems/overlayInputSystem")(),
-        require ("systems/drawsystems/spinnersystem")(),
+        require ("systems/drawsystems/spinnerdrawsystem")(),
         require ("systems/drawsystems/plumbingsystem")(),
         require ("systems/drawsystems/drawventgassystem")(),
         require ("systems/drawsystems/misslowspritesystem")(),
