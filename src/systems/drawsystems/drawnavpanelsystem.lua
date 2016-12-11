@@ -68,7 +68,7 @@ function DrawNavPanelSystem:process(e, dt)
     sx1, sy1 = rotatePoint(sPos.x, sPos.y + 15, e.rotation, sPos.x, sPos.y)
     sx2, sy2 = rotatePoint(sPos.x + 30, sPos.y, e.rotation, sPos.x, sPos.y)
     love.graphics.setColor(255, 255, 255)
-    drawDottedLine(e.lcdpos.x, e.lcdpos.y + e.lcdpos.h/2, e.lcdpos.x + e.lcdpos.w, e.lcdpos.y + e.lcdpos.h/2)
+    drawDottedLine(e.lcdpos.x+3, e.lcdpos.y + e.lcdpos.h/2, e.lcdpos.x+3 + e.lcdpos.w, e.lcdpos.y + e.lcdpos.h/2)
     love.graphics.setColor(255, 0, 0, 255)
     love.graphics.polygon('fill', sx0, sy0, sx1, sy1, sx2, sy2)
 end
