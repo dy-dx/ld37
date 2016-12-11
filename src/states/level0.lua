@@ -9,6 +9,7 @@ local CrewMemberEngineer = require 'entities/crewmemberengineer'
 local CrewMemberDoctor = require 'entities/crewmemberdoctor'
 local CrewMemberSecurity = require 'entities/crewmembersecurity'
 local CrewMemberPilot = require 'entities/crewmemberpilot'
+local AlertStatusBox = require 'entities/alertstatusbox'
 
 local Level = Class{}
 function Level:init()
@@ -78,15 +79,28 @@ function Level:load()
     world:addEntity(CrewMemberDoctor())
     world:addEntity(CrewMemberSecurity())
     world:addEntity(CrewMemberPilot())
+    alerts = AlertStatusBox({
+        PIPES = "FINE",
+        SECURITY = "VERY NOT SAFE",
+        GASSES = "IN DIRE NEED OF VENTING",
+    })
+    Signal.register(
+        'set-alert-status',
+        function(game, level)
+            alerts:setAlertStatus(game, level)
+        end)
+    world:addEntity(alerts)
     world:addEntity(Panel({x = 10, y = 300, w = 100, h = 250}, "plumbing"))
     world:addEntity(Panel({x = 80, y = 160, w = 160, h = 220}, "ventgas"))
     world:addEntity(Panel({x = 560, y = 160, w = 160, h = 220}, "spinner"))
     world:addEntity(Panel({x = 690, y = 300, w = 100, h = 250}, "misslowcommand"))
 
+
     if Global.isDebug then
         world:addEntity(DebugInfo())
     end
 
+    Signal.emit('set-alert-status', "DAD", "NOT MY REAL")
     -- todo
     require 'signalhandlers'
 end
