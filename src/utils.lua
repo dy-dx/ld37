@@ -21,4 +21,10 @@ function Utils.isInCircle(x, y, radius)
     return x * x + y * y < radius * radius
 end
 
+function Utils.split(textString, sep)
+    words = {}
+    for w in textString:gmatch(sep) do table.insert(words, w) end
+    return words
+end
+
 return Utils

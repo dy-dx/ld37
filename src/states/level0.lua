@@ -52,10 +52,15 @@ function Level:load()
         require ("systems/drawsystems/drawdebuginfosystem")()
     )
 
+    local text = Text('Hello', 5000);
+
+    Signal.register('write', function(s, speed)
+        text:write(s, speed)
+    end)
+
     -- fixme
     world:addEntity(Overlay())
-
-    world:addEntity(Text('hello', 3000))
+    world:addEntity(text)
 
     world:addEntity(NavPanel())
     world:addEntity(VentGas())
@@ -68,7 +73,6 @@ function Level:load()
     if Global.isDebug then
         world:addEntity(DebugInfo())
     end
-
 
     -- todo
     require 'signalhandlers'

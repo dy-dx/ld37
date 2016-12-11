@@ -25,6 +25,8 @@ function PlayerControlSystem:process(e, dt)
         -- self.mouseDown = true
         -- if self.mouseDown then
         Signal.emit('fire')
+        Signal.emit('write', "Yea get'em", 10000)
+
         local x, y = love.mouse.getPosition()
         world:addEntity(Shell(x, y))
         -- end
