@@ -37,7 +37,7 @@ function TextSystem:printText(e, charactersDisplayed)
     local font = love.graphics.newFont(30)
     local text = love.graphics.newText(font, partialText)
 
-    love.graphics.draw(text, windowWidth / 2 - font:getWidth(partialText) / 2, 80)
+    love.graphics.draw(text, windowWidth / 2 - font:getWidth(partialText) / 2, e.textHeight - font:getHeight(partialText) / 2)
 end
 
 function TextSystem:process(e, dt)
