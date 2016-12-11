@@ -34,7 +34,7 @@ local DEBUG_MAP = {
 
 function PlumbingSystem:init()
     Global.pipes = {}
-    self.filter = tiny.requireAll('pipeCoordinate', 'isDead', 'plumbing')
+    self.filter = tiny.requireAll('isDead', 'outDirection', 'plumbing')
 end
 
 function PlumbingSystem:preProcess(dt)
@@ -60,14 +60,6 @@ function PlumbingSystem:preProcess(dt)
                 end
                 -- local pipe = randomPipe(x, y)
                 -- local pipe = StraightPipe(x, y, 0)
-                -- TODO: don't start here!!
-                if pipe.pipeCoordinate.x == 9 and pipe.pipeCoordinate.y == 0 then
-                    if not pipe:acceptFrom({x = 1, y = 0}) then
-                        Signal.emit('gameover')
-                    else
-                        pipe.filling = true
-                    end
-                end
                 world:addEntity(pipe)
             end
         end
@@ -83,11 +75,11 @@ function PlumbingSystem:process(e, dt)
         if e.fluidProgress == 1 then
             e.filling = false
             local outDir = e:outDirection()
-            local key = getPipeKey(e.pipeCoordinate.x + outDir.x, e.pipeCoordinate.y + outDir.y)
+            local key = getPipeKey(outDir.x, outDir.y)
 
             -- find the next pipe to fill
             local nextPipe = Global.pipes[key]
-            if not nextPipe or not nextPipe:acceptFrom({x = -outDir.x, y = -outDir.y}) then
+            if not nextPipe or not nextPipe:acceptFrom({x = -outDir.dx, y = -outDir.dy}) then
                 Signal.emit('gameover')
                 return
             end
@@ -101,6 +93,9 @@ function PlumbingSystem:process(e, dt)
 end
 
 function PlumbingSystem:onAdd(e)
+    if not e.pipeCoordinate then
+        return
+    end
     local key = getPipeKey(e.pipeCoordinate.x, e.pipeCoordinate.y)
     local existingPipe = Global.pipes[key]
     if existingPipe then

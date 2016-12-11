@@ -4,17 +4,18 @@ local StartBuffer = Class{}
 
 function StartBuffer:init()
     self.plumbing = true
-    self.pos = {x = 602, y = 114}
+    self.pos = {x = 602, y = 94}
 
-    self.sprite = love.graphics.newImage('assets/images/bullet.png')
+    self.sprite = love.graphics.newImage('assets/images/plumbingStartBuffer.png')
 
-    self.fluidProgress = 1
+    self.fluidProgress = 0
     self.filling = true
+    self.isDead = false
 
     self.drawId = -10
 end
 
-function StartBuffer:draw(dt)
+function StartBuffer:predraw(dt)
     love.graphics.setColor(0, 0xFF, 0, 0xFF)
 
     local MAIN_TIME = 0.75
@@ -60,6 +61,15 @@ function StartBuffer:draw(dt)
         )
     end
     love.graphics.setColor(0xFF, 0xFF, 0xFF, 0xFF)
+end
+
+function StartBuffer:outDirection()
+    return {
+        x = 9,
+        y = 0,
+        dx = -1,
+        dy = 0
+    }
 end
 
 return StartBuffer

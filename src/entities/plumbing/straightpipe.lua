@@ -105,9 +105,19 @@ function StraightPipe:outDirection()
         vector = 1
     end
     if self.rotation == 0 then
-        return {x = vector, y = 0}
+        return {
+            x = self.pipeCoordinate.x + vector,
+            y = self.pipeCoordinate.y,
+            dx = vector,
+            dy = 0
+        }
     end
-    return {x = 0, y = vector}
+    return {
+        x = self.pipeCoordinate.x,
+        y = self.pipeCoordinate.y + vector,
+        dx = 0,
+        dy = vector
+    }
 end
 
 function StraightPipe:acceptFrom(direction)
