@@ -78,10 +78,10 @@ function Level:load()
     world:addEntity(CrewMemberDoctor())
     world:addEntity(CrewMemberSecurity())
     world:addEntity(CrewMemberPilot())
-    world:addEntity(Panel({x = 80, y = 160, w = 160, h = 220}, "misslowcommand")) -- needs to take panel graphis
-    world:addEntity(Panel({x = 560, y = 160, w = 160, h = 220}, "ventgas"))
-    world:addEntity(Panel({x = 10, y = 300, w = 100, h = 250}, "spinner"))
-    world:addEntity(Panel({x = 690, y = 300, w = 100, h = 250}, "plumbing"))
+    world:addEntity(Panel({x = 10, y = 300, w = 100, h = 250}, "plumbing"))
+    world:addEntity(Panel({x = 80, y = 160, w = 160, h = 220}, "ventgas"))
+    world:addEntity(Panel({x = 560, y = 160, w = 160, h = 220}, "spinner"))
+    world:addEntity(Panel({x = 690, y = 300, w = 100, h = 250}, "misslowcommand"))
 
     if Global.isDebug then
         world:addEntity(DebugInfo())
