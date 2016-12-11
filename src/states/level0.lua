@@ -3,13 +3,17 @@ local Panel = require 'entities/panel'
 local Overlay = require 'entities/overlay'
 local NavPanel = require 'entities/navpanel'
 local VentGas = require 'entities/ventgas'
+local DebugInfo = require 'entities/debuginfo'
 
 local Level = Class{}
 function Level:init()
 end
 
+-- Don't be tempted! Until Dec 12th
 Global = {
-    currentGame = nil
+    currentGame = nil,
+    isDebug = true,
+    isGameOver = false
 }
 
 function Level:load()
@@ -33,7 +37,9 @@ function Level:load()
         require ("systems/overlayInputSystem")(),
         require ("systems/drawsystems/spinnersystem")(),
         require ("systems/drawsystems/drawventgassystem")(),
-        require ("systems/drawsystems/misslowspritesystem")()
+        require ("systems/drawsystems/misslowspritesystem")(),
+        -- let this go last
+        require ("systems/drawsystems/drawdebuginfosystem")()
     )
 
     -- fixme
@@ -46,6 +52,11 @@ function Level:load()
     world:addEntity(Panel({x = 10, y = 300, w = 100, h = 250}, "spinner"))
     world:addEntity(Panel({x = 690, y = 300, w = 100, h = 250}, "TESTGAME2"))
     world:addEntity(Environment())
+
+    if Global.isDebug then
+        world:addEntity(DebugInfo())
+    end
+
 
     -- todo
     require 'signalhandlers'

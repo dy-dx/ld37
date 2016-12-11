@@ -7,8 +7,6 @@ Signal = require '../vendor/hump.signal'
 tiny = require '../vendor/tiny'
 local Sound = require 'sound'
 
-Global = {}
-
 function printTable(mytable)
     for k, v in pairs(mytable) do
        print(k, v)
@@ -30,7 +28,6 @@ function love.draw()
     if world then
         world:update(love.timer.getDelta(), drawSystems)
     end
-    love.graphics.print("Entity Count: " .. world:getEntityCount(), 0,0)
 end
 
 
