@@ -22,13 +22,11 @@ function VentGas:init()
     self.b = 35
 
     -- gas pressure
-    self.gasPressureDecrease = 50
-    self.gasGrowthRate = 5
-    self.maxGasPressure = maxPressure
-    self.currentGasPressure = 0
+    self.gasMeter = {pressureDecrease = 50, growthRate = 5
+        , maxPressure = maxPressure, currentPressure = 0}
     self.gasPressureBox = {x = self.width*1/4
         , y = self.y + barPadding, width = barWidth
-        , height = self.maxGasPressure, r=25, g=25, b=75
+        , height = self.gasMeter.maxPressure, r=25, g=25, b=75
         }
     self.gasPressureButton = {x=self.gasPressureBox.x + buttonRadius
         , y=self.gasPressureBox.y + self.gasPressureBox.height + buttonYOffset
@@ -45,13 +43,11 @@ function VentGas:init()
         , radius=buttonRadius, r=0, g=255, b=40, text='DO NOT Press Here'}
 
     -- unknown pressure
-    self.unknownPressureDecrease = 50
-    self.unknownGrowthRate = 10
-    self.maxUnknownPressure = maxPressure
-    self.currentUnknownPressure = 0
+    self.unknownMeter = {pressureDecrease = 50, growthRate = 10
+        , maxPressure = maxPressure, currentPressure = 0}
     self.unknownPressureBox = {x = self.width*3/4
         , y = self.y + barPadding, width = barWidth
-        , height = self.maxUnknownPressure, r=25, g=25, b=75
+        , height = self.unknownMeter.maxPressure, r=25, g=25, b=75
         }
     self.unknownPressureButton = {x=self.unknownPressureBox.x + buttonRadius
         , y=self.unknownPressureBox.y + self.unknownPressureBox.height + buttonYOffset
