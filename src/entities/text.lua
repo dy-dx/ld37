@@ -11,7 +11,8 @@ end
 
 function Text:reset()
     self.time = 0
-    self.textHeight = 130
+    self.textX = 270
+    self.textY = 40
     self.maxWidth = 200
     self.prevTextLen = 0
     self.savedText = {}
