@@ -22,7 +22,7 @@ function GameHitboxSystem:process(e, dt)
 
         local point = {x = clickX, y = clickY}
 
-        if(Utils.isInside(point, e.hitbox)) then
+        if(Utils.isInside(point, e.hitbox) and not Global.currentGame) then
             printTable(e)
             Global.currentGame = e.gName
         end
