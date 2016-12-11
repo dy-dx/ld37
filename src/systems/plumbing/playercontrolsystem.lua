@@ -1,3 +1,5 @@
+local Utils = require('utils')
+
 local CurvedPipe = require 'entities/plumbing/curvedpipe'
 local StraightPipe = require 'entities/plumbing/straightpipe'
 
@@ -19,10 +21,8 @@ function PlayerControlSystem:pipeAtMouse()
     local x, y = love.mouse.getPosition()
     x = math.floor((x - 100) / 50)
     y = math.floor((y - 100) / 50)
-    if 0 <= x and x < 10 and 0 <= y and y < 7 then
-        local key = getPipeKey(x, y)
-        return Global.pipes[key]
-    end
+    local key = getPipeKey(x, y)
+    return Global.pipes[key]
 end
 
 function getPipeKey(x, y)
@@ -75,6 +75,8 @@ function PlayerControlSystem:process(e, dt)
 
     -- PRESS
     if self.input:pressed("mouse1") then
+        local x, y = love.mouse.getPosition()
+
         local pipe = self:pipeAtMouse()
         if pipe and pipe:canMove() then
             -- we create a new one to update the draw order, so it'll be on top
@@ -87,6 +89,9 @@ function PlayerControlSystem:process(e, dt)
             pipe.lifted = true
             world:addEntity(pipe)
             self.liftedPipe = pipe
+        elseif Utils.isInCircle(x - 628, y - 375, 18) then
+            -- Refresh scrap
+            world:addEntity(randomPipe(11, 5))
         end
     end
 
