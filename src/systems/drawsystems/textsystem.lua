@@ -76,14 +76,14 @@ end
 
 function TextSystem:process(e, dt)
     e.time = e.time + dt;
-    local charactersDisplayed = self:getCharactersDisplayed(e)
+    e.charactersDisplayed = self:getCharactersDisplayed(e)
 
-    if(e.prevTextLen < charactersDisplayed) then
+    if(e.prevTextLen < e.charactersDisplayed) then
         Signal.emit('talk');
-        e.prevTextLen = charactersDisplayed
+        e.prevTextLen = e.charactersDisplayed
     end
 
-    self:printText(e, charactersDisplayed)
+    self:printText(e, e.charactersDisplayed)
 end
 
 return TextSystem

@@ -52,7 +52,7 @@ function Level:load()
         require ("systems/drawsystems/drawdebuginfosystem")()
     )
 
-    local text = Text('Hello', 8000);
+    local text = Text('Hello Commander.', 10000);
 
     Signal.register('write', function(s, speed)
         text:write(s, speed)
