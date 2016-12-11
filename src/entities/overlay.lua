@@ -13,7 +13,7 @@ function Overlay:init(hitbox, closeHitboxes)
     local largCloseButtonWidth = 300;
     local largCloseButtonHeight = 20;
 
-    self.sprite = love.graphics.newImage("assets/images/chrome.png")
+    self.sprite = love.graphics.newImage("assets/images/monitor.png")
 
     self.closeHitboxes = {
         {

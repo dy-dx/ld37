@@ -13,16 +13,31 @@ function NavPanelControlSystem:postProcess(dt)
 end
 
 function NavPanelControlSystem:process(e, dt)
+    local cursorOverLeftButton = false
+    local cursorOverRightButton = false
     local leftClicked = false
     local rightClicked = false
-    if self.input:released('left_click') then
+
+    if self.input:down('left_click') then
         local x, y = love.mouse.getPosition()
-        -- print(x, y)
         if x >= e.leftButton.x and x <= e.leftButton.x + e.leftButton.w and y >= e.leftButton.y and y <= e.leftButton.y + e.leftButton.h then
-            leftClicked = true
+            cursorOverLeftButton = true
         elseif x >= e.rightButton.x and x <= e.rightButton.x + e.rightButton.w and y >= e.rightButton.y and y <= e.rightButton.y + e.rightButton.h then
-            rightClicked = true
+            cursorOverRightButton = true
         end
+    end
+
+    -- up/down states for visual feedback
+    e.leftButtonDown = false
+    e.rightButtonDown = false
+    if self.input:down('left_click') then
+        e.leftButtonDown = cursorOverLeftButton
+        e.rightButtonDown = cursorOverRightButton
+    end
+
+    if self.input:pressed('left_click') then
+        leftClicked = cursorOverLeftButton
+        rightClicked = cursorOverRightButton
     end
 
     -- rotate the ship via user input

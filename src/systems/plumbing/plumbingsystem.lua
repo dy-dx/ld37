@@ -41,6 +41,8 @@ function PlumbingSystem:preProcess(dt)
         self.loaded = true
 
         world:addEntity(Background())
+        -- Scrap pipe
+        world:addEntity(randomPipe(11, 5))
         for y=0,6 do
             for x=0,9 do
                 local fromDebug = DEBUG_MAP[y + 1][x + 1]
