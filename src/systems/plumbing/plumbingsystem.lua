@@ -3,8 +3,8 @@ local CurvedPipe = require 'entities/plumbing/curvedpipe'
 local StraightPipe = require 'entities/plumbing/straightpipe'
 
 local FLUID_RATE = 0.1
-local OFFSET_X = 125
-local OFFSET_Y = 125
+local OFFSET_X = 127
+local OFFSET_Y = 120
 
 function randomPipe(x, y)
     local pipeType = math.floor(math.random() * 6)
