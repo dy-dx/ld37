@@ -29,15 +29,17 @@ function Level:load()
 
         -- draw systems
         require ("systems/drawsystems/spritesystem")(),
-        require ("systems/drawsystems/panelsystem")(),
+
         require ("systems/drawsystems/debughitboxsystem")(),
         require ("systems/drawsystems/drawnavpanelsystem")(),
 
-        require ("systems/overlaySystem")(),
         require ("systems/overlayInputSystem")(),
         require ("systems/drawsystems/spinnersystem")(),
         require ("systems/drawsystems/drawventgassystem")(),
         require ("systems/drawsystems/misslowspritesystem")(),
+        require ("systems/drawsystems/panelsystem")(),
+        require ("systems/overlaySystem")(),
+
         -- let this go last
         require ("systems/drawsystems/drawdebuginfosystem")()
     )
