@@ -28,13 +28,11 @@ function TextSystem:getCharactersDisplayed(e)
     end
 end
 
-
-
-function TextSystem:printLine(line, height, idx)
+function TextSystem:printLine(line, x, y, idx)
     local font = love.graphics.newFont(20)
     local text = love.graphics.newText(font, line)
 
-    love.graphics.draw(text, windowWidth / 2 - font:getWidth(line) / 2, height + idx * font:getHeight(line))
+    love.graphics.draw(text, x, y + idx * font:getHeight(line))
 end
 
 function TextSystem:printLines(e, lines)
@@ -43,7 +41,7 @@ function TextSystem:printLines(e, lines)
 
     local i = 1
     lume.map(lines, function(line)
-        TextSystem:printLine(line, e.textHeight - font:getHeight(firstLineText) * table.getn(lines)/ 2, i)
+        TextSystem:printLine(line, e.textX, e.textY, i)
         i = i + 1
     end)
 end
