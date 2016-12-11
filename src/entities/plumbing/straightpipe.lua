@@ -1,7 +1,6 @@
 local StraightPipe = Class{}
 
 local SIZE = 50
-local FLUID_RATE = 0.1
 
 local offsett = {
     x = 125,
@@ -10,6 +9,7 @@ local offsett = {
 
 function StraightPipe:init(x, y, rotation)
     self.plumbing = true
+    self.pipeCoordinate = {x = x, y = y}
     self.pos = {
         x = x * SIZE + offsett.x,
         y = y * SIZE + offsett.y
@@ -23,7 +23,7 @@ function StraightPipe:init(x, y, rotation)
     }
     self.readingDirection = true
     self.isDead = false
-    self.filling = true
+    self.filling = false
     self.fluidProgress = 0
 end
 
@@ -75,14 +75,23 @@ function StraightPipe:predraw(dt)
     love.graphics.setColor(0xFF, 0xFF, 0xFF, 0xFF)
 end
 
-function StraightPipe:process(dt)
-    if self.filling then
-        self.fluidProgress = math.min(self.fluidProgress + dt * FLUID_RATE, 1)
-        if self.fluidProgress == 1 then
-            self.filling = false
-            -- find the next guy to fill
-        end
+function StraightPipe:outDirection()
+    local vector = -1
+    if self.readingDirection then
+        vector = 1
     end
+    if self.rotation == 0 then
+        return {x = vector, y = 0}
+    end
+    return {x = 0, y = vector}
+end
+
+function StraightPipe:acceptFrom(direction)
+    if (direction.x == 0) == (self.rotation == 1) then
+        self.readingDirection = (direction.x < 0 or direction.y < 0)
+        return true
+    end
+    return nil
 end
 
 return StraightPipe

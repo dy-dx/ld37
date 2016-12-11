@@ -1,15 +1,28 @@
 local CurvedPipe = Class{}
 
 local SIZE = 50
-local FLUID_RATE = 0.1
 
 local offsett = {
     x = 125,
     y = 125
 }
 
+function rotateCoords(x, y, rotation)
+    rotation = rotation % 4
+    if rotation == 0 then
+        return {x = x, y = y}
+    elseif rotation == 1 then
+        return {x = -y, y = x}
+    elseif rotation == 2 then
+        return {x = -x, y = -y}
+    elseif rotation == 3 then
+        return {x = y, y = -x}
+    end
+end
+
 function CurvedPipe:init(x, y, rotation)
     self.plumbing = true
+    self.pipeCoordinate = {x = x, y = y}
     self.pos = {
         x = x * SIZE + offsett.x,
         y = y * SIZE + offsett.y
@@ -23,7 +36,7 @@ function CurvedPipe:init(x, y, rotation)
     }
     self.clockwise = true
     self.isDead = false
-    self.filling = true
+    self.filling = false
     self.fluidProgress = 0
 end
 
@@ -52,39 +65,42 @@ function CurvedPipe:predraw(dt)
         }
         local flattenedVertices = {}
         for k, coord in ipairs(vertices) do
-            local x, y = coord.x, coord.y
-
             -- Flip depending on which side of the pipe the fluid enters
             if self.clockwise then
-                x, y = -y, -x
+                coord = {x = -coord.y, y = -coord.x}
             end
 
             -- Rotate depending on the rotation of the pipe
-            if self.rotation == 1 then
-                y, x = x, -y
-            elseif self.rotation == 2 then
-                x, y = -x, -y
-            elseif self.rotation == 3 then
-                y, x = -x, y
-            end
+            coord = rotateCoords(coord.x, coord.y, self.rotation)
 
             -- `polygon` wants a flattened array-table for some reason ᖍ(ツ)ᖌ
-            table.insert(flattenedVertices, x + self.pos.x)
-            table.insert(flattenedVertices, y + self.pos.y)
+            table.insert(flattenedVertices, coord.x + self.pos.x)
+            table.insert(flattenedVertices, coord.y + self.pos.y)
         end
         love.graphics.polygon('fill', flattenedVertices)
     end
     love.graphics.setColor(0xFF, 0xFF, 0xFF, 0xFF)
 end
 
-function CurvedPipe:process(dt)
-    if self.filling then
-        self.fluidProgress = math.min(self.fluidProgress + dt * FLUID_RATE, 1)
-        if self.fluidProgress == 1 then
-            self.filling = false
-            -- find the next guy to fill
-        end
+function CurvedPipe:outDirection()
+    local rot = self.rotation
+    if self.clockwise then
+        rot = rot - 1
     end
+
+    return rotateCoords(-1, 0, rot)
+end
+
+function CurvedPipe:acceptFrom(direction)
+    local rotated = rotateCoords(direction.x, direction.y, -self.rotation)
+    if rotated.y == 1 then
+        self.clockwise = false
+        return true
+    elseif rotated.x == -1 then
+        self.clockwise = true
+        return true
+    end
+    return nil
 end
 
 return CurvedPipe
