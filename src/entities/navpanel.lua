@@ -15,16 +15,16 @@ function NavPanel:init()
 
     self.leftButton = {
         x = 150,
-        y = 505,
-        w = 40,
-        h = 40
+        y = 501,
+        w = 50,
+        h = 50
     }
 
     self.rightButton = {
         x = 150,
-        y = 555,
-        w = 40,
-        h = 40
+        y = 552,
+        w = 50,
+        h = 50
     }
 end
 
