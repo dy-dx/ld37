@@ -32,7 +32,7 @@ local DEBUG_MAP = {
 }
 
 function PlumbingSystem:init()
-    self.pipes = {}
+    Global.pipes = {}
     self.filter = tiny.requireAll('pipeCoordinate', 'isDead', 'plumbing')
 end
 
@@ -74,12 +74,6 @@ function PlumbingSystem:postProcess(dt)
 end
 
 function PlumbingSystem:process(e, dt)
-    -- e:process(dt)
-
-    -- if e == self.liftedPipe then
-    --     e.
-    -- end
-
     if e.filling then
         e.fluidProgress = math.min(e.fluidProgress + dt * FLUID_RATE, 1)
         if e.fluidProgress == 1 then
@@ -87,13 +81,13 @@ function PlumbingSystem:process(e, dt)
             local outDir = e:outDirection()
             local key = getPipeKey(e.pipeCoordinate.x + outDir.x, e.pipeCoordinate.y + outDir.y)
 
-            local nextPipe = self.pipes[key]
+            -- find the next pipe to fill
+            local nextPipe = Global.pipes[key]
             if not nextPipe or not nextPipe:acceptFrom({x = -outDir.x, y = -outDir.y}) then
                 Signal.emit('gameover')
                 return
             end
             nextPipe.filling = true
-            -- find the next guy to fill
         end
     end
 
@@ -104,15 +98,11 @@ end
 
 function PlumbingSystem:onAdd(e)
     local key = getPipeKey(e.pipeCoordinate.x, e.pipeCoordinate.y)
-    local existingPipe = self.pipes[key]
+    local existingPipe = Global.pipes[key]
     if existingPipe then
         world:remove(existingPipe)
     end
-    self.pipes[key] = e
+    Global.pipes[key] = e
 end
-
--- function PlumbingSystem:onRemove(e)
-
--- end
 
 return PlumbingSystem

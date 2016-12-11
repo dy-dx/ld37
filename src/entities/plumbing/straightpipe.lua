@@ -5,11 +5,14 @@ local SIZE = 50
 
 function StraightPipe:init(x, y, offsetX, offsetY, rotation)
     self.plumbing = true
+    self.isStraight = true
+    self.lifted = false
     self.pipeCoordinate = {x = x, y = y}
-    self.pos = {
+    self.normalPos = {
         x = x * SIZE + offsetX,
         y = y * SIZE + offsetY
     }
+    self.pos = self.normalPos
     self.rotation = rotation  -- this is for the game logic stuff, [0, 1]
     self.rot = rotation * math.pi / 2  -- this is for the display stuff, [0, 2π)
     self.sprite = love.graphics.newImage('assets/images/pipeLR.png')
