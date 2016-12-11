@@ -111,6 +111,9 @@ function StraightPipe:outDirection()
 end
 
 function StraightPipe:acceptFrom(direction)
+    if self.lifted then
+        return nil
+    end
     if (direction.x == 0) == (self.rotation == 1) then
         self.readingDirection = (direction.x < 0 or direction.y < 0)
         return true

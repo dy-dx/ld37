@@ -115,6 +115,9 @@ function CurvedPipe:outDirection()
 end
 
 function CurvedPipe:acceptFrom(direction)
+    if self.lifted then
+        return nil
+    end
     local rotated = rotateCoords(direction.x, direction.y, -self.rotation)
     if rotated.y == 1 then
         self.clockwise = false
