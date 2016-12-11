@@ -43,7 +43,7 @@ function StraightPipe:predraw(dt)
         )
     -- Some fluid
     else
-        -- originally, vertices refers to a down-to-left bend
+        -- originally, vertices refers to a left-to-right line
         local vertices = {
             {x = -SIZE / 2, y = SIZE / 2},  -- bottom left
             {x = -SIZE / 2, y = -SIZE / 2},  -- top left
@@ -57,7 +57,7 @@ function StraightPipe:predraw(dt)
             local x, y = coord.x, coord.y
 
             -- Flip depending on which side of the pipe the fluid enters
-            if self.readingDirection then
+            if not self.readingDirection then
                 x, y = -x, -y
             end
 
