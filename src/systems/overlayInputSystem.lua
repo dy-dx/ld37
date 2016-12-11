@@ -24,6 +24,15 @@ function overlayInputSystem:overlayActive(e, dt)
         return
     end
 
+    local closeHit = lume.any(e.closeHitboxes, function(cHitbox)
+        return Utils.isInside(position, cHitbox)
+    end)
+
+    if(closeHit) then
+        Global.currentGame = nil
+        return
+    end
+
     if(not Utils.isInside(position, e.hitbox)) then
         Global.currentGame = nil
         return

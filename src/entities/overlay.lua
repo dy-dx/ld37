@@ -15,6 +15,15 @@ function Overlay:init(hitbox, closeHitboxes)
 
     self.sprite = love.graphics.newImage("assets/images/chrome.png")
 
+    self.closeHitboxes = {
+        {
+            x = windowWidth - padding - closeRadius,
+            y = padding - closeRadius,
+            w = closeRadius * 2,
+            h = closeRadius * 2
+        }
+    }
+
 
     self.isOverlay = true;
     self.hitbox = {
@@ -38,8 +47,9 @@ function Overlay:draw(dt)
         0,
         0)
 
-    -- Utils.printFilled(self.hitbox, {r = 255, g = 255, b = 255, a = 255}, 'fill')
-    -- love.graphics.draw(self.sprite, self.hitbox.x, self.hitbox.y, 0, 1, 1, 0, 0)
+    lume.each(self.closeHitboxes, function(cHitbox)
+        Utils.printFilled(cHitbox, {r = 255, g = 0, b = 0, a = 255})
+    end)
 end
 
 return Overlay
