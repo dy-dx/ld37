@@ -32,7 +32,9 @@ function Level:load()
         require ("systems/plumbing/plumbingsystem")(),
 
         -- draw systems
+
         require ("systems/drawsystems/spritesystem")(),
+        require ("systems/drawsystems/textsystem")(),
 
         require ("systems/drawsystems/debughitboxsystem")(),
         require ("systems/drawsystems/drawnavpanelsystem")(),
@@ -43,7 +45,6 @@ function Level:load()
         require ("systems/drawsystems/drawventgassystem")(),
         require ("systems/drawsystems/misslowspritesystem")(),
         require ("systems/drawsystems/panelsystem")(),
-        require ("systems/drawsystems/textsystem")(),
 
         require ("systems/overlaySystem")(),
 

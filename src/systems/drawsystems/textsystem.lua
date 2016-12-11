@@ -17,11 +17,8 @@ function TextSystem:postProcess(dt)
 end
 
 function TextSystem:getCharactersDisplayed(e)
-    print("e.time = " .. e.time)
-    print("e.speed = " .. e.speed)
     local distance = (e.time * e.speed) / 1000
 
-    print("distance = " .. distance)
     if(distance > string.len(e.text)) then
         return string.len(e.text)
     else
@@ -30,8 +27,6 @@ function TextSystem:getCharactersDisplayed(e)
 end
 
 function TextSystem:printText(e, charactersDisplayed)
-    print("charactersDisplayed = " .. charactersDisplayed)
-
     local partialText = string.sub(e.text, 1, charactersDisplayed)
 
     local font = love.graphics.newFont(30)
@@ -42,9 +37,6 @@ end
 
 function TextSystem:process(e, dt)
     e.time = e.time + dt;
-
-    print("e.text = " .. e.text)
-
     local charactersDisplayed = self:getCharactersDisplayed(e)
 
     self:printText(e, charactersDisplayed)
