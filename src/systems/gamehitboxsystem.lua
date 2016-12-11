@@ -23,6 +23,7 @@ function GameHitboxSystem:process(e, dt)
 
         if(Utils.isInside(point, e.hitbox) and not Global.currentGame) then
             printTable(e)
+            Global.timeSinceOverlayOpened = love.timer.getTime()
             Global.currentGame = e.gName
         end
     end

@@ -13,7 +13,8 @@ end
 Global = {
     currentGame = nil,
     isDebug = true,
-    isGameOver = false
+    isGameOver = false,
+    timeSinceOverlayOpened = 0
 }
 
 function Level:load()
