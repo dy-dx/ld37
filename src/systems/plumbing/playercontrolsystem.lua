@@ -50,7 +50,7 @@ function PlayerControlSystem:process(e, dt)
     -- RELEASE
     if self.input:released("mouse1") and self.liftedPipe then
         local swapPipe = self:pipeAtMouse()
-        if swapPipe and swapPipe ~= self.liftedPipe and swapPipe.fluidProgress == 0 then
+        if swapPipe and swapPipe ~= self.liftedPipe and swapPipe:canMove() then
             -- swap em
             world:remove(swapPipe)
             world:remove(self.liftedPipe)
@@ -76,8 +76,16 @@ function PlayerControlSystem:process(e, dt)
     -- PRESS
     if self.input:pressed("mouse1") then
         local pipe = self:pipeAtMouse()
-        if pipe and pipe.fluidProgress == 0 then
+        if pipe and pipe:canMove() then
+            -- we create a new one to update the draw order, so it'll be on top
+            -- gross!
+            pipe = newPipe(
+                pipe.isStraight,
+                pipe.pipeCoordinate.x, pipe.pipeCoordinate.y,
+                pipe.rotation
+            )
             pipe.lifted = true
+            world:addEntity(pipe)
             self.liftedPipe = pipe
         end
     end

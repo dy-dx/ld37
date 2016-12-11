@@ -37,13 +37,30 @@ local function drawDottedLine(x1, y1, x2, y2)
 end
 
 function DrawNavPanelSystem:process(e, dt)
-    love.graphics.setColor(255, 255, 255, 255)
-    love.graphics.rectangle('fill', e.pos.x, e.pos.y, e.pos.w, e.pos.h)
-    love.graphics.setColor(0, 0, 0, 255)
-    love.graphics.rectangle('fill', e.lcdpos.x, e.lcdpos.y, e.lcdpos.w, e.lcdpos.h)
+    -- panel sprite
+    love.graphics.draw(e.panelSprite, e.pos.x, e.pos.y)
+    -- debug panel gfx
+    -- love.graphics.setColor(255, 255, 255, 255)
+    -- love.graphics.rectangle('fill', e.pos.x, e.pos.y, e.pos.w, e.pos.h)
+    -- love.graphics.setColor(0, 0, 0, 255)
+    -- love.graphics.rectangle('fill', e.lcdpos.x, e.lcdpos.y, e.lcdpos.w, e.lcdpos.h)
+
     -- buttons
-    love.graphics.rectangle('fill', e.leftButton.x, e.leftButton.y, e.leftButton.w, e.leftButton.h)
-    love.graphics.rectangle('fill', e.rightButton.x, e.rightButton.y, e.rightButton.w, e.rightButton.h)
+    love.graphics.setColor(255, 255, 255, 255)
+    local scaleHack = 0.9
+    if e.leftButtonDown then
+        love.graphics.draw(e.leftButtonDownSprite, e.leftButton.x, e.leftButton.y)
+    else
+        love.graphics.draw(e.leftButtonSprite, e.leftButton.x, e.leftButton.y)
+    end
+    if e.rightButtonDown then
+        love.graphics.draw(e.rightButtonDownSprite, e.rightButton.x, e.rightButton.y)
+    else
+        love.graphics.draw(e.rightButtonSprite, e.rightButton.x, e.rightButton.y)
+    end
+    -- debug button gfx
+    -- love.graphics.rectangle('fill', e.leftButton.x, e.leftButton.y, e.leftButton.w, e.leftButton.h)
+    -- love.graphics.rectangle('fill', e.rightButton.x, e.rightButton.y, e.rightButton.w, e.rightButton.h)
 
     -- draw ship
     local progressPct = e.secondsSinceDeparture / e.levelDuration

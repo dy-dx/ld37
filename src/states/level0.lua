@@ -5,6 +5,10 @@ local NavPanel = require 'entities/navpanel'
 local VentGas = require 'entities/ventgas'
 local DebugInfo = require 'entities/debuginfo'
 local Text = require 'entities/Text'
+local CrewMemberEngineer = require 'entities/crewmemberengineer'
+local CrewMemberDoctor = require 'entities/crewmemberdoctor'
+local CrewMemberSecurity = require 'entities/crewmembersecurity'
+local CrewMemberPilot = require 'entities/crewmemberpilot'
 
 local Level = Class{}
 function Level:init()
@@ -64,17 +68,20 @@ function Level:load()
 
 
 
-    -- fixme
+    world:addEntity(Environment()) -- background layer, goes first
     world:addEntity(Overlay())
     world:addEntity(text)
 
     world:addEntity(NavPanel())
     world:addEntity(VentGas())
+    world:addEntity(CrewMemberEngineer())
+    world:addEntity(CrewMemberDoctor())
+    world:addEntity(CrewMemberSecurity())
+    world:addEntity(CrewMemberPilot())
     world:addEntity(Panel({x = 80, y = 160, w = 160, h = 220}, "misslowcommand")) -- needs to take panel graphis
     world:addEntity(Panel({x = 560, y = 160, w = 160, h = 220}, "ventgas"))
     world:addEntity(Panel({x = 10, y = 300, w = 100, h = 250}, "spinner"))
     world:addEntity(Panel({x = 690, y = 300, w = 100, h = 250}, "plumbing"))
-    world:addEntity(Environment())
 
     if Global.isDebug then
         world:addEntity(DebugInfo())

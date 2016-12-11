@@ -15,17 +15,25 @@ function NavPanel:init()
 
     self.leftButton = {
         x = 150,
-        y = 505,
-        w = 40,
-        h = 40
+        y = 502,
+        w = 50,
+        h = 50
     }
 
     self.rightButton = {
         x = 150,
-        y = 555,
-        w = 40,
-        h = 40
+        y = 551,
+        w = 50,
+        h = 50
     }
+
+    self.leftButtonDown = false
+    self.rightButtonDown = false
+    self.leftButtonSprite = love.graphics.newImage('assets/images/navpanel/button_up.png')
+    self.leftButtonDownSprite = love.graphics.newImage('assets/images/navpanel/button_upPressed.png')
+    self.rightButtonSprite = love.graphics.newImage('assets/images/navpanel/button_down.png')
+    self.rightButtonDownSprite = love.graphics.newImage('assets/images/navpanel/button_downPressed.png')
+    self.panelSprite = love.graphics.newImage('assets/images/navpanel/panel.png')
 end
 
 return NavPanel

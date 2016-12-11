@@ -1,10 +1,10 @@
 local SpriteSystem = Class{}
-SpriteSystem = tiny.processingSystem(SpriteSystem)
+SpriteSystem = tiny.sortedProcessingSystem(SpriteSystem)
 
 function SpriteSystem:init()
     self.name = "plumbing"
     self.isDrawingSystem = true
-    self.filter = tiny.requireAll('sprite', 'pos', self.name)
+    self.filter = tiny.requireAll('sprite', 'pos', 'drawId', self.name)
 end
 
 function SpriteSystem:preProcess(dt)
@@ -38,6 +38,17 @@ function SpriteSystem:process(e, dt)
     if e.draw then
         e:draw(dt)
     end
+end
+
+
+function SpriteSystem:compare(one, other)
+    -- should return true if `one` should come before `other` and false otherwise
+    if one.lifted then
+        return false
+    elseif other.lifted then
+        return true
+    end
+    return one.drawId < other.drawId
 end
 
 return SpriteSystem
