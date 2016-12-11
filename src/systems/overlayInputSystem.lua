@@ -25,10 +25,12 @@ function overlayInputSystem:overlayActive(e, dt)
 
     if(closeHit) then
       Global.currentGame = nil
+      return
     end
 
     if(not Utils.isInside(position, e.hitbox)) then
         Global.currentGame = nil
+        return
     end
   end
 end
