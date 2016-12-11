@@ -52,8 +52,11 @@ function PlumbingSystem:preProcess(dt)
                 -- local pipe = StraightPipe(x, y, 0)
                 -- TODO: don't start here!!
                 if pipe.pipeCoordinate.x == 9 and pipe.pipeCoordinate.y == 0 then
-                    pipe.readingDirection = false
-                    pipe.filling = true
+                    if not pipe:acceptFrom({x = 1, y = 0}) then
+                        Signal.emit('gameover')
+                    else
+                        pipe.filling = true
+                    end
                 end
                 world:addEntity(pipe)
             end
@@ -91,6 +94,10 @@ end
 
 function PlumbingSystem:onAdd(e)
     local coord = e.pipeCoordinate.x .. '_' .. e.pipeCoordinate.y
+    local existingPipe = self.pipes[coord]
+    if existingPipe then
+        world:remove(existingPipe)
+    end
     self.pipes[coord] = e
 end
 

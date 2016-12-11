@@ -1,4 +1,16 @@
+local CurvedPipe = require 'entities/plumbing/curvedpipe'
+local StraightPipe = require 'entities/plumbing/straightpipe'
+
 PlayerControlSystem = tiny.processingSystem(Class{})
+
+function randomPipe(x, y)
+    local pipeType = math.floor(math.random() * 6)
+    if pipeType < 4 then
+        return CurvedPipe(x, y, pipeType)
+    else
+        return StraightPipe(x, y, pipeType - 4)
+    end
+end
 
 function PlayerControlSystem:init()
     self.name = "plumbing"
@@ -18,19 +30,15 @@ function PlayerControlSystem:process(e, dt)
         return
     end
     if self.input:pressed("mouse1") then
-        -- self.mouseDown = true
-        -- if self.mouseDown then
         local x, y = love.mouse.getPosition()
         x = math.floor((x - 100) / 50)
         y = math.floor((y - 100) / 50)
         if 0 <= x and x < 10 and 0 <= y and y < 7 then
+            local pipe = randomPipe(x, y)
+            world:addEntity(pipe)
             print(x, y)
         end
     end
-
-    -- if self.input:up("mouse1") then
-    --     self.mouseDown = false
-    -- end
 end
 
 return PlayerControlSystem
