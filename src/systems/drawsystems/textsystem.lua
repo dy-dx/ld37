@@ -78,14 +78,16 @@ function TextSystem:printText(e, charactersDisplayed)
         return self:chunkText(e, line)
     end)
 
-
-    -- local font = love.graphics.newFont(20)
-    -- local prevTextChunks = self:chunkText(e, self:savedTextPrefix(e))
-
     self:printLines(e, lume.concat(lume.concat(prevChunks), textChunks))
+
 end
 
 function TextSystem:process(e, dt)
+    local prevLen = table.getn(e.savedText)
+    if(prevLen > 5) then
+        e.savedText = lume.slice(e.savedText, prevLen - 5, prevLen)
+    end
+
     e.time = e.time + dt;
     e.charactersDisplayed = self:getCharactersDisplayed(e)
 
