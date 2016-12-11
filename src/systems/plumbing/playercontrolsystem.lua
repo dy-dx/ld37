@@ -3,13 +3,30 @@ local StraightPipe = require 'entities/plumbing/straightpipe'
 
 PlayerControlSystem = tiny.processingSystem(Class{})
 
-function randomPipe(x, y)
-    local pipeType = math.floor(math.random() * 6)
-    if pipeType < 4 then
-        return CurvedPipe(x, y, pipeType)
+local OFFSET_X = 125
+local OFFSET_Y = 125
+
+
+function newPipe(isStraight, x, y, rotation)
+    if isStraight then
+        return StraightPipe(x, y, OFFSET_X, OFFSET_Y, rotation)
     else
-        return StraightPipe(x, y, pipeType - 4)
+        return CurvedPipe(x, y, OFFSET_X, OFFSET_Y, rotation)
     end
+end
+
+function PlayerControlSystem:pipeAtMouse()
+    local x, y = love.mouse.getPosition()
+    x = math.floor((x - 100) / 50)
+    y = math.floor((y - 100) / 50)
+    if 0 <= x and x < 10 and 0 <= y and y < 7 then
+        local key = getPipeKey(x, y)
+        return Global.pipes[key]
+    end
+end
+
+function getPipeKey(x, y)
+    return x .. '_' .. y
 end
 
 function PlayerControlSystem:init()
@@ -29,15 +46,46 @@ function PlayerControlSystem:process(e, dt)
     if Global.currentGame ~= self.name or e.gName ~= self.name then
         return
     end
-    if self.input:pressed("mouse1") then
-        local x, y = love.mouse.getPosition()
-        x = math.floor((x - 100) / 50)
-        y = math.floor((y - 100) / 50)
-        if 0 <= x and x < 10 and 0 <= y and y < 7 then
-            local pipe = randomPipe(x, y)
-            world:addEntity(pipe)
-            print(x, y)
+
+    -- RELEASE
+    if self.input:released("mouse1") and self.liftedPipe then
+        local swapPipe = self:pipeAtMouse()
+        if swapPipe and swapPipe ~= self.liftedPipe and swapPipe.fluidProgress == 0 then
+            -- swap em
+            world:remove(swapPipe)
+            world:remove(self.liftedPipe)
+            world:addEntity(newPipe(
+                swapPipe.isStraight,
+                self.liftedPipe.pipeCoordinate.x, self.liftedPipe.pipeCoordinate.y,
+                swapPipe.rotation
+            ))
+            world:addEntity(newPipe(
+                self.liftedPipe.isStraight,
+                swapPipe.pipeCoordinate.x, swapPipe.pipeCoordinate.y,
+                self.liftedPipe.rotation
+            ))
+        else
+            -- put it back
+            self.liftedPipe.pos = self.liftedPipe.normalPos
         end
+        -- put it down
+        self.liftedPipe.lifted = false
+        self.liftedPipe = nil
+    end
+
+    -- PRESS
+    if self.input:pressed("mouse1") then
+        local pipe = self:pipeAtMouse()
+        if pipe and pipe.fluidProgress == 0 then
+            pipe.lifted = true
+            self.liftedPipe = pipe
+        end
+    end
+
+    -- DRAG
+    if self.liftedPipe then
+        local x, y = love.mouse.getPosition()
+        self.liftedPipe.pos = {x=x, y=y}
     end
 end
 

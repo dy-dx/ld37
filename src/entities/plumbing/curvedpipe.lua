@@ -2,11 +2,6 @@ local CurvedPipe = Class{}
 
 local SIZE = 50
 
-local offsett = {
-    x = 125,
-    y = 125
-}
-
 function rotateCoords(x, y, rotation)
     rotation = rotation % 4
     if rotation == 0 then
@@ -20,13 +15,16 @@ function rotateCoords(x, y, rotation)
     end
 end
 
-function CurvedPipe:init(x, y, rotation)
+function CurvedPipe:init(x, y, offsetX, offsetY, rotation)
     self.plumbing = true
+    self.isStraight = false
+    self.lifted = false
     self.pipeCoordinate = {x = x, y = y}
-    self.pos = {
-        x = x * SIZE + offsett.x,
-        y = y * SIZE + offsett.y
+    self.normalPos = {
+        x = x * SIZE + offsetX,
+        y = y * SIZE + offsetY
     }
+    self.pos = self.normalPos
     self.rotation = rotation  -- this is for the game logic stuff, [0, 3]
     self.rot = rotation * math.pi / 2  -- this is for the display stuff, [0, 2π)
     self.sprite = love.graphics.newImage('assets/images/pipeLD.png')
