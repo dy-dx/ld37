@@ -18,6 +18,9 @@ function SpriteSystem:process(e, dt)
     if Global.currentGame ~= self.name then
         return
     end
+    if e.predraw then
+        e:predraw(dt)
+    end
     local an = e.animation
     local alpha = e.alpha or 1
     local pos, sprite, scale, rot, offset = e.pos, e.sprite, e.scale, e.rot, e.offset
