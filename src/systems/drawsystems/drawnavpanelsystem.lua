@@ -25,14 +25,10 @@ local function drawDottedLine(x1, y1, x2, y2)
     local stepx, stepy = x / len, y / len
     x = x1
     y = y1
-
-    for i = 1, len do
-        int, frac = math.modf(i/2)
-        if frac == 0 then
-            love.graphics.points(x, y)
-        end
-        x = x + stepx
-        y = y + stepy
+    for i = 1, len, 3 do
+        love.graphics.points(x, y)
+        x = x + stepx*3
+        y = y + stepy*3
     end
 end
 
