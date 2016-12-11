@@ -32,6 +32,7 @@ function Missile:process(dt)
     local oy = self.pos.y - self.destination.y
     if Utils.isInCircle(ox, oy, dt * Missile.SPEED) then
         self.isDead = true
+        Signal.emit('ded')
         Signal.emit('gameover')
     end
 end

@@ -27,6 +27,7 @@ end
 function CollisionSystem:onAdd(e)
     if e.isExplosion then
         self.explosions[e] = e
+        Signal.emit('explosion')
     end
 end
 

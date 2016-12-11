@@ -24,6 +24,7 @@ function PlayerControlSystem:process(e, dt)
     if self.input:pressed("mouse1") then
         -- self.mouseDown = true
         -- if self.mouseDown then
+        Signal.emit('fire')
         local x, y = love.mouse.getPosition()
         world:addEntity(Shell(x, y))
         -- end
