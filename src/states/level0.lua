@@ -65,7 +65,7 @@ function Level:load()
 
 
 
-    -- fixme
+    world:addEntity(Environment()) -- background layer, goes first
     world:addEntity(Overlay())
     world:addEntity(text)
 
@@ -76,7 +76,6 @@ function Level:load()
     world:addEntity(Panel({x = 560, y = 160, w = 160, h = 220}, "ventgas"))
     world:addEntity(Panel({x = 10, y = 300, w = 100, h = 250}, "spinner"))
     world:addEntity(Panel({x = 690, y = 300, w = 100, h = 250}, "plumbing"))
-    world:addEntity(Environment())
 
     if Global.isDebug then
         world:addEntity(DebugInfo())
