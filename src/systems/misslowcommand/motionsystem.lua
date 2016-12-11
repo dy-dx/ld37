@@ -3,6 +3,8 @@ local Missile = require 'entities/misslowcommand/missile'
 
 MisslowCommandSystem = tiny.processingSystem(Class{})
 
+local TIME_TO_MISSILE = 5  -- seconds
+
 local MISSILE_LENGTH = 35
 local WIDTH = 720
 local HEIGHT = 480
@@ -22,7 +24,7 @@ function MisslowCommandSystem:preProcess(dt)
 
     self.cooldown = self.cooldown - dt
     if self.cooldown <= 0 then
-        self.cooldown = 5
+        self.cooldown = TIME_TO_MISSILE
 
         local wall = math.floor(math.random() * 4)
         local x, y
