@@ -18,6 +18,24 @@ local rotatePoint = function(x, y, theta, x0, y0)
         ((x-x0) * math.sin(theta) + (y-y0) * math.cos(theta) + y0)
 end
 
+local function drawDottedLine(x1, y1, x2, y2)
+    love.graphics.setPointSize(1)
+    local x, y = x2 - x1, y2 - y1
+    local len = math.sqrt(x^2 + y^2)
+    local stepx, stepy = x / len, y / len
+    x = x1
+    y = y1
+
+    for i = 1, len do
+        int, frac = math.modf(i/2)
+        if frac == 0 then
+            love.graphics.points(x, y)
+        end
+        x = x + stepx
+        y = y + stepy
+    end
+end
+
 function DrawNavPanelSystem:process(e, dt)
     love.graphics.setColor(255, 255, 255, 255)
     love.graphics.rectangle('fill', e.pos.x, e.pos.y, e.pos.w, e.pos.h)
@@ -36,6 +54,8 @@ function DrawNavPanelSystem:process(e, dt)
     sx0, sy0 = rotatePoint(sPos.x, sPos.y - 15, e.rotation, sPos.x, sPos.y)
     sx1, sy1 = rotatePoint(sPos.x, sPos.y + 15, e.rotation, sPos.x, sPos.y)
     sx2, sy2 = rotatePoint(sPos.x + 30, sPos.y, e.rotation, sPos.x, sPos.y)
+    love.graphics.setColor(255, 255, 255)
+    drawDottedLine(e.lcdpos.x, e.lcdpos.y + e.lcdpos.h/2, e.lcdpos.x + e.lcdpos.w, e.lcdpos.y + e.lcdpos.h/2)
     love.graphics.setColor(255, 0, 0, 255)
     love.graphics.polygon('fill', sx0, sy0, sx1, sy1, sx2, sy2)
 end

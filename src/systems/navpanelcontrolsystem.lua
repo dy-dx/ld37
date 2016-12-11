@@ -51,6 +51,10 @@ function NavPanelControlSystem:process(e, dt)
 
     e.secondsSinceDeparture = e.secondsSinceDeparture + dt
     e.shipYOffset = e.shipYOffset + dt * e.rotation * 10 -- arbitrary magic number but it works
+
+    if math.abs(e.shipYOffset) > e.lcdpos.h/2 then
+        Signal.emit('gameover')
+    end
 end
 
 return NavPanelControlSystem
