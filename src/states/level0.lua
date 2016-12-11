@@ -4,6 +4,7 @@ local Overlay = require 'entities/overlay'
 local NavPanel = require 'entities/navpanel'
 local VentGas = require 'entities/ventgas'
 local DebugInfo = require 'entities/debuginfo'
+local Text = require 'entities/Text'
 
 local Level = Class{}
 function Level:init()
@@ -42,6 +43,8 @@ function Level:load()
         require ("systems/drawsystems/drawventgassystem")(),
         require ("systems/drawsystems/misslowspritesystem")(),
         require ("systems/drawsystems/panelsystem")(),
+        require ("systems/drawsystems/textsystem")(),
+
         require ("systems/overlaySystem")(),
 
         -- let this go last
@@ -50,6 +53,8 @@ function Level:load()
 
     -- fixme
     world:addEntity(Overlay())
+
+    world:addEntity(Text('hello', 3000))
 
     world:addEntity(NavPanel())
     world:addEntity(VentGas())

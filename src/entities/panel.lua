@@ -10,10 +10,6 @@ function Panel:init(hitbox, gameName)
     self.activatable = true
     self.gName = gameName
 
-    print('game')
-    print('self.gName'.. self.gName)
-    print(game)
-
     self.hitbox = hitbox
 end
 
