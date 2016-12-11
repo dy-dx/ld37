@@ -19,18 +19,9 @@ function overlayInputSystem:overlayActive(e, dt)
     clickX, clickY = love.mouse.getPosition()
     local position = {x = clickX, y = clickY}
 
-    local closeHit = lume.any(e.closeHitboxes, function(cHitbox)
-      return Utils.isInside(position, cHitbox)
-    end)
-
     if love.timer.getTime() - Global.timeSinceOverlayOpened < 0.05 then
         -- we just opened the overlay so don't close it
         return
-    end
-
-    if(closeHit) then
-      Global.currentGame = nil
-      return
     end
 
     if(not Utils.isInside(position, e.hitbox)) then

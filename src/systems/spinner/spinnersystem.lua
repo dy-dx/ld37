@@ -9,7 +9,6 @@ end
 
 function SpinnerSystem:preProcess(dt)
     if not self.indicator then
-        print("why god")
         self.indicator = true
         world:addEntity(Indicator())
         world:addEntity(SpinnerFrame())

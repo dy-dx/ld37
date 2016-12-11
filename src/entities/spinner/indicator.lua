@@ -15,7 +15,6 @@ function Indicator:init()
 end
 
 function Indicator:process(dt)
-    print("processing")
     self.angle = (self.angle + math.pi * 2 * dt) % (math.pi * 2)
     self.pos = {
         x = SPIN_RADIUS * math.cos(self.angle) + 200,
