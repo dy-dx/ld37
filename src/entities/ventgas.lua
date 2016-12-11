@@ -22,8 +22,8 @@ function VentGas:init()
     self.b = 35
 
     -- gas pressure
-    self.gasPressureDecrease = 100
-    self.gasGrowthRate = .1
+    self.gasPressureDecrease = 50
+    self.gasGrowthRate = 5
     self.maxGasPressure = maxPressure
     self.currentGasPressure = 0
     self.gasPressureBox = {x = self.width*1/4
@@ -46,7 +46,7 @@ function VentGas:init()
 
     -- unknown pressure
     self.unknownPressureDecrease = 50
-    self.unknownGrowthRate = .2
+    self.unknownGrowthRate = 10
     self.maxUnknownPressure = maxPressure
     self.currentUnknownPressure = 0
     self.unknownPressureBox = {x = self.width*3/4
