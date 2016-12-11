@@ -1,3 +1,4 @@
+local Background = require 'entities/plumbing/background'
 local Pipe = require 'entities/plumbing/pipe'
 
 PlumbingSystem = tiny.processingSystem(Class{})
@@ -9,6 +10,8 @@ end
 function PlumbingSystem:preProcess(dt)
     if not self.pipes then
         self.pipes = true
+
+        world:addEntity(Background())
         for y=0,6 do
             for x=0,9 do
                 world:addEntity(Pipe(x, y, math.floor(math.random() * 4)))

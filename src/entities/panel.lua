@@ -18,7 +18,8 @@ function Panel:init(hitbox, gameName)
 end
 
 function Panel:draw(dt)
-    Utils.printFilled(self.hitbox, {r = 0, g = 255, b = 0}, 'line')
+    -- Debug frame
+    -- Utils.printFilled(self.hitbox, {r = 0, g = 255, b = 0}, 'line')
 end
 
 return Panel

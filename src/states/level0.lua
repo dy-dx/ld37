@@ -49,7 +49,7 @@ function Level:load()
     )
 
     -- fixme
-    world:addEntity(Overlay());
+    world:addEntity(Overlay())
 
     world:addEntity(NavPanel())
     world:addEntity(VentGas())

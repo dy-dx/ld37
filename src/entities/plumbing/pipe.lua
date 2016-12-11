@@ -1,8 +1,8 @@
 local Pipe = Class{}
 
 local offsett = {
-    x = 100,
-    y = 100
+    x = 125,
+    y = 125
 }
 
 function Pipe:init(x, y, rotation)
