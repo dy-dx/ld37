@@ -91,7 +91,13 @@ function PlayerControlSystem:process(e, dt)
             self.liftedPipe = pipe
         elseif Utils.isInCircle(x - 628, y - 375, 18) then
             -- Refresh scrap
-            world:addEntity(randomPipe(11, 5))
+            local key = getPipeKey(11, 5)
+            pipe = Global.pipes[key]
+            local isStraight, rotation = pipe.isStraight, pipe.rotation
+            while pipe.isStraight == isStraight and pipe.rotation == rotation do
+                pipe = randomPipe(11, 5)
+            end
+            world:addEntity(pipe)
         end
     end
 
