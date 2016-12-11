@@ -21,8 +21,9 @@ function CurvedPipe:init(x, y, rotation)
         x = self.sprite:getWidth() / 2,
         y = self.sprite:getHeight() / 2
     }
-    self.leftToDown = true
+    self.clockwise = true
     self.isDead = false
+    self.filling = true
     self.fluidProgress = 0
 end
 
@@ -54,7 +55,7 @@ function CurvedPipe:predraw(dt)
             local x, y = coord.x, coord.y
 
             -- Flip depending on which side of the pipe the fluid enters
-            if self.leftToDown then
+            if self.clockwise then
                 x, y = -y, -x
             end
 
@@ -77,7 +78,13 @@ function CurvedPipe:predraw(dt)
 end
 
 function CurvedPipe:process(dt)
-    self.fluidProgress = math.min(self.fluidProgress + dt * FLUID_RATE, 1)
+    if self.filling then
+        self.fluidProgress = math.min(self.fluidProgress + dt * FLUID_RATE, 1)
+        if self.fluidProgress == 1 then
+            self.filling = false
+            -- find the next guy to fill
+        end
+    end
 end
 
 return CurvedPipe

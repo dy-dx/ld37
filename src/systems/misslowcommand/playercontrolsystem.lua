@@ -18,7 +18,7 @@ function PlayerControlSystem:postProcess(dt)
 end
 
 function PlayerControlSystem:process(e, dt)
-    if Global.currentGame ~= self.name then
+    if Global.currentGame ~= self.name or e.gName ~= self.name then
         return
     end
     if self.input:pressed("mouse1") then
