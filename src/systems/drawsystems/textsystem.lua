@@ -28,25 +28,7 @@ function TextSystem:getCharactersDisplayed(e)
     end
 end
 
-function TextSystem:chunkText(e, font, textString)
 
-    local chunks = Utils.split(textString, "%S+")
-
-    local linesChunks = lume.reduce(chunks, function(memo, chunk)
-        local lastChunk = lume.last(memo)
-
-        local testChunks = lume.concat(lastChunk, {chunk})
-        if(font:getWidth(table.concat(testChunks, ' ')) < e.maxWidth) then
-            memo[table.getn(memo)] = testChunks
-        else
-            lume.push(memo, { chunk })
-        end
-        return memo
-
-    end, {{}})
-
-    return lume.map(linesChunks, function(line) return table.concat(line, ' ') end);
-end
 
 function TextSystem:printLine(line, height, idx)
     local font = love.graphics.newFont(20)
@@ -66,12 +48,41 @@ function TextSystem:printLines(e, lines)
     end)
 end
 
-function TextSystem:printText(e, charactersDisplayed)
-    local partialText = string.sub(e.text, 1, charactersDisplayed) or ""
+function TextSystem:chunkText(e, textString)
+
     local font = love.graphics.newFont(20)
-    local text = love.graphics.newText(font, partialText)
-    local textChunks = self:chunkText(e, font, partialText)
-    self:printLines(e, textChunks)
+    local chunks = Utils.split(textString, "%S+")
+
+    local linesChunks = lume.reduce(chunks, function(memo, chunk)
+        local lastChunk = lume.last(memo)
+
+        local testChunks = lume.concat(lastChunk, {chunk})
+        if(font:getWidth(table.concat(testChunks, ' ')) < e.maxWidth) then
+            memo[table.getn(memo)] = testChunks
+        else
+            lume.push(memo, { chunk })
+        end
+        return memo
+
+    end, {{}})
+
+    return lume.map(linesChunks, function(line) return table.concat(line, ' ') end);
+end
+
+function TextSystem:printText(e, charactersDisplayed)
+
+    local partialText = string.sub(e.text, 1, charactersDisplayed) or ""
+    local textChunks = self:chunkText(e, partialText)
+
+    local prevChunks = lume.each(e.savedText, function (line)
+        return self:chunkText(e, line)
+    end)
+
+
+    -- local font = love.graphics.newFont(20)
+    -- local prevTextChunks = self:chunkText(e, self:savedTextPrefix(e))
+
+    self:printLines(e, lume.concat(lume.concat(prevChunks), textChunks))
 end
 
 function TextSystem:process(e, dt)

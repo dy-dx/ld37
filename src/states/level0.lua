@@ -18,6 +18,16 @@ Global = {
     timeSinceOverlayOpened = 0 -- hack for overlay
 }
 
+local text = Text('Hello Commander.', 10000);
+
+Signal.register('write', function(s, speed)
+    text:write(s, speed)
+end)
+
+Signal.register('writeMore', function(s, speed)
+    text:writeMore(s, speed)
+end)
+
 function Level:load()
     -- ordering of systems really matters
     world = tiny.world(
@@ -52,11 +62,7 @@ function Level:load()
         require ("systems/drawsystems/drawdebuginfosystem")()
     )
 
-    local text = Text('Hello Commander.', 10000);
 
-    Signal.register('write', function(s, speed)
-        text:write(s, speed)
-    end)
 
     -- fixme
     world:addEntity(Overlay())
