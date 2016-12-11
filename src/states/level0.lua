@@ -14,7 +14,7 @@ Global = {
     currentGame = nil,
     isDebug = true,
     isGameOver = false,
-    timeSinceOverlayOpened = 0
+    timeSinceOverlayOpened = 0 -- hack for overlay
 }
 
 function Level:load()

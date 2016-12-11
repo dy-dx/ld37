@@ -5,7 +5,7 @@ Input = require '../vendor/input'
 Timer = require '../vendor/hump.timer'
 Signal = require '../vendor/hump.signal'
 tiny = require '../vendor/tiny'
-local Sound = require 'sound'
+require 'sounds'
 
 function printTable(mytable)
     for k, v in pairs(mytable) do
