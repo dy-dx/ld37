@@ -77,7 +77,15 @@ function PlayerControlSystem:process(e, dt)
     if self.input:pressed("mouse1") then
         local pipe = self:pipeAtMouse()
         if pipe and pipe.fluidProgress == 0 then
+            -- we create a new one to update the draw order, so it'll be on top
+            -- gross!
+            pipe = newPipe(
+                pipe.isStraight,
+                pipe.pipeCoordinate.x, pipe.pipeCoordinate.y,
+                pipe.rotation
+            )
             pipe.lifted = true
+            world:addEntity(pipe)
             self.liftedPipe = pipe
         end
     end

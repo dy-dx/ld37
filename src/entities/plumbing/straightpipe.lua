@@ -24,22 +24,43 @@ function StraightPipe:init(x, y, offsetX, offsetY, rotation)
     self.isDead = false
     self.filling = false
     self.fluidProgress = 0
+    -- default draw order
+    self.drawId = x + y * 10
 end
 
 function StraightPipe:predraw(dt)
+    local fullBackground = {
+        self.pos.x - SIZE / 2, self.pos.y - SIZE / 2,
+        self.pos.x + SIZE / 2, self.pos.y - SIZE / 2,
+        self.pos.x + SIZE / 2, self.pos.y + SIZE / 2,
+        self.pos.x - SIZE / 2, self.pos.y + SIZE / 2
+    }
+
+    if self.lifted then
+        -- Background from the lifted piece
+        love.graphics.setColor(0x57, 0x5d, 0x60, 0xFF)
+        love.graphics.polygon(
+            'fill',
+            self.normalPos.x - SIZE / 2, self.normalPos.y - SIZE / 2,
+            self.normalPos.x + SIZE / 2, self.normalPos.y - SIZE / 2,
+            self.normalPos.x + SIZE / 2, self.normalPos.y + SIZE / 2,
+            self.normalPos.x - SIZE / 2, self.normalPos.y + SIZE / 2
+        )
+
+        -- Background OF the lifted piece
+        love.graphics.setColor(0xC3, 0xC3, 0xC3, 0xFF)
+        love.graphics.polygon('fill', fullBackground)
+        love.graphics.setColor(0xFF, 0xFF, 0xFF, 0xFF)
+        return
+    end
+
     -- No fluid
     if self.fluidProgress == 0 then return end
 
     love.graphics.setColor(0, 0xFF, 0, 0xFF)
     -- All fluid
     if self.fluidProgress == 1 then
-        love.graphics.polygon(
-            'fill',
-            self.pos.x - SIZE / 2, self.pos.y - SIZE / 2,
-            self.pos.x + SIZE / 2, self.pos.y - SIZE / 2,
-            self.pos.x + SIZE / 2, self.pos.y + SIZE / 2,
-            self.pos.x - SIZE / 2, self.pos.y + SIZE / 2
-        )
+        love.graphics.polygon('fill', fullBackground)
     -- Some fluid
     else
         -- originally, vertices refers to a left-to-right line
