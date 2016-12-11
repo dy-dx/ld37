@@ -1,4 +1,4 @@
-local CurvedPipe = Class{}
+local StraightPipe = Class{}
 
 local SIZE = 50
 local FLUID_RATE = 0.1
@@ -8,25 +8,26 @@ local offsett = {
     y = 125
 }
 
-function CurvedPipe:init(x, y, rotation)
+function StraightPipe:init(x, y, rotation)
     self.plumbing = true
     self.pos = {
         x = x * SIZE + offsett.x,
         y = y * SIZE + offsett.y
     }
-    self.rotation = rotation  -- this is for the game logic stuff, [0, 3]
+    self.rotation = rotation  -- this is for the game logic stuff, [0, 1]
     self.rot = rotation * math.pi / 2  -- this is for the display stuff, [0, 2π)
-    self.sprite = love.graphics.newImage('assets/images/pipeLD.png')
+    self.sprite = love.graphics.newImage('assets/images/pipeLR.png')
     self.offset = {
         x = self.sprite:getWidth() / 2,
         y = self.sprite:getHeight() / 2
     }
-    self.leftToDown = true
+    self.readingDirection = true
     self.isDead = false
+    self.filling = true
     self.fluidProgress = 0
 end
 
-function CurvedPipe:predraw(dt)
+function StraightPipe:predraw(dt)
     -- No fluid
     if self.fluidProgress == 0 then return end
 
@@ -44,27 +45,25 @@ function CurvedPipe:predraw(dt)
     else
         -- originally, vertices refers to a down-to-left bend
         local vertices = {
-            {x = SIZE / 2, y = SIZE / 2},  -- bottom right
             {x = -SIZE / 2, y = SIZE / 2},  -- bottom left
-            -- bottom right to top left
-            {x = SIZE / 2 - self.fluidProgress * SIZE, y = SIZE / 2 - self.fluidProgress * SIZE}
+            {x = -SIZE / 2, y = -SIZE / 2},  -- top left
+            -- top left to top right
+            {x = -SIZE / 2 + self.fluidProgress * SIZE, y = -SIZE / 2},
+            -- bottom left to bottom right
+            {x = -SIZE / 2 + self.fluidProgress * SIZE, y = SIZE / 2}
         }
         local flattenedVertices = {}
         for k, coord in ipairs(vertices) do
             local x, y = coord.x, coord.y
 
             -- Flip depending on which side of the pipe the fluid enters
-            if self.leftToDown then
-                x, y = -y, -x
+            if self.readingDirection then
+                x, y = -x, -y
             end
 
             -- Rotate depending on the rotation of the pipe
             if self.rotation == 1 then
                 y, x = x, -y
-            elseif self.rotation == 2 then
-                x, y = -x, -y
-            elseif self.rotation == 3 then
-                y, x = -x, y
             end
 
             -- `polygon` wants a flattened array-table for some reason ᖍ(ツ)ᖌ
@@ -76,8 +75,14 @@ function CurvedPipe:predraw(dt)
     love.graphics.setColor(0xFF, 0xFF, 0xFF, 0xFF)
 end
 
-function CurvedPipe:process(dt)
-    self.fluidProgress = math.min(self.fluidProgress + dt * FLUID_RATE, 1)
+function StraightPipe:process(dt)
+    if self.filling then
+        self.fluidProgress = math.min(self.fluidProgress + dt * FLUID_RATE, 1)
+        if self.fluidProgress == 1 then
+            self.filling = false
+            -- find the next guy to fill
+        end
+    end
 end
 
-return CurvedPipe
+return StraightPipe

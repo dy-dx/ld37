@@ -1,5 +1,6 @@
 local Background = require 'entities/plumbing/background'
-local Pipe = require 'entities/plumbing/pipe'
+local CurvedPipe = require 'entities/plumbing/curvedpipe'
+local StraightPipe = require 'entities/plumbing/straightpipe'
 
 PlumbingSystem = tiny.processingSystem(Class{})
 
@@ -14,7 +15,12 @@ function PlumbingSystem:preProcess(dt)
         world:addEntity(Background())
         for y=0,6 do
             for x=0,9 do
-                world:addEntity(Pipe(x, y, math.floor(math.random() * 4)))
+                local pipeType = math.floor(math.random() * 6)
+                if pipeType < 4 then
+                    world:addEntity(CurvedPipe(x, y, pipeType))
+                else
+                    world:addEntity(StraightPipe(x, y, pipeType - 4))
+                end
             end
         end
     end
