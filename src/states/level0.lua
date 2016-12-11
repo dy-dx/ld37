@@ -21,9 +21,9 @@ function Level:load()
         require ("systems/misslowcommand/motionsystem")(),
         require ("systems/misslowcommand/collisionsystem")(),
         require ("systems/ventgascontrolsystem")(),
+        require ("systems/spinner/spinnersystem")(),
 
         -- draw systems
-
         require ("systems/drawsystems/spritesystem")(),
         require ("systems/drawsystems/panelsystem")(),
         require ("systems/drawsystems/debughitboxsystem")(),
@@ -31,6 +31,7 @@ function Level:load()
 
         require ("systems/overlaySystem")(),
         require ("systems/overlayInputSystem")(),
+        require ("systems/drawsystems/spinnersystem")(),
         require ("systems/drawsystems/drawventgassystem")(),
         require ("systems/drawsystems/misslowspritesystem")()
     )
@@ -42,7 +43,7 @@ function Level:load()
     world:addEntity(VentGas())
     world:addEntity(Panel({x = 80, y = 160, w = 160, h = 220}, "misslowcommand")) -- needs to take panel graphis
     world:addEntity(Panel({x = 560, y = 160, w = 160, h = 220}, "ventgas"))
-    world:addEntity(Panel({x = 10, y = 300, w = 100, h = 250}, "TESTGAME1"))
+    world:addEntity(Panel({x = 10, y = 300, w = 100, h = 250}, "spinner"))
     world:addEntity(Panel({x = 690, y = 300, w = 100, h = 250}, "TESTGAME2"))
     world:addEntity(Environment())
 
