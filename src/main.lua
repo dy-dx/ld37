@@ -24,18 +24,22 @@ end
 
 local drawSystems = function(_, s) return not not s.isDrawingSystem end
 local updateSystems = function(_, s) return not s.isDrawingSystem end
+local cutsceneSystems = function(_, s) return not not s.isCutsceneSystem end
 
 function love.draw()
-    if world then
-        world:update(love.timer.getDelta(), drawSystems)
-    end
+    if not world then return end
+
+    world:update(love.timer.getDelta(), drawSystems)
 end
 
 
 function love.update(dt)
+    if not world then return end
     Timer.update(dt)
-    if world then
+
+    if Global and Global.isCutscene then
+        world:update(love.timer.getDelta(), cutsceneSystems)
+    else
         world:update(love.timer.getDelta(), updateSystems)
-        -- print (world:getEntityCount())
     end
 end

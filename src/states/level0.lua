@@ -13,6 +13,7 @@ local CrewMemberPilot = require 'entities/crewmemberpilot'
 local Screen = require 'entities/screen'
 local Siren = require 'entities/siren'
 local LevelProgression = require 'entities/levelprogression'
+local Cutscene = require 'entities/cutscene'
 
 local Level = Class{}
 function Level:init()
@@ -24,7 +25,7 @@ Global = {
     isGameOver = false,
     isGameWon = false,
     timeSinceOverlayOpened = 0, -- hack for overlay
-    isCutscene = false,
+    isCutscene = true,
     currentLevel = 1, -- todo: change to 1 when we ship
     currentLevelDefinition = nil,
     levelDefinitions = require 'levelDefinitions',
@@ -91,12 +92,14 @@ function Level:load()
 
         require ("systems/overlaySystem")(),
 
-        -- let this go last
+        -- let these go last
+        require ("systems/drawsystems/cutscenedrawsystem")(),
         require ("systems/drawsystems/drawdebuginfosystem")()
     )
 
     local screenWidth = love.graphics.getWidth()
     world:addEntity(Environment()) -- background layer, goes first
+    world:addEntity(Cutscene())
     world:addEntity(music)
     world:addEntity(LevelProgression())
     world:addEntity(Overlay())
@@ -130,7 +133,7 @@ function Level:load()
     -- todo
     require 'signalhandlers'
 
-    Signal.emit('startLevel', Global.currentLevel)
+    Signal.emit('startCutscene', Global.currentLevel)
 end
 
 return Level

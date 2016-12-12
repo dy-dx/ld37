@@ -7,7 +7,7 @@ RestartSystem = tiny.processingSystem(Class{})
 
 
 function startLevel()
-    if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'misslowcommand') then
+    if not Utils.isAnActiveGame('misslowcommand') then
         return
     end
 

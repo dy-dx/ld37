@@ -1,6 +1,7 @@
 LevelProgressionSystem = tiny.processingSystem(Class{})
 
 function LevelProgressionSystem:init()
+    self.isCutsceneSystem = true
     self.filter = tiny.requireAll('isLevelProgression')
     self.input = Input()
     self.input:bind('l', 'skiplevel')
@@ -19,15 +20,21 @@ function LevelProgressionSystem:process(e, dt)
     -- for now, just restart the current level when isGameOver
     if Global.isGameOver then
         Global.isGameOver = false
-        Signal.emit('startLevel', Global.currentLevel)
+        Signal.emit('startCutscene', Global.currentLevel)
     end
 
     -- cheat code skip level
     if self.input:released('skiplevel') then
-        Global.currentLevel = Global.currentLevel + 1
-        -- fixme
-        Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
-        Signal.emit('startLevel', Global.currentLevel)
+        if Global.isCutscene then
+            Global.isCutscene = false
+            Signal.emit('startLevel', Global.currentLevel)
+        else
+            print('increased currentlevel in LevelProgressionSystem')
+            Global.currentLevel = Global.currentLevel + 1
+            -- fixme
+            Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
+            Signal.emit('startCutscene', Global.currentLevel)
+        end
     end
 
     local finalLevel = table.getn(Global.levelDefinitions)

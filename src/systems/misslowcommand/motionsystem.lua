@@ -30,7 +30,7 @@ function MisslowCommandSystem:init()
 end
 
 function MisslowCommandSystem:preProcess(dt)
-    if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'misslowcommand') then
+    if not Utils.isAnActiveGame('misslowcommand') then
         return
     end
 
@@ -58,7 +58,7 @@ function MisslowCommandSystem:preProcess(dt)
 end
 
 function MisslowCommandSystem:postProcess(dt)
-    if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'misslowcommand') then
+    if not Utils.isAnActiveGame('misslowcommand') then
         return
     end
 
@@ -72,7 +72,7 @@ function MisslowCommandSystem:postProcess(dt)
 end
 
 function MisslowCommandSystem:process(e, dt)
-    if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'misslowcommand') then
+    if not Utils.isAnActiveGame('misslowcommand') then
         return
     end
 

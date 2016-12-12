@@ -3,6 +3,7 @@ DrawDebugInfoSystem = tiny.processingSystem(DrawDebugInfoSystem)
 
 function DrawDebugInfoSystem:init()
     self.isDrawingSystem = true
+    self.isCutsceneSystem = true
     self.filter = tiny.requireAll('isDebugInfo')
 end
 
@@ -18,8 +19,8 @@ function DrawDebugInfoSystem:process(e, dt)
     local lineHeight = 14
     local lines = {
         "Entity Count: " .. world:getEntityCount(),
-        -- "isGameOver: " .. tostring(Global.isGameOver),
-        -- "isCutScene: " .. tostring(Global.isCutScene),
+        "isGameOver: " .. tostring(Global.isGameOver),
+        "isCutscene: " .. tostring(Global.isCutscene),
         "currentLevel: " .. tostring(Global.currentLevel),
     }
     for name, level in pairs(e.dangerLevels) do

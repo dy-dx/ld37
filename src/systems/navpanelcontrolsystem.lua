@@ -1,4 +1,5 @@
-NavPanelControlSystem = tiny.processingSystem(Class{})
+local Utils = require 'utils'
+local NavPanelControlSystem = tiny.processingSystem(Class{})
 
 function NavPanelControlSystem:init()
     self.filter = tiny.requireAll('isNavPanel')
@@ -12,10 +13,16 @@ end
 function NavPanelControlSystem:postProcess(dt)
 end
 
+local winTheLevel = function()
+    print('increased currentlevel in NavPanelControlSystem')
+    Global.currentLevel = Global.currentLevel + 1
+    -- fixme
+    Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
+    Signal.emit('startCutscene', Global.currentLevel)
+end
+
 function NavPanelControlSystem:process(e, dt)
-    if not lume.any(Global.currentLevelDefinition.activeGames, function(x) return x == 'nav' end) then
-        return
-    end
+    if not Utils.isAnActiveGame('nav') then return end
 
     local cursorOverLeftButton = false
     local cursorOverRightButton = false
@@ -79,27 +86,18 @@ function NavPanelControlSystem:process(e, dt)
     -- uncomment out to change win condition to tip of ship hitting planet
     --if e.shipTipX ~= nil and e.shipTipY ~= nil then
     --    if (e.shipTipX - (e.lcdpos.x + e.lcdpos.w))^2 + (e.shipTipY - (e.lcdpos.y + e.lcdpos.h/2))^2 < e.planetRadius^2 then
-    --        Global.currentLevel = Global.currentLevel + 1
-    --        -- fixme
-    --        Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
-    --        Signal.emit('startLevel', Global.currentLevel)
+    --        winTheLevel()
     --    end
     --end
 
     if e.shipTipX ~= nil then
         if e.shipTipX >= e.lcdpos.x + e.lcdpos.w - e.planetRadius*2 then
-            Global.currentLevel = Global.currentLevel + 1
-            -- fixme
-            Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
-            Signal.emit('startLevel', Global.currentLevel)
+            winTheLevel()
         end
     end
     -- todo: should do this in levelprogressionsystem
     --if e.secondsSinceDeparture >= Global.currentLevelDefinition.duration then
-    --    Global.currentLevel = Global.currentLevel + 1
-    --    -- fixme
-    --    Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
-    --    Signal.emit('startLevel', Global.currentLevel)
+    --    winTheLevel()
     --end
 end
 
