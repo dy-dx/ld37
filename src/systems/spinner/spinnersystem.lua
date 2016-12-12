@@ -2,6 +2,7 @@ local Indicator = require 'entities/spinner/indicator'
 local SpinnerFrame = require 'entities/spinner/spinnerframe'
 local Pillbox = require 'entities/spinner/pillbox'
 local Pill = require 'entities/spinner/pill'
+local Utils = require 'utils'
 
 SpinnerSystem = tiny.processingSystem(Class{})
 
@@ -14,6 +15,7 @@ function SpinnerSystem:init()
     self.input = Input()
     self.input:bind('mouse1', 'mouse1')
     self.pillBox = nil
+    self.spinnerPos = { x = 250, y = 250 }
 end
 
 function SpinnerSystem:preProcess(dt)
@@ -21,7 +23,7 @@ function SpinnerSystem:preProcess(dt)
         self.indicator = Indicator()
         self.pillBox = Pillbox({ x = 450, y = 300, w = 200, h = 50 }, 5, 5)
         world:addEntity(self.indicator)
-        world:addEntity(SpinnerFrame())
+        world:addEntity(SpinnerFrame(self.spinnerPos))
         world:addEntity(self.pillBox)
     end
 
@@ -54,12 +56,20 @@ function SpinnerSystem:process(e, dt)
     end
 
     if self.input:released("mouse1") then
-        self.indicator:pause(5)
+        clickX, clickY = love.mouse.getPosition()
+        local position = {x = clickX, y = clickY}
+        local spinnerBox = {x = self.spinnerPos.x, y = self.spinnerPos.y, w = 200, h = 200}
+        if(Utils.isInside(position, spinnerBox)) then
+            if(0 == table.getn(self.pillBox.pills)) then
+                self.indicator:pause(1)
+                return
+            end
 
-        if(0 == table.getn(self.pillBox.pills)) then return end
-
-        if(lume.first(self.pillBox.pills).number == self.indicator:getSelected()) then
-            self.pillBox:removePill()
+            if(lume.first(self.pillBox.pills).number == self.indicator:getSelected()) then
+                self.pillBox:removePill()
+            else
+                self.indicator:pause(1)
+            end
         end
     end
 end

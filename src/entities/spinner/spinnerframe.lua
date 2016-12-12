@@ -1,11 +1,8 @@
 local SpinnerFrame = Class{}
 
-function SpinnerFrame:init()
+function SpinnerFrame:init(pos)
     self.spinner = true
-    self.pos = {
-        x = 250,
-        y = 250
-    }
+    self.pos = pos
     self.sprite = love.graphics.newImage('assets/images/spinnerframe.png')
     self.offset = {
         x = self.sprite:getWidth() / 2,

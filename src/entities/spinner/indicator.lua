@@ -33,7 +33,6 @@ function Indicator:pause(t)
 end
 
 function Indicator:process(dt)
-    print("self.pauseTimer = " .. self.pauseTimer)
     self.pauseTimer = self.pauseTimer - dt
     if(self.pauseTimer < 0) then
         self.pauseTimer = 0
