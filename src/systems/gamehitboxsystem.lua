@@ -27,6 +27,9 @@ function GameHitboxSystem:process(e, dt)
             Signal.emit('write', "you can't play that game yet GREG! press L to skip to the next level", 150000)
             return
         end
+
+        Signal.emit("blip")
+
         -- printTable(e)
         Global.timeSinceOverlayOpened = love.timer.getTime()
         Global.currentGame = e.gName

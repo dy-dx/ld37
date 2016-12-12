@@ -25,12 +25,10 @@ function RestartSystem:init()
 end
 
 function RestartSystem:preProcess(dt)
-    print("preprocess restart")
     if(not self.backgroundinit) then
         world:addEntity(self.background)
         self.backgroundinit = true
     end
-
 end
 
 function RestartSystem:postProcess(dt)
