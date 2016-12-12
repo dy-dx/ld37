@@ -19,6 +19,8 @@ function DrawDebugInfoSystem:process(e, dt)
     local lines = {
         "Entity Count: " .. world:getEntityCount(),
         "isGameOver: " .. tostring(Global.isGameOver),
+        "isCutScene: " .. tostring(Global.isCutScene),
+        "currentLevel: " .. tostring(Global.currentLevel),
     }
     for i, line in ipairs(lines) do
         love.graphics.print(line, 2, lineHeight * (i-1))

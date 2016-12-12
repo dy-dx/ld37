@@ -16,16 +16,21 @@ function GameHitboxSystem:postProcess(dt)
 end
 
 function GameHitboxSystem:process(e, dt)
-    if not Global.currentGame and self.input:released('left_click') then
-        clickX, clickY = love.mouse.getPosition()
+    if Global.currentGame or not self.input:released('left_click') then return end
 
-        local point = {x = clickX, y = clickY}
+    local clickX, clickY = love.mouse.getPosition()
 
-        if(Utils.isInside(point, e.hitbox) and not Global.currentGame) then
-            printTable(e)
-            Global.timeSinceOverlayOpened = love.timer.getTime()
-            Global.currentGame = e.gName
+    local point = {x = clickX, y = clickY}
+
+    if Utils.isInside(point, e.hitbox) then
+        if not lume.any(Global.currentLevelDefinition.activeGames, function(x) return x == e.gName end) then
+            print("you can't play that game yet greg")
+            Signal.emit('write', "you can't play that game yet GREG! press L to skip to the next level", 150000)
+            return
         end
+        -- printTable(e)
+        Global.timeSinceOverlayOpened = love.timer.getTime()
+        Global.currentGame = e.gName
     end
 end
 

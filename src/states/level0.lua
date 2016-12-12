@@ -9,6 +9,7 @@ local CrewMemberEngineer = require 'entities/crewmemberengineer'
 local CrewMemberDoctor = require 'entities/crewmemberdoctor'
 local CrewMemberSecurity = require 'entities/crewmembersecurity'
 local CrewMemberPilot = require 'entities/crewmemberpilot'
+local LevelProgression = require 'entities/levelprogression'
 
 local Level = Class{}
 function Level:init()
@@ -19,10 +20,15 @@ Global = {
     currentGame = nil,
     isDebug = true,
     isGameOver = false,
-    timeSinceOverlayOpened = 0 -- hack for overlay
+    isGameWon = false,
+    timeSinceOverlayOpened = 0, -- hack for overlay
+    isCutscene = false,
+    currentLevel = 1,
+    currentLevelDefinition = nil,
+    levelDefinitions = require 'levelDefinitions'
 }
 
-local text = Text('Hello Commander.', 10000);
+local text = Text('Hello Commander.', 100000);
 
 Signal.register('write', function(s, speed)
     text:write(s, speed)
@@ -35,6 +41,7 @@ end)
 function Level:load()
     -- ordering of systems really matters
     world = tiny.world(
+        require ("systems/levelprogressionsystem")(), -- not a real system. let this run first tho
         require ("systems/misslowcommand/playercontrolsystem")(),
         require ("systems/plumbing/playercontrolsystem")(),
         require ("systems/navpanelcontrolsystem")(),
@@ -70,6 +77,7 @@ function Level:load()
 
 
     world:addEntity(Environment()) -- background layer, goes first
+    world:addEntity(LevelProgression())
     world:addEntity(Overlay())
     world:addEntity(text)
 
