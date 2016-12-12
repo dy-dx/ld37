@@ -58,11 +58,26 @@ function MisslowCommandSystem:preProcess(dt)
 end
 
 function MisslowCommandSystem:postProcess(dt)
+    if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'misslowcommand') then
+        return
+    end
+
+    -- if you saw a missile on this tick
+    if self.sawAMissile then
+        self.sawAMissile = false
+        Signal.emit('dangerLevel', 'misslowcommand', 3)
+    else
+        Signal.emit('dangerLevel', 'misslowcommand', 1)
+    end
 end
 
 function MisslowCommandSystem:process(e, dt)
     if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'misslowcommand') then
         return
+    end
+
+    if e.isMissile then
+        self.sawAMissile = true
     end
 
     e.pos.x = e.velocity.x * dt + e.pos.x
