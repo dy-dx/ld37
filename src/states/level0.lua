@@ -95,6 +95,7 @@ function Level:load()
 
         -- let these go last
         require ("systems/drawsystems/cutscenedrawsystem")(),
+        require ("systems/drawsystems/cutscenespritesystem")(),
         require ("systems/drawsystems/drawdebuginfosystem")()
     )
 
