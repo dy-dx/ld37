@@ -4,7 +4,6 @@ local Siren = Class{}
 -- types: sirens_side, sirens_mid_side
 function Siren:init(sirenType, xPos, yPos, flipHorizontally, gamename)
     self.isSirenAnimationSystem=true
-    self.global = true
     self.pos = {x = xPos, y = yPos}
     self.flipHorizontally = flipHorizontally
     self.gamename = gamename

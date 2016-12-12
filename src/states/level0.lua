@@ -76,6 +76,7 @@ function Level:load()
 
         require ("systems/drawsystems/spritesystem")(),
         require ("systems/alertSystem")(),
+        require ("systems/drawsystems/sirenspritesystem")(), --welcome to the game
         require ("systems/drawsystems/textsystem")(),
 
         require ("systems/drawsystems/debughitboxsystem")(),
