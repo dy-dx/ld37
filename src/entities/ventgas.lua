@@ -18,9 +18,9 @@ function VentGas:init()
     self.y = padding
     self.width = screenWidth - 2 * padding
     self.height = screenHeight - 2 * padding * 1.5
-    self.r = 10
-    self.g = 175
-    self.b = 35
+    self.r = 188
+    self.g = 198
+    self.b = 204
 
     self.gasButtonSprite = love.graphics.newImage('assets/images/ventgas/button_left.png')
     self.gasButtonPressedSprite = love.graphics.newImage('assets/images/ventgas/button_left_pressed.png')

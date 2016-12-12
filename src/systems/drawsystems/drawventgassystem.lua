@@ -77,6 +77,8 @@ function DrawVentGasSystem:process(e, dt)
         drawButtonSprite(e.wastePressureButton)
         -- drawing waste meter
         drawMeter(e.wastePressureBox, e.wasteMeter)
+        love.graphics.draw(e.tapeSprite, e.oxygenPressureBox.x - 70
+            , e.oxygenPressureBox.y + 140)
     end
 end
 
