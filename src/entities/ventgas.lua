@@ -31,7 +31,7 @@ function VentGas:init()
     self.tapeSprite = love.graphics.newImage('assets/images/ventgas/tape.png')
 
     -- gas pressure
-    self.gasMeter = {pressureDecrease = 50, growthRate = 30
+    self.gasMeter = {pressureDecrease = 50, growthRate = 3
         , maxPressure = maxPressure, currentPressure = 0}
     self.gasPressureBox = {x = self.width*1/4
         , y = self.y + barPadding, width = barWidth
@@ -58,7 +58,7 @@ function VentGas:init()
     }
 
     -- waste pressure
-    self.wasteMeter = {pressureDecrease = 50, growthRate = 40
+    self.wasteMeter = {pressureDecrease = 50, growthRate = 7
         , maxPressure = maxPressure, currentPressure = 0}
     self.wastePressureBox = {x = self.width*3/4
         , y = self.y + barPadding, width = barWidth
