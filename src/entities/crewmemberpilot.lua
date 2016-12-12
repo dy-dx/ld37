@@ -8,7 +8,7 @@ function CrewMemberPilot:init()
     self.global = true
     self.bobbingSheet = love.graphics.newImage('assets/images/characters/pilot_bobbing_sheet.png')
     self.pressButtonSheet = love.graphics.newImage('assets/images/characters/pilot_pressButton_sheet.png')
-    self.pos = {x = 140, y = 240}
+    self.pos = {x = 142, y = 242}
     self.bobRate = 0.9
     self.buttonPressAnimationRate = .2
     self.nframes = 4
