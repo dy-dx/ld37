@@ -111,7 +111,13 @@ function CurvedPipe:outDirection()
         rot = rot - 1
     end
 
-    return rotateCoords(-1, 0, rot)
+    local rotated = rotateCoords(-1, 0, rot)
+    return {
+        dx = rotated.x,
+        dy = rotated.y,
+        x = self.pipeCoordinate.x + rotated.x,
+        y = self.pipeCoordinate.y + rotated.y
+    }
 end
 
 function CurvedPipe:acceptFrom(direction)

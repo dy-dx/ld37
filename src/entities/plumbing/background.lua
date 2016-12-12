@@ -4,7 +4,7 @@ function Background:init()
     self.plumbing = true
     self.pos = {
         x = 90,
-        y = 90
+        y = 79
     }
     self.sprite = love.graphics.newImage('assets/images/plumbingbg.png')
     self.isDead = false
