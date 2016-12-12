@@ -9,6 +9,7 @@ function CutsceneControlSystem:init()
     Signal.register('startCutscene', function(level)
         Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
         Global.isCutscene = true
+        Global.currentGame = nil
     end)
 end
 
@@ -22,6 +23,7 @@ local endCutscene = function()
     if Global.isGameWon then return end
 
     Global.isCutscene = false
+    Global.isGameOver = false
     Signal.emit('startLevel', Global.currentLevel)
 end
 
@@ -29,8 +31,10 @@ function CutsceneControlSystem:process(e, dt)
     if not Global.isCutscene then return end
 
     if self.input:released('left_click') then
+        if e.cutsceneType == 'gameover' then
+            endCutscene()
         -- go to next dialogue line. if we already displayed the last line, then end cutscene
-        if e.currentDialogueIndex >= table.getn(Global.currentLevelDefinition.cutsceneDialogue) then
+        elseif e.currentDialogueIndex >= table.getn(Global.currentLevelDefinition.cutsceneDialogue) then
             print('endcutscene')
             endCutscene()
         else

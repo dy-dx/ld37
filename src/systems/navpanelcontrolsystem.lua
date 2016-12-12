@@ -18,6 +18,7 @@ local winTheLevel = function()
     Global.currentLevel = Global.currentLevel + 1
     -- fixme
     Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
+    Global.currentGame = nil
     Signal.emit('startCutscene', Global.currentLevel)
 end
 

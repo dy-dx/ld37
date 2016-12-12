@@ -21,33 +21,42 @@ function CutsceneDrawSystem:postProcess(dt)
     love.graphics.setColor(255, 255, 255, 255)
 end
 
+local getCurrentDialogue = function(e)
+    -- print(e.cutsceneType)
+    if e.cutsceneType == 'intro' then
+        return Global.currentLevelDefinition.cutsceneDialogue[e.currentDialogueIndex]
+    else
+        return e.gameOverText
+    end
+end
+
 function CutsceneDrawSystem:process(e, dt)
     if not Global.isCutscene then return end
+    e.timer:update(dt)
 
     -- draw space
     love.graphics.setColor(0, 0, 0, 255)
     love.graphics.rectangle('fill', 0, 0, 800, 600)
+    love.graphics.setColor(255, 255, 255, 255)
 
     -- draw ship
-    local sPos = {
-        x = 340,
-        y = 360
-    }
-    love.graphics.setColor(255, 255, 255, 255)
-    love.graphics.polygon('fill',
-        sPos.x, sPos.y - 15,
-        sPos.x, sPos.y + 15,
-        sPos.x + 30, sPos.y
-    )
+    -- local sPos = {
+    --     x = 340,
+    --     y = 360
+    -- }
+    -- love.graphics.polygon('fill',
+    --     sPos.x, sPos.y - 15,
+    --     sPos.x, sPos.y + 15,
+    --     sPos.x + 30, sPos.y
+    -- )
 
     self.ps:update(dt)
     love.graphics.draw(self.ps, love.graphics.getWidth(), love.graphics.getHeight() * 0.5)
 
-
     -- draw dialogue
     local x = 400
     local y = 300
-    local line = Global.currentLevelDefinition.cutsceneDialogue[e.currentDialogueIndex]
+    local line = getCurrentDialogue(e)
     local font = e.dialogueFont
     local text = love.graphics.newText(font, line)
     love.graphics.draw(text, x, y)
