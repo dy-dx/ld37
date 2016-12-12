@@ -19,6 +19,7 @@ function NavPanel:init()
         h = 50
     }
 
+    self.planetRadius = 10
     self.leftButtonDown = false
     self.rightButtonDown = false
     self.leftButtonSprite = love.graphics.newImage('assets/images/navpanel/button_up.png')
@@ -27,7 +28,8 @@ function NavPanel:init()
     self.rightButtonDownSprite = love.graphics.newImage('assets/images/navpanel/button_downPressed.png')
     self.panelSprite = love.graphics.newImage('assets/images/navpanel/panel.png')
     self.lcdpos = {x = 253, y = 511, w = 400, h = 80}
-
+    self.shipTipX = nil
+    self.shipTipY = nil
     self:resetState()
 
     Signal.register('startLevel', function(level)
