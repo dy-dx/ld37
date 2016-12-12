@@ -2,6 +2,7 @@ local Indicator = require 'entities/spinner/indicator'
 local SpinnerFrame = require 'entities/spinner/spinnerframe'
 local Pillbox = require 'entities/spinner/pillbox'
 local Pill = require 'entities/spinner/pill'
+local Background = require 'entities/spinner/background'
 local Utils = require 'utils'
 
 SpinnerSystem = tiny.processingSystem(Class{})
@@ -22,6 +23,7 @@ function SpinnerSystem:preProcess(dt)
     if not self.indicator then
         self.indicator = Indicator()
         self.pillBox = Pillbox({ x = 450, y = 300, w = 200, h = 50 }, 5, 5)
+        world:addEntity(Background())
         world:addEntity(self.indicator)
         world:addEntity(SpinnerFrame(self.spinnerPos))
         world:addEntity(self.pillBox)
