@@ -42,13 +42,10 @@ local function setDangerLevel(e)
     local isWasteLevel2 = e.wasteMeter.currentPressure >= e.wasteLevelTwoLowerBound and e.wasteMeter.currentPressure < e.wasteLevelThreeLowerBound
     local isWasteLevel3 = e.wasteMeter.currentPressure >= e.wasteLevelThreeLowerBound
     if isGasLevel3 or isWasteLevel3 then
-        print("danger 3")
         e.dangerLevel = 3
     elseif isGasLevel2 or isWasteLevel2 then
-        print("danger 2")
         e.dangerLevel = 2
     else
-        print("danger 1")
         e.dangerLevel = 1
     end
 end
