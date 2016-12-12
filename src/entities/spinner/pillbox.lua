@@ -30,7 +30,7 @@ function Pillbox:getPillPosition(num)
     local pillSlotWidth = (self.pos.w) / self.maxPills;
 
     return {
-        x = self.pos.x + pillSlotWidth * (num - 1) + self.padding,
+        x = self.pos.x + (pillSlotWidth) * self.maxPills  + self.padding - pillSlotWidth * (num),
         y = self.pos.y,
         w = pillSlotWidth - 2 * self.padding,
         h = self.pos.h

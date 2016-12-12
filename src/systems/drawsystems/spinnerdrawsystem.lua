@@ -17,6 +17,8 @@ end
 function SpinnerDrawSystem:process(e, dt)
     if Global.currentGame ~= self.name then return end
 
+
+
     if e.sprite then
         local an = e.animation
         local alpha = e.alpha or 1

@@ -2,12 +2,13 @@ local SPIN_RADIUS = 115
 
 local Indicator = Class{}
 
-function Indicator:init()
+function Indicator:init(pos)
     self.spinner = true
     self.isIndicator = true
     self.angle = 0
     self.pauseTimer = 0;
     self.pos = {}
+    self.centerPos = pos
     self.sprite = love.graphics.newImage('assets/images/bullet.png')
     self.offset = {
         x = self.sprite:getWidth() / 2,
@@ -42,8 +43,8 @@ function Indicator:process(dt)
 
     self.angle = (self.angle + math.pi * 2 * dt) % (math.pi * 2)
     self.pos = {
-        x = SPIN_RADIUS * math.cos(self.angle) + 250,
-        y = SPIN_RADIUS * math.sin(self.angle) + 250
+        x = SPIN_RADIUS * math.cos(self.angle) + self.centerPos.x,
+        y = SPIN_RADIUS * math.sin(self.angle) + self.centerPos.y
     }
 end
 

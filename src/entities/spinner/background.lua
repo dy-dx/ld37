@@ -8,11 +8,9 @@ function Background:init()
     }
     self.sprite = love.graphics.newImage('assets/images/misslowbg.png')
     self.isDead = false
-    print("Background initialized")
 end
 
 function Background:process(dt)
-    print("background is processed")
 end
 
 
