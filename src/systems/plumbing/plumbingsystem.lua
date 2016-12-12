@@ -75,7 +75,7 @@ function healthCheck(currentPipe)
         end
         local key = getPipeKey(outDir.x, outDir.y)
         currentPipe = Global.pipes[key]
-        if not currentPipe then
+        if not currentPipe or not currentPipe:acceptFrom({x = -outDir.dx, y = -outDir.dy}) then
             if i <= DANGER_PIPES then
                 return 3  -- DANGER
             end
