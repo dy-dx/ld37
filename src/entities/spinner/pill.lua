@@ -7,6 +7,7 @@ function Pill:init(number, sprite, v, pos, endX, padding, queue)
     self.number = number
     self.spinner = true
     self.isPill = true
+    self.isSuicidal = false
     self.velocity = v
     self.pos = pos
     self.endX = endX
