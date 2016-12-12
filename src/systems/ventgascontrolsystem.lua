@@ -36,6 +36,23 @@ local function maintainVent(meter, dt)
     end
 end
 
+local function setDangerLevel(e)
+    local isGasLevel2 = e.gasMeter.currentPressure >= e.gasLevelTwoLowerBound and e.gasMeter.currentPressure < e.gasLevelThreeLowerBound
+    local isGasLevel3 = e.gasMeter.currentPressure >= e.gasLevelThreeLowerBound
+    local isWasteLevel2 = e.wasteMeter.currentPressure >= e.wasteLevelTwoLowerBound and e.wasteMeter.currentPressure < e.wasteLevelThreeLowerBound
+    local isWasteLevel3 = e.wasteMeter.currentPressure >= e.wasteLevelThreeLowerBound
+    if isGasLevel3 or isWasteLevel3 then
+        print("danger 3")
+        e.dangerLevel = 3
+    elseif isGasLevel2 or isWasteLevel2 then
+        print("danger 2")
+        e.dangerLevel = 2
+    else
+        print("danger 1")
+        e.dangerLevel = 1
+    end
+end
+
 function VentGasControlSystem:process(e, dt)
     -- don't run the game if 'ventgas' is not in the list of currently active games
     if not lume.any(Global.currentLevelDefinition.activeGames, function(x) return x == 'ventgas' end) then
@@ -57,6 +74,9 @@ function VentGasControlSystem:process(e, dt)
     end
     e.gasMeter.currentPressure = math.min(e.gasMeter.currentPressure, e.gasMeter.maxPressure)
     e.wasteMeter.currentPressure = math.min(e.wasteMeter.currentPressure, e.wasteMeter.maxPressure)
+    setDangerLevel(e)
+    Signal.emit('dangerLevel', 'ventgas', e.dangerLevel)
+
 end
 
 return VentGasControlSystem
