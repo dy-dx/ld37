@@ -30,6 +30,7 @@ function SpriteSystem:process(e, dt)
         sx = -1*sx
     end
     -- love.graphics.setColor(255, 255, 255, math.max(0, math.min(1, alpha)) * 255)
+
     if an then
         an.flippedH = e.flippedH or false
         an.flippedV = e.flippedV or false
