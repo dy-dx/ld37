@@ -29,8 +29,8 @@ function Shell:init(dest_x, dest_y)
     local g = anim8.newGrid(20, 20, self.sprite:getWidth(), self.sprite:getHeight())
     self.animation = anim8.newAnimation(g('1-2', 1), 0.1)
     self.offset = {
-        x = self.sprite:getWidth() / 2,
-        y = self.sprite:getHeight() / 2,
+        x = 20 / 2,
+        y = 20 / 2,
     }
 end
 

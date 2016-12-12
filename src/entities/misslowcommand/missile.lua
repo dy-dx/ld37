@@ -25,8 +25,8 @@ function Missile:init(src_x, src_y, dest_x, dest_y)
     local g = anim8.newGrid(35, 15, self.sprite:getWidth(), self.sprite:getHeight())
     self.animation = anim8.newAnimation(g(1, '1-2'), 0.1)
     self.offset = {
-        x = self.sprite:getWidth() / 2,
-        y = self.sprite:getHeight() / 2,
+        x = 35 / 2,
+        y = 15 / 2,
     }
 end
 
