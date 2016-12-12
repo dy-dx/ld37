@@ -38,7 +38,7 @@ function DrawNavPanelSystem:process(e, dt)
     -- debug panel gfx
     -- love.graphics.setColor(255, 255, 255, 255)
     -- love.graphics.rectangle('fill', e.pos.x, e.pos.y, e.pos.w, e.pos.h)
-    -- love.graphics.setColor(0, 0, 0, 255)
+    -- love.graphics.setColor(100, 100, 0, 255)
     -- love.graphics.rectangle('fill', e.lcdpos.x, e.lcdpos.y, e.lcdpos.w, e.lcdpos.h)
 
     -- buttons

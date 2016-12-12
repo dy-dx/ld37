@@ -26,6 +26,7 @@ function NavPanel:init()
     self.rightButtonSprite = love.graphics.newImage('assets/images/navpanel/button_down.png')
     self.rightButtonDownSprite = love.graphics.newImage('assets/images/navpanel/button_downPressed.png')
     self.panelSprite = love.graphics.newImage('assets/images/navpanel/panel.png')
+    self.lcdpos = {x = 253, y = 511, w = 400, h = 80}
 
     self:resetState()
 
@@ -36,7 +37,6 @@ end
 
 function NavPanel:resetState()
     self.pos = {x = 100, y = 500, w = 600, h = 100}
-    self.lcdpos = {x = 250, y = 510, w = 400, h = 80}
     self.levelDuration = Global.currentLevelDefinition.duration
     self.secondsSinceDeparture = 0
     self.rotation = 0

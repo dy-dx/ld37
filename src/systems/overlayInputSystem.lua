@@ -5,6 +5,7 @@ function overlayInputSystem:init()
   self.filter = tiny.requireAll('isOverlay')
   self.input = Input()
   self.input:bind('mouse1', 'left_click')
+  self.input:bind('escape', 'escape')
 end
 
 function overlayInputSystem:preProcess(dt)
@@ -15,6 +16,10 @@ function overlayInputSystem:postProcess(dt)
 end
 
 function overlayInputSystem:overlayActive(e, dt)
+    if self.input:pressed('escape') then
+        Global.currentGame = nil
+    end
+
   if self.input:released('left_click') then
     clickX, clickY = love.mouse.getPosition()
     local position = {x = clickX, y = clickY}

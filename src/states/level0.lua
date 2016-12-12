@@ -5,6 +5,7 @@ local NavPanel = require 'entities/navpanel'
 local VentGas = require 'entities/ventgas'
 local DebugInfo = require 'entities/debuginfo'
 local Text = require 'entities/Text'
+local Music = require 'entities/Music'
 local CrewMemberEngineer = require 'entities/crewmemberengineer'
 local CrewMemberDoctor = require 'entities/crewmemberdoctor'
 local CrewMemberSecurity = require 'entities/crewmembersecurity'
@@ -42,9 +43,19 @@ Signal.register('writeMore', function(s, speed)
     text:writeMore(s, speed)
 end)
 
+local music = Music()
+
+Signal.register('tranistionMusic', function (theme, time, volume)
+    music:transition(theme, time, volume)
+end)
+-- example increase intensity
+-- Signal.emit('tranistionMusic', 'intense', 5, .9)
+
+
 function Level:load()
     -- ordering of systems really matters
     world = tiny.world(
+        require ("systems/musicsystem")(),
         require ("systems/levelprogressionsystem")(), -- not a real system. let this run first tho
         require ("systems/misslowcommand/playercontrolsystem")(),
         require ("systems/plumbing/playercontrolsystem")(),
@@ -80,10 +91,9 @@ function Level:load()
         require ("systems/drawsystems/drawdebuginfosystem")()
     )
 
-
     local screenWidth = love.graphics.getWidth()
-
     world:addEntity(Environment()) -- background layer, goes first
+    world:addEntity(music)
     world:addEntity(LevelProgression())
     world:addEntity(Overlay())
     world:addEntity(text)

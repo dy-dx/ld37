@@ -25,6 +25,8 @@ function LevelProgressionSystem:process(e, dt)
     -- cheat code skip level
     if self.input:released('skiplevel') then
         Global.currentLevel = Global.currentLevel + 1
+        -- fixme
+        Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
         Signal.emit('startLevel', Global.currentLevel)
     end
 

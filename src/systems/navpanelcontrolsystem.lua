@@ -54,7 +54,7 @@ function NavPanelControlSystem:process(e, dt)
 
     local maxRotation = 1
     local minRotation = 0.03
-    local fuckeryRate = 0.5
+    local fuckeryRate = Global.currentLevelDefinition.nav.fuckeryRate
     if e.rotation == 0 then
         -- start the fuckery
         e.rotation = (love.math.random() - 0.5) * 0.05
@@ -70,7 +70,7 @@ function NavPanelControlSystem:process(e, dt)
 
     e.secondsSinceDeparture = e.secondsSinceDeparture + dt
     e.shipYOffset = e.shipYOffset + dt * e.rotation * 10 -- arbitrary magic number but it works
-    e.shipYOffset = lume.clamp(e.shipYOffset, -40, 40) -- temp -- just some huge number so it doesnt get drawn in the middle of nowhere
+    -- e.shipYOffset = lume.clamp(e.shipYOffset, -40, 40) -- temp -- just some huge number so it doesnt get drawn in the middle of nowhere
 
     if math.abs(e.shipYOffset) > e.lcdpos.h/2 then
         Signal.emit('gameover', 'nav')
@@ -79,6 +79,8 @@ function NavPanelControlSystem:process(e, dt)
     -- todo: should do this in levelprogressionsystem
     if e.secondsSinceDeparture >= Global.currentLevelDefinition.duration then
         Global.currentLevel = Global.currentLevel + 1
+        -- fixme
+        Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
         Signal.emit('startLevel', Global.currentLevel)
     end
 end

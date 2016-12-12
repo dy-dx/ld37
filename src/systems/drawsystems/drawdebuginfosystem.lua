@@ -18,10 +18,23 @@ function DrawDebugInfoSystem:process(e, dt)
     local lineHeight = 14
     local lines = {
         "Entity Count: " .. world:getEntityCount(),
-        "isGameOver: " .. tostring(Global.isGameOver),
-        "isCutScene: " .. tostring(Global.isCutScene),
+        -- "isGameOver: " .. tostring(Global.isGameOver),
+        -- "isCutScene: " .. tostring(Global.isCutScene),
         "currentLevel: " .. tostring(Global.currentLevel),
     }
+    for name, level in pairs(e.dangerLevels) do
+        local text = nil
+        if level == 1 then
+            text = 'ok'
+        elseif level == 2 then
+            text = 'WARNING'
+        elseif level == 3 then
+            text = 'EXTREME DANGER!!!!!!!!'
+        end
+        if text then
+            lume.push(lines, name .. ": " .. text)
+        end
+    end
     for i, line in ipairs(lines) do
         love.graphics.print(line, 2, lineHeight * (i-1))
     end
