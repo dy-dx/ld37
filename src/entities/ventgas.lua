@@ -22,37 +22,54 @@ function VentGas:init()
     self.g = 175
     self.b = 35
 
+    self.gasButtonSprite = love.graphics.newImage('assets/images/ventgas/button_left.png')
+    self.gasButtonPressedSprite = love.graphics.newImage('assets/images/ventgas/button_left_pressed.png')
+    self.oxygenButtonSprite = love.graphics.newImage('assets/images/ventgas/button_middle.png')
+    self.oxygenButtonPressedSprite = love.graphics.newImage('assets/images/ventgas/button_middle_pressed.png')
+    self.wasteButtonSprite = love.graphics.newImage('assets/images/ventgas/button_right.png')
+    self.wasteButtonPressedSprite = love.graphics.newImage('assets/images/ventgas/button_right_pressed.png')
+    self.tapeSprite = love.graphics.newImage('assets/images/ventgas/tape.png')
+
     -- gas pressure
-    self.gasMeter = {pressureDecrease = 50, growthRate = 5
+    self.gasMeter = {pressureDecrease = 50, growthRate = 30
         , maxPressure = maxPressure, currentPressure = 0}
     self.gasPressureBox = {x = self.width*1/4
         , y = self.y + barPadding, width = barWidth
         , height = barHeight, r=25, g=25, b=75
-        }
+    }
     self.gasPressureButton = {x=self.gasPressureBox.x + buttonRadius
         , y=self.gasPressureBox.y + self.gasPressureBox.height + buttonYOffset
-        , radius=buttonRadius, r=0, g=255, b=40, text='Press Here'}
+        , radius=buttonRadius, r=0, g=255, b=40, buttonDown = false, text = 'test'
+        , buttonSprite = self.gasButtonSprite, buttonPressedSprite = self.gasButtonPressedSprite
+        , buttonType = 'gas'
+    }
 
     -- oxygen
     self.maxOxygenPressure = maxPressure
     self.oxygenPressureBox = {x = self.width*2/4
         , y = self.y + barPadding, width = barWidth
         , height = barHeight, r=25, g=25, b=75
-        }
+    }
     self.oxygenPressureButton = {x=self.oxygenPressureBox.x + buttonRadius
         , y=self.oxygenPressureBox.y + self.oxygenPressureBox.height + buttonYOffset
-        , radius=buttonRadius, r=0, g=255, b=40, text='DO NOT Press Here'}
+        , radius=buttonRadius, r=0, g=255, b=40, buttonDown = false, text= 'test'
+        , buttonSprite = self.oxygenButtonSprite, buttonPressedSprite = self.oxygenButtonPressedSprite
+        , buttonType = 'oxygen'
+    }
 
-    -- unknown pressure
-    self.unknownMeter = {pressureDecrease = 50, growthRate = 10
+    -- waste pressure
+    self.wasteMeter = {pressureDecrease = 50, growthRate = 40
         , maxPressure = maxPressure, currentPressure = 0}
-    self.unknownPressureBox = {x = self.width*3/4
+    self.wastePressureBox = {x = self.width*3/4
         , y = self.y + barPadding, width = barWidth
         , height = barHeight, r=25, g=25, b=75
-        }
-    self.unknownPressureButton = {x=self.unknownPressureBox.x + buttonRadius
-        , y=self.unknownPressureBox.y + self.unknownPressureBox.height + buttonYOffset
-        , radius=buttonRadius, r=0, g=255, b=40, text='Press Here'}
+    }
+    self.wastePressureButton = {x=self.wastePressureBox.x + buttonRadius
+        , y=self.wastePressureBox.y + self.wastePressureBox.height + buttonYOffset
+        , radius=buttonRadius, r=0, g=255, b=40, text = 'test'
+        , buttonSprite = self.wasteButtonSprite, buttonPressedSprite = self.wasteButtonPressedSprite
+        , buttonType = 'waste'
+    }
 end
 
 return VentGas

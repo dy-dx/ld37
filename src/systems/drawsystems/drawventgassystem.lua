@@ -31,6 +31,15 @@ local function drawButton(button)
     love.graphics.draw(gasText, button.x - button.radius, button.y - 5)
 end
 
+local function drawButtonSprite(button)
+    love.graphics.setColor(255, 255, 255, 255)
+    if button.buttonDown then
+        love.graphics.draw(button.buttonPressedSprite, button.x - button.radius - 4, button.y - button.radius - 5)
+    else
+        love.graphics.draw(button.buttonSprite, button.x - button.radius - 4, button.y - button.radius - 5)
+    end
+end
+
 local function drawMeter(box, meter)
     love.graphics.setColor(255, 0, 0)
     local pressurePercentage = meter.currentPressure / meter.maxPressure
@@ -49,21 +58,25 @@ function DrawVentGasSystem:process(e, dt)
         -- drawing gas pressure box
         drawBox(e.gasPressureBox)
         -- drawing gas pressure button
-        drawButton(e.gasPressureButton)
+        -- drawButton(e.gasPressureButton)
+        --print(e.gasPressureButton.buttonDown)
+        drawButtonSprite(e.gasPressureButton)
         -- drawing gas meter
         drawMeter(e.gasPressureBox, e.gasMeter)
 
         -- drawing oxygen pressure box
         drawBox(e.oxygenPressureBox)
         -- drawing gas pressure button
-        drawButton(e.oxygenPressureButton)
+        --drawButton(e.oxygenPressureButton)
+        drawButtonSprite(e.oxygenPressureButton)
 
-        -- drawing unknown pressure box
-        drawBox(e.unknownPressureBox)
-        -- drawing unknown pressure button
-        drawButton(e.unknownPressureButton)
-        -- drawing unknown meter
-        drawMeter(e.unknownPressureBox, e.unknownMeter)
+        -- drawing waste pressure box
+        drawBox(e.wastePressureBox)
+        -- drawing waste pressure button
+        -- drawButton(e.wastePressureButton)
+        drawButtonSprite(e.wastePressureButton)
+        -- drawing waste meter
+        drawMeter(e.wastePressureBox, e.wasteMeter)
     end
 end
 
