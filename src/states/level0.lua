@@ -49,6 +49,7 @@ function Level:load()
         require ("systems/plumbing/playercontrolsystem")(),
         require ("systems/navpanelcontrolsystem")(),
         require ("systems/gamehitboxsystem")(),
+        require ("systems/misslowcommand/restartsystem")(),
         require ("systems/misslowcommand/motionsystem")(),
         require ("systems/misslowcommand/collisionsystem")(),
         require ("systems/ventgascontrolsystem")(),

@@ -1,5 +1,5 @@
-local Background = require 'entities/misslowcommand/background'
-local Ship = require 'entities/misslowcommand/ship'
+local Utils = require 'utils'
+
 local Missile = require 'entities/misslowcommand/missile'
 
 MisslowCommandSystem = tiny.processingSystem(Class{})
@@ -11,19 +11,28 @@ local WIDTH = 720
 local HEIGHT = 480
 local OFFSET = 40
 
+
+-- function restartLevel()
+--     -- TODO: cleanup
+
+--     math.randomseed(os.time())
+--     self.cooldown = 0
+--     if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'misslowcommand') then
+--         return
+--     end
+
+--     world:addEntity(Background())
+--     world:addEntity(Ship())
+-- end
+
+-- Signal.register('startLevel', restartLevel)
+
 function MisslowCommandSystem:init()
     self.filter = tiny.requireAll('pos', 'velocity', 'process', 'isDead', 'misslowcommand')
     self.cooldown = 0
-    math.randomseed(os.time())
 end
 
 function MisslowCommandSystem:preProcess(dt)
-    if not self.ship then
-        self.ship = true
-        world:addEntity(Background())
-        world:addEntity(Ship())
-    end
-
     self.cooldown = self.cooldown - dt
     if self.cooldown <= 0 then
         self.cooldown = TIME_TO_MISSILE
