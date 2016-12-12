@@ -19,6 +19,7 @@ function SpinnerSystem:init()
     self.background = Background()
     self.backgroundInit = false
 
+    self.totalCooldown = 1
     self.cooldown = 0
 
     Signal.register('startLevel', function(level)
@@ -57,8 +58,11 @@ function SpinnerSystem:preProcess(dt)
     end
 
     self.cooldown = self.cooldown - dt
+
+    self.pillBox:slidePill(self.cooldown, self.totalCooldown)
+
     if self.cooldown <= 0 then
-        self.cooldown = 5
+        self.cooldown = self.totalCooldown
 
         if(self.pillBox:isFull()) then
             Signal.emit('gameover', "spinner")

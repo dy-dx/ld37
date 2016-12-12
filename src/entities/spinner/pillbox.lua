@@ -26,11 +26,20 @@ function Pillbox:addPill(pillNumber, pillColor)
     lume.push(self.pills, pill)
 end
 
+function Pillbox:slidePill(cooldown, totalCooldown)
+    self.slide = cooldown/totalCooldown
+end
+
 function Pillbox:getPillPosition(num)
+    local slide = 0
+    if(table.getn(self.pills) == num) then
+        slide = self.slide
+    end
+
     local pillSlotWidth = (self.pos.w) / self.maxPills;
 
     return {
-        x = self.pos.x + (pillSlotWidth) * self.maxPills  + self.padding - pillSlotWidth * (num),
+        x = self.pos.x + ((pillSlotWidth) * self.maxPills + self.padding - (pillSlotWidth * num)) * (1 - slide),
         y = self.pos.y,
         w = pillSlotWidth - 2 * self.padding,
         h = self.pos.h
