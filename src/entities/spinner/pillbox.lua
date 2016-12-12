@@ -9,7 +9,7 @@ function Pillbox:init(pos, maxPills, padding)
     self.isDead = false
     self.isDraw = true
     self.pills = {}
-
+    self.sprite = love.graphics.newImage('assets/images/pilltube.png')
     self.maxPills = maxPills
     self.padding = padding
 end
@@ -48,21 +48,6 @@ function Pillbox:removePill()
         return pill
     end)
     return table.remove(self.pills, 1)
-end
-
-function Pillbox:draw(dt)
-    Utils.printFilled({
-        x = self.pos.x,
-        y = self.pos.y,
-        w = self.pos.w,
-        h = self.pos.h
-    },
-    {
-        r = 255,
-        g = 0,
-        b = 0,
-        a = 255
-    })
 end
 
 return Pillbox
