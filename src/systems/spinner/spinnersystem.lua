@@ -33,6 +33,7 @@ function SpinnerSystem:reset()
         lume.map(self.pillBox.pills, function(pill)
             world:removeEntity(pill)
         end)
+        Signal.emit("stopwoosh")
         world:remove(self.pillBox)
         self.spinnerFrame = nil;
         self.pillBox = nil;
@@ -98,6 +99,7 @@ function SpinnerSystem:process(e, dt)
         local spinnerBox = {x = self.spinnerPos.x - 100, y = self.spinnerPos.y - 100, w = 200, h = 200}
         if(Utils.isInside(position, spinnerBox)) then
             if(0 == table.getn(self.pillBox.pills)) then
+                Signal.emit("failBlip")
                 self.spinnerFrame:pause(1)
                 return
             end
@@ -106,7 +108,9 @@ function SpinnerSystem:process(e, dt)
                 local deadPill = self.pillBox:removePill();
                 self.spinnerFrame:pause(.1)
                 deadPill.isSuicidal = true
+                Signal.emit("woosh")
             else
+                Signal.emit("failBlip")
                 self.spinnerFrame:pause(1)
             end
         end

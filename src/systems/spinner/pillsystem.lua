@@ -34,6 +34,7 @@ end
 function PillSystem:process(e, dt)
 
     if(e.pos.x == self:suicidePosition(e)) then
+        Signal.emit("stopwoosh")
         world:removeEntity(e)
     end
 

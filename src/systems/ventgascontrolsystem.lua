@@ -13,6 +13,14 @@ end
 function VentGasControlSystem:postProcess(dt)
 end
 
+function insideButton(button, x, y)
+    if (x - button.x)^2 + (y - button.y)^2 < button.radius^2 then
+        return button.buttonType
+    end
+
+    return nil
+end
+
 local function checkButton(button, meter, x, y, dt)
     if (x - button.x)^2 + (y - button.y)^2 < button.radius^2 then
         button.buttonDown = true
@@ -56,6 +64,20 @@ function VentGasControlSystem:process(e, dt)
 
     maintainVent(e.gasMeter, dt)
     maintainVent(e.wasteMeter, dt)
+
+    if Global.currentGame == 'ventgas' and self.input:pressed('left_click') then
+        local x, y = love.mouse.getPosition()
+        local buttonType = insideButton(e.gasPressureButton, x, y) or insideButton(e.wastePressureButton, x, y)
+
+        if(buttonType == "gas") then
+            Signal.emit("spray")
+        end
+
+        if(buttonType == "waste") then
+            Signal.emit("sludge")
+        end
+    end
+
     if Global.currentGame == 'ventgas' and self.input:down('left_click') then
         local x, y = love.mouse.getPosition()
         checkButton(e.gasPressureButton, e.gasMeter, x, y, dt)
@@ -66,6 +88,17 @@ function VentGasControlSystem:process(e, dt)
         toggleButtonOff(e.gasPressureButton)
         toggleButtonOff(e.oxygenPressureButton)
         toggleButtonOff(e.wastePressureButton)
+
+        local x, y = love.mouse.getPosition()
+        local buttonType = insideButton(e.gasPressureButton, x, y) or insideButton(e.wastePressureButton, x, y)
+
+        if(buttonType == "gas") then
+            Signal.emit("stopspray")
+        end
+
+        if(buttonType == "waste") then
+            Signal.emit("stopsludge")
+        end
     end
     e.gasMeter.currentPressure = math.min(e.gasMeter.currentPressure, e.gasMeter.maxPressure)
     e.wasteMeter.currentPressure = math.min(e.wasteMeter.currentPressure, e.wasteMeter.maxPressure)
