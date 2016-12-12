@@ -27,4 +27,8 @@ function Utils.split(textString, sep)
     return words
 end
 
+function Utils.pickRandom(arr)
+    return arr[math.random(table.getn(arr))]
+end
+
 return Utils
