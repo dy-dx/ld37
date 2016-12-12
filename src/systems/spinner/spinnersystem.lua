@@ -13,14 +13,30 @@ function SpinnerSystem:init()
     self.name = "spinner"
     self.input = Input()
     self.input:bind('mouse1', 'mouse1')
-    self.pillBox = nil
     self.spinnerPos = { x = 480, y = 270 }
+    self.pillBoxPos = { x = 90, y = 240, w = 280, h = 60 }
+    self.maxPills = 5
+    self.pillPadding = 5
+
+    self:reset()
 end
+
+function SpinnerSystem:reset()
+    print("reset run")
+    if self.spinnerFrame then
+        world:remove(Background())
+        world:remove(self.spinnerFrame)
+        world:remove(self.pillBox)
+    end
+    self.spinnerFrame = nil;
+    self.pillBox = nil;
+end
+
 
 function SpinnerSystem:preProcess(dt)
     if not self.spinnerFrame then
         self.spinnerFrame = SpinnerFrame(self.spinnerPos)
-        self.pillBox = Pillbox({ x = 90, y = 240, w = 280, h = 60 }, 5, 5)
+        self.pillBox = Pillbox(self.pillBoxPos, self.maxPills, self.pillPadding)
         world:addEntity(Background())
         world:addEntity(self.spinnerFrame)
         world:addEntity(self.pillBox)
