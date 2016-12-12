@@ -13,6 +13,7 @@ function SpinnerSystem:init()
     self.filter = tiny.requireAll('isIndicator')
     self.input = Input()
     self.input:bind('mouse1', 'mouse1')
+    self.pillBox = nil
 end
 
 function SpinnerSystem:preProcess(dt)
@@ -34,10 +35,7 @@ function SpinnerSystem:preProcess(dt)
         end
 
         local pillNumber = math.random(table.getn(self.indicator.colors))
-
         local pillColor = self.indicator.colors[pillNumber]
-
-
         self.pillBox:addPill(pillNumber, pillColor)
 
     end

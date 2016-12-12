@@ -22,15 +22,15 @@ function Pillbox:isFull(dt)
 end
 
 function Pillbox:addPill(pillNumber, pillColor)
-    local pill = Pill(pillNumber, self:getPillPosition(), pillColor)
+    local pill = Pill(pillNumber, pillColor)
     lume.push(self.pills, pill)
 end
 
-function Pillbox:getPillPosition()
+function Pillbox:getPillPosition(num)
     local pillSlotWidth = (self.pos.w) / self.maxPills;
 
     return {
-        x = self.pos.x + pillSlotWidth * ( table.getn(self.pills)) + self.padding,
+        x = self.pos.x + pillSlotWidth * (num - 1) + self.padding,
         y = self.pos.y,
         w = pillSlotWidth - 2 * self.padding,
         h = self.pos.h
@@ -38,7 +38,6 @@ function Pillbox:getPillPosition()
 end
 
 function Pillbox:removePill()
-    world:remove(lume.first(self.pills))
     table.remove(self.pills, 1)
 end
 
@@ -58,7 +57,8 @@ function Pillbox:draw(dt)
 
     local i = 1
     lume.each(self.pills, function(pill)
-        pill.render(i)
+        local position = self:getPillPosition(i);
+        pill:render(position)
         i = i + 1
     end)
 
