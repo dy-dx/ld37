@@ -49,6 +49,13 @@ function PlayerControlSystem:process(e, dt)
 
     -- RELEASE
     if self.input:released("mouse1") and self.liftedPipe then
+        local key = getPipeKey(self.liftedPipe.pipeCoordinate.x, self.liftedPipe.pipeCoordinate.y)
+        local liftPipe = Global.pipes[key]
+        if liftPipe ~= self.liftedPipe then
+            self.liftedPipe = nil
+            return
+        end
+
         local swapPipe = self:pipeAtMouse()
         if swapPipe and swapPipe ~= self.liftedPipe and swapPipe:canMove() then
             -- swap em

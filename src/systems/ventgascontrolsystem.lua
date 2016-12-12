@@ -12,30 +12,46 @@ end
 function VentGasControlSystem:postProcess(dt)
 end
 
-function VentGasControlSystem:process(e, dt)
-    e.gasMeter.currentPressure = e.gasMeter.currentPressure + e.gasMeter.growthRate * dt
-    e.unknownMeter.currentPressure = e.unknownMeter.currentPressure + e.unknownMeter.growthRate * dt
-    if e.gasMeter.currentPressure > e.gasMeter.maxPressure then
-        Signal.emit('gameover')
-    end
-    if e.unknownMeter.currentPressure > e.unknownMeter.maxPressure then
-        Signal.emit('gameover')
-    end
-    if Global.currentGame == 'ventgas' and self.input:down('left_click') then
-        x, y = love.mouse.getPosition()
-        if (x - e.gasPressureButton.x)^2 + (y - e.gasPressureButton.y)^2 < e.gasPressureButton.radius^2 then
-            e.gasMeter.currentPressure = math.max(0, e.gasMeter.currentPressure - e.gasMeter.pressureDecrease * dt)
-        end
-        if (x - e.unknownPressureButton.x)^2 + (y - e.unknownPressureButton.y)^2 < e.unknownPressureButton.radius^2 then
-            e.unknownMeter.currentPressure = math.max(0, e.unknownMeter.currentPressure - e.unknownMeter.pressureDecrease * dt)
-        end
-        if (x - e.oxygenPressureButton.x)^2 + (y - e.oxygenPressureButton.y)^2 < e.oxygenPressureButton.radius^2 then
+local function checkButton(button, meter, x, y, dt)
+    if (x - button.x)^2 + (y - button.y)^2 < button.radius^2 then
+        button.buttonDown = true
+        if button.buttonType == 'oxygen' then
             Signal.emit('gameover')
-            print("YOU LOSE")
+        else
+            meter.currentPressure = math.max(0, meter.currentPressure - meter.pressureDecrease * dt)
         end
+    end
+end
+
+local function toggleButtonOff(button)
+    if button.buttonDown then
+        button.buttonDown = false
+    end
+end
+
+local function maintainVent(meter, dt)
+    meter.currentPressure = meter.currentPressure + meter.growthRate * dt
+    if meter.currentPressure > meter.maxPressure then
+        Signal.emit('gameover')
+    end
+end
+
+function VentGasControlSystem:process(e, dt)
+    maintainVent(e.gasMeter, dt)
+    maintainVent(e.wasteMeter, dt)
+    if Global.currentGame == 'ventgas' and self.input:down('left_click') then
+        local x, y = love.mouse.getPosition()
+        checkButton(e.gasPressureButton, e.gasMeter, x, y, dt)
+        checkButton(e.wastePressureButton, e.wasteMeter, x, y, dt)
+        checkButton(e.oxygenPressureButton, e.oxygenMeter, x, y, dt)
+    end
+    if Global.currentGame == 'ventgas' and self.input:released('left_click') then
+        toggleButtonOff(e.gasPressureButton)
+        toggleButtonOff(e.oxygenPressureButton)
+        toggleButtonOff(e.wastePressureButton)
     end
     e.gasMeter.currentPressure = math.min(e.gasMeter.currentPressure, e.gasMeter.maxPressure)
-    e.unknownMeter.currentPressure = math.min(e.unknownMeter.currentPressure, e.unknownMeter.maxPressure)
+    e.wasteMeter.currentPressure = math.min(e.wasteMeter.currentPressure, e.wasteMeter.maxPressure)
 end
 
 return VentGasControlSystem

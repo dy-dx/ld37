@@ -1,4 +1,5 @@
 local Background = require 'entities/plumbing/background'
+local EndBuffer = require 'entities/plumbing/endbuffer'
 local StartBuffer = require 'entities/plumbing/startbuffer'
 local CurvedPipe = require 'entities/plumbing/curvedpipe'
 local StraightPipe = require 'entities/plumbing/straightpipe'
@@ -23,8 +24,9 @@ end
 PlumbingSystem = tiny.processingSystem(Class{})
 
 function PlumbingSystem:init()
+    self.filter = tiny.requireAll('isDead', 'plumbing')
     Global.pipes = {}
-    self.filter = tiny.requireAll('isDead', 'outDirection', 'plumbing')
+    self.singletons = {}
 end
 
 function PlumbingSystem:preProcess(dt)
@@ -33,6 +35,7 @@ function PlumbingSystem:preProcess(dt)
 
         world:addEntity(Background())
         world:addEntity(StartBuffer())
+        world:addEntity(EndBuffer())
         -- Scrap pipe
         world:addEntity(randomPipe(11, 5))
         for y=0,6 do
@@ -52,7 +55,18 @@ function PlumbingSystem:process(e, dt)
         e.fluidProgress = math.min(e.fluidProgress + dt * (e.fluidRate or FLUID_RATE), 1)
         if e.fluidProgress == 1 then
             e.filling = false
+            if e.type == 'endbuffer' then
+                self.loaded = false
+                return
+            end
             local outDir = e:outDirection()
+
+            -- Gross hardcode! It's Sunday night!
+            if outDir.x == 0 and outDir.y == 6 then
+                self.singletons['endbuffer'].filling = true
+                return
+            end
+
             local key = getPipeKey(outDir.x, outDir.y)
 
             -- find the next pipe to fill
@@ -72,6 +86,10 @@ end
 
 function PlumbingSystem:onAdd(e)
     if not e.pipeCoordinate then
+        if self.singletons[e.type] then
+            world:remove(self.singletons[e.type])
+        end
+        self.singletons[e.type] = e
         return
     end
     local key = getPipeKey(e.pipeCoordinate.x, e.pipeCoordinate.y)

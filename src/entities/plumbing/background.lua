@@ -6,6 +6,7 @@ function Background:init()
         x = 90,
         y = 79
     }
+    self.type = 'background'
     self.sprite = love.graphics.newImage('assets/images/plumbingbg.png')
     self.isDead = false
     -- Always draw first
