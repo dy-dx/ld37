@@ -65,13 +65,17 @@ function SpinnerSystem:preProcess(dt)
         self.cooldown = self.totalCooldown
 
         if(self.pillBox:isFull()) then
-            Signal.emit('gameover', "spinner")
+            Signal.emit('gameover', self.name)
             return;
         end
 
         local pillNumber = math.random(table.getn(self.spinnerFrame.colors))
         local pillColor = self.spinnerFrame.colors[pillNumber]
         self.pillBox:addPill(pillNumber, pillColor)
+
+        if(table.getn(self.pillBox.pills) == self.pillBox.maxPills - 2) then Signal.emit('dangerLevel', self.name, 1) end
+        if(table.getn(self.pillBox.pills) == self.pillBox.maxPills - 1) then Signal.emit('dangerLevel', self.name, 2) end
+        if(table.getn(self.pillBox.pills) == self.pillBox.maxPills - 0) then Signal.emit('dangerLevel', self.name, 3) end
 
     end
 end
