@@ -13,7 +13,6 @@ function Pill:init(number, sprite, v, pos, endX, padding, queue)
     self.endX = endX
     self.padding = padding
     self.queue = queue or 1
-    printTable(pos)
 end
 
 return Pill
