@@ -22,16 +22,6 @@ end
 
 PlumbingSystem = tiny.processingSystem(Class{})
 
-local DEBUG_MAP = {
-    {" ", " ", " ", " ", " ", 3, "-", "-", "-", "-"},
-    {" ", " ", " ", " ", " ", "|", 3, "-", 4, " "},
-    {" ", " ", " ", " ", " ", "|", "|", "-", 1, " "},
-    {" ", " ", " ", " ", " ", "|", 2, "-", "-", 4},
-    {" ", " ", " ", " ", " ", 2, "-", "-", "-", 1},
-    {" ", " ", " ", " ", " ", " ", " ", " ", " ", " "},
-    {" ", " ", " ", " ", " ", " ", " ", " ", " ", " "}
-}
-
 function PlumbingSystem:init()
     Global.pipes = {}
     self.filter = tiny.requireAll('isDead', 'outDirection', 'plumbing')
@@ -47,19 +37,7 @@ function PlumbingSystem:preProcess(dt)
         world:addEntity(randomPipe(11, 5))
         for y=0,6 do
             for x=0,9 do
-                local fromDebug = DEBUG_MAP[y + 1][x + 1]
-                local pipe
-                if fromDebug == " " then
-                    pipe = randomPipe(x, y)
-                elseif fromDebug == "-" then
-                    pipe = StraightPipe(x, y, OFFSET_X, OFFSET_Y, 0)
-                elseif fromDebug == "|" then
-                    pipe = StraightPipe(x, y, OFFSET_X, OFFSET_Y, 1)
-                else
-                    pipe = CurvedPipe(x, y, OFFSET_X, OFFSET_Y, fromDebug)
-                end
-                -- local pipe = randomPipe(x, y)
-                -- local pipe = StraightPipe(x, y, 0)
+                local pipe = randomPipe(x, y)
                 world:addEntity(pipe)
             end
         end
@@ -71,7 +49,7 @@ end
 
 function PlumbingSystem:process(e, dt)
     if e.filling then
-        e.fluidProgress = math.min(e.fluidProgress + dt * FLUID_RATE, 1)
+        e.fluidProgress = math.min(e.fluidProgress + dt * (e.fluidRate or FLUID_RATE), 1)
         if e.fluidProgress == 1 then
             e.filling = false
             local outDir = e:outDirection()
