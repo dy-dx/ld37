@@ -8,7 +8,6 @@ SpinnerSystem = tiny.processingSystem(Class{})
 
 function SpinnerSystem:init()
     self.filter = tiny.requireAll('process', 'isDead', 'spinner', 'isSpinnerFrame')
-    self.cooldown = 0
 
     self.name = "spinner"
     self.input = Input()
@@ -19,6 +18,8 @@ function SpinnerSystem:init()
     self.pillPadding = 5
     self.background = Background()
     self.backgroundInit = false
+
+    self.cooldown = 0
 
     Signal.register('startLevel', function(level)
         self:reset()
@@ -32,6 +33,7 @@ function SpinnerSystem:reset()
         self.spinnerFrame = nil;
         self.pillBox = nil;
     end
+    self.cooldown = 0
 end
 
 
@@ -42,6 +44,7 @@ function SpinnerSystem:preProcess(dt)
 
     if(not backgroundInit) then
         world:addEntity(self.background)
+        backgroundInit = true
     end
 
 
