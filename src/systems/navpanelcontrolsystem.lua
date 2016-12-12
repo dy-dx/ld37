@@ -13,6 +13,10 @@ function NavPanelControlSystem:postProcess(dt)
 end
 
 function NavPanelControlSystem:process(e, dt)
+    if not lume.any(Global.currentLevelDefinition.activeGames, function(x) return x == 'nav' end) then
+        return
+    end
+
     local cursorOverLeftButton = false
     local cursorOverRightButton = false
     local leftClicked = false
@@ -69,7 +73,7 @@ function NavPanelControlSystem:process(e, dt)
     e.shipYOffset = lume.clamp(e.shipYOffset, -40, 40) -- temp -- just some huge number so it doesnt get drawn in the middle of nowhere
 
     if math.abs(e.shipYOffset) > e.lcdpos.h/2 then
-        Signal.emit('gameover')
+        Signal.emit('gameover', 'nav')
     end
 
     -- todo: should do this in levelprogressionsystem

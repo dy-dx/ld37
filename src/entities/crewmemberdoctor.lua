@@ -3,6 +3,7 @@ local anim8 = require 'vendor/anim8'
 local CrewMemberDoctor = Class{}
 
 function CrewMemberDoctor:init()
+    self.assignedConsole = 'spinner'
     self.isCrewMemberAnimationSystem=true
     self.global = true
     self.bobbingSheet = love.graphics.newImage('assets/images/characters/doctor_bobbing_sheet.png')

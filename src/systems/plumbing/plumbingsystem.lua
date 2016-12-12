@@ -6,7 +6,12 @@ local StartBuffer = require 'entities/plumbing/startbuffer'
 local CurvedPipe = require 'entities/plumbing/curvedpipe'
 local StraightPipe = require 'entities/plumbing/straightpipe'
 
+-- DIFFICULTY PARAMS
 local FLUID_RATE = 0.1
+local WARNING_PIPES = 1
+local DANGER_PIPES = 0
+
+-- OK DON'T TOUCH THESE ANYMORE
 local OFFSET_X = 127
 local OFFSET_Y = 120
 
@@ -58,8 +63,32 @@ end
 function PlumbingSystem:postProcess(dt)
 end
 
+function healthCheck(currentPipe)
+    -- Do a quick lookahead to see how many pipes we can traverse.
+    for i=0,WARNING_PIPES do
+        local outDir = currentPipe:outDirection()
+
+        -- clear path to the goal
+        if outDir.x == 0 and outDir.y == 6 then
+            return 1  -- SAFE
+        end
+        local key = getPipeKey(outDir.x, outDir.y)
+        currentPipe = Global.pipes[key]
+        if not currentPipe then
+            if i <= DANGER_PIPES then
+                return 3  -- DANGER
+            end
+            return 2  -- WARNING
+        end
+    end
+    return 1  -- SAFE
+end
+
 function PlumbingSystem:process(e, dt)
     if e.filling then
+        Signal.emit('dangerLevel', 'plumbing', healthCheck(e))
+
+        -- Actually move the fluid.
         e.fluidProgress = math.min(e.fluidProgress + dt * (e.fluidRate or FLUID_RATE), 1)
         if e.fluidProgress == 1 then
             e.filling = false
@@ -80,7 +109,7 @@ function PlumbingSystem:process(e, dt)
             -- find the next pipe to fill
             local nextPipe = Global.pipes[key]
             if not nextPipe or not nextPipe:acceptFrom({x = -outDir.dx, y = -outDir.dy}) then
-                Signal.emit('gameover')
+                Signal.emit('gameover', 'plumbing')
                 return
             end
             nextPipe.filling = true

@@ -11,6 +11,9 @@ function VentGas:init()
 
     self.isDrawVentGasSystem = true
     self.isVentGasControlSystem = true
+    -- percentages used to invoke danger signal switches
+    self.dangerLevelTwoPercentage = .6
+    self.dangerLevelThreePercentage = .8
     self.x = padding
     self.y = padding
     self.width = screenWidth - 2 * padding
@@ -27,7 +30,7 @@ function VentGas:init()
     self.wasteButtonPressedSprite = love.graphics.newImage('assets/images/ventgas/button_right_pressed.png')
     self.tapeSprite = love.graphics.newImage('assets/images/ventgas/tape.png')
 
-    -- gas pressure
+    -- gas
     self.gasPressureBox = {x = self.width*1/4
         , y = self.y + barPadding, width = barWidth
         , height = barHeight, r=25, g=25, b=75
@@ -40,7 +43,7 @@ function VentGas:init()
         , height = barHeight, r=25, g=25, b=75
     }
 
-    -- waste pressure
+    -- waste
     self.wastePressureBox = {x = self.width*3/4
         , y = self.y + barPadding, width = barWidth
         , height = barHeight, r=25, g=25, b=75
@@ -54,12 +57,24 @@ end
 function VentGas:resetState()
     local buttonRadius = 30
     local buttonYOffset = 40
-    local maxPressure = 300
-    local gasGrowthRate = 3
-    local wasteGrowthRate = 7
+    local gasMaxPressure = 300
+    local wasteMaxPressure = 300
+    -- Growth Rates - increase to make more difficult
+    local gasGrowthRate = 5
+    local wasteGrowthRate = 10
+    -- Decrease Rates - decrease to make more difficult
+    local gasPressureDecrease = 50
+    local wastePressureDecrease = 50
 
-    self.gasMeter = {pressureDecrease = 50, growthRate = gasGrowthRate
-        , maxPressure = maxPressure, currentPressure = 0}
+    self.dangerLevel = 1
+
+    self.gasLevelTwoLowerBound = gasMaxPressure*self.dangerLevelTwoPercentage
+    self.gasLevelThreeLowerBound = gasMaxPressure*self.dangerLevelThreePercentage
+    self.wasteLevelTwoLowerBound = wasteMaxPressure*self.dangerLevelTwoPercentage
+    self.wasteLevelThreeLowerBound = wasteMaxPressure*self.dangerLevelThreePercentage
+
+    self.gasMeter = {pressureDecrease = gasPressureDecrease, growthRate = gasGrowthRate
+        , maxPressure = gasMaxPressure, currentPressure = 0}
     self.gasPressureButton = {x=self.gasPressureBox.x + buttonRadius
         , y=self.gasPressureBox.y + self.gasPressureBox.height + buttonYOffset
         , radius=buttonRadius, r=0, g=255, b=40, buttonDown = false, text = 'test'
@@ -72,8 +87,8 @@ function VentGas:resetState()
         , buttonSprite = self.oxygenButtonSprite, buttonPressedSprite = self.oxygenButtonPressedSprite
         , buttonType = 'oxygen'
     }
-    self.wasteMeter = {pressureDecrease = 50, growthRate = wasteGrowthRate
-        , maxPressure = maxPressure, currentPressure = 0}
+    self.wasteMeter = {pressureDecrease = wastePressureDecrease, growthRate = wasteGrowthRate
+        , maxPressure = wasteMaxPressure, currentPressure = 0}
     self.wastePressureButton = {x=self.wastePressureBox.x + buttonRadius
         , y=self.wastePressureBox.y + self.wastePressureBox.height + buttonYOffset
         , radius=buttonRadius, r=0, g=255, b=40, text = 'test'

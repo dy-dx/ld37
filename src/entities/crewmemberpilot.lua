@@ -3,6 +3,7 @@ local anim8 = require 'vendor/anim8'
 local CrewMemberPilot = Class{}
 
 function CrewMemberPilot:init()
+    self.assignedConsole = 'ventgas'
     self.isCrewMemberAnimationSystem=true
     self.global = true
     self.bobbingSheet = love.graphics.newImage('assets/images/characters/pilot_bobbing_sheet.png')

@@ -111,7 +111,7 @@ function PlayerControlSystem:process(e, dt)
     -- DRAG
     if self.liftedPipe then
         local x, y = love.mouse.getPosition()
-        self.liftedPipe.pos = {x=x, y=y}
+        self.liftedPipe.pos = {x=lume.clamp(x, 90, 710), y=lume.clamp(y, 80, 460)}
     end
 end
 

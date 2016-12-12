@@ -14,6 +14,11 @@ function SpriteSystem:postProcess(dt)
 end
 
 function SpriteSystem:process(e, dt)
+    -- hack for crew member visibility
+    if e.assignedConsole and lume.any(Global.currentLevelDefinition.activeGames, function(x) return x == e.assignedConsole end) then
+        return
+    end
+
     local an = e.animation
     local alpha = e.alpha or 1
     local pos, sprite, scale, rot, offset = e.pos, e.sprite, e.scale, e.rot, e.offset
