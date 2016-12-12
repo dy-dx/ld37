@@ -10,6 +10,7 @@ local CrewMemberEngineer = require 'entities/crewmemberengineer'
 local CrewMemberDoctor = require 'entities/crewmemberdoctor'
 local CrewMemberSecurity = require 'entities/crewmembersecurity'
 local CrewMemberPilot = require 'entities/crewmemberpilot'
+local Screen = require 'entities/screen'
 local Siren = require 'entities/siren'
 local LevelProgression = require 'entities/levelprogression'
 
@@ -74,6 +75,7 @@ function Level:load()
         -- draw systems
 
         require ("systems/drawsystems/spritesystem")(),
+        require ("systems/alertSystem")(),
         require ("systems/drawsystems/textsystem")(),
 
         require ("systems/drawsystems/debughitboxsystem")(),
@@ -108,11 +110,14 @@ function Level:load()
     world:addEntity(Siren('sirens_side', screenWidth - sirenSideXOffset, 200, true, "misslowcommand"))
     world:addEntity(Siren('sirens_midside', sirenMidsideXOffset, 90, false, "ventgas"))
     world:addEntity(Siren('sirens_midside', screenWidth - sirenMidsideXOffset, 90, true, "spinner"))
+    world:addEntity(Screen('assets/images/stencils/background_bl.png', "plumbing"))
+    world:addEntity(Screen('assets/images/stencils/background_tl.png', "ventgas"))
+    world:addEntity(Screen('assets/images/stencils/background_tr.png', "spinner"))
+    world:addEntity(Screen('assets/images/stencils/background_br.png', "misslowcommand"))
     world:addEntity(Panel({x = 10, y = 300, w = 100, h = 250}, "plumbing"))
     world:addEntity(Panel({x = 80, y = 160, w = 160, h = 220}, "ventgas"))
     world:addEntity(Panel({x = 560, y = 160, w = 160, h = 220}, "spinner"))
     world:addEntity(Panel({x = 690, y = 300, w = 100, h = 250}, "misslowcommand"))
-
     world:addEntity(NavPanel())
     world:addEntity(VentGas())
 
