@@ -16,7 +16,7 @@ local function checkButton(button, meter, x, y, dt)
     if (x - button.x)^2 + (y - button.y)^2 < button.radius^2 then
         button.buttonDown = true
         if button.buttonType == 'oxygen' then
-            Signal.emit('gameover')
+            Signal.emit('gameover', 'ventgas')
         else
             meter.currentPressure = math.max(0, meter.currentPressure - meter.pressureDecrease * dt)
         end
@@ -32,7 +32,7 @@ end
 local function maintainVent(meter, dt)
     meter.currentPressure = meter.currentPressure + meter.growthRate * dt
     if meter.currentPressure > meter.maxPressure then
-        Signal.emit('gameover')
+        Signal.emit('gameover', 'ventgas')
     end
 end
 

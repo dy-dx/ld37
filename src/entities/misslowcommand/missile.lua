@@ -36,7 +36,7 @@ function Missile:process(dt)
     if Utils.isInCircle(ox, oy, dt * Missile.SPEED) then
         self.isDead = true
         Signal.emit('ded')
-        Signal.emit('gameover')
+        Signal.emit('gameover', 'misslowcommand')
     end
 end
 

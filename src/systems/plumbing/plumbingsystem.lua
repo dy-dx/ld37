@@ -109,7 +109,7 @@ function PlumbingSystem:process(e, dt)
             -- find the next pipe to fill
             local nextPipe = Global.pipes[key]
             if not nextPipe or not nextPipe:acceptFrom({x = -outDir.dx, y = -outDir.dy}) then
-                Signal.emit('gameover')
+                Signal.emit('gameover', 'plumbing')
                 return
             end
             nextPipe.filling = true
