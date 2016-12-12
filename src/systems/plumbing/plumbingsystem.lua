@@ -7,9 +7,10 @@ local CurvedPipe = require 'entities/plumbing/curvedpipe'
 local StraightPipe = require 'entities/plumbing/straightpipe'
 
 -- DIFFICULTY PARAMS
-local FLUID_RATE = 0.1
-local WARNING_PIPES = 1
+local FLUID_RATE = 0.1  -- Larger number -> faster flow. See also startBuffer.fluidRate
+local WARNING_PIPES = 1  -- Number of pipes ahead of current one to trigger WARNING
 local DANGER_PIPES = 0
+local RESTART_ON_WIN = true  -- Reshuffle board when game is won. Otherwise, just leave "won"
 
 -- OK DON'T TOUCH THESE ANYMORE
 local OFFSET_X = 127
@@ -93,7 +94,9 @@ function PlumbingSystem:process(e, dt)
         if e.fluidProgress == 1 then
             e.filling = false
             if e.type == 'endbuffer' then
-                restartLevel()
+                if RESTART_ON_WIN then
+                    restartLevel()
+                end
                 return
             end
             local outDir = e:outDirection()
