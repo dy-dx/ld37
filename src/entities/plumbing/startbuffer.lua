@@ -6,6 +6,7 @@ function StartBuffer:init()
     self.plumbing = true
     self.pos = {x = 602, y = 94}
 
+    self.type = 'startbuffer'
     self.sprite = love.graphics.newImage('assets/images/plumbingStartBuffer.png')
 
     self.fluidRate = 0.03
