@@ -3,6 +3,7 @@ local anim8 = require 'vendor/anim8'
 local CrewMemberEngineer = Class{}
 
 function CrewMemberEngineer:init()
+    self.assignedConsole = 'plumbing'
     self.isCrewMemberAnimationSystem=true
     self.global = true
     self.bobbingSheet = love.graphics.newImage('assets/images/characters/alien_bobbing_sheet.png')

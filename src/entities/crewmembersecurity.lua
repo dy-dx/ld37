@@ -3,6 +3,7 @@ local anim8 = require 'vendor/anim8'
 local CrewMemberSecurity = Class{}
 
 function CrewMemberSecurity:init()
+    self.assignedConsole = 'misslowcommand'
     self.isCrewMemberAnimationSystem=true
     self.global = true
     self.bobbingSheet = love.graphics.newImage('assets/images/characters/security_bobbing_sheet.png')
