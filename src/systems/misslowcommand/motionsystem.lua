@@ -1,3 +1,4 @@
+local Background = require 'entities/misslowcommand/background'
 local Ship = require 'entities/misslowcommand/ship'
 local Missile = require 'entities/misslowcommand/missile'
 
@@ -19,6 +20,7 @@ end
 function MisslowCommandSystem:preProcess(dt)
     if not self.ship then
         self.ship = true
+        world:addEntity(Background())
         world:addEntity(Ship())
     end
 
