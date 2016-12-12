@@ -20,7 +20,7 @@ function SpinnerSystem:init()
     self.backgroundInit = false
 
     self.totalCooldown = 5
-    self.cooldown = 0
+    self.cooldown = 0.1
 
     Signal.register('startLevel', function(level)
         self:reset()
@@ -37,7 +37,7 @@ function SpinnerSystem:reset()
         self.spinnerFrame = nil;
         self.pillBox = nil;
     end
-    self.cooldown = 0
+    self.cooldown = 0.1
 end
 
 
