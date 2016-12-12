@@ -9,6 +9,7 @@ local CrewMemberEngineer = require 'entities/crewmemberengineer'
 local CrewMemberDoctor = require 'entities/crewmemberdoctor'
 local CrewMemberSecurity = require 'entities/crewmembersecurity'
 local CrewMemberPilot = require 'entities/crewmemberpilot'
+local Siren = require 'entities/siren'
 local LevelProgression = require 'entities/levelprogression'
 
 local Level = Class{}
@@ -56,6 +57,7 @@ function Level:load()
         require ("systems/spinner/spinnersystem")(),
         require ("systems/plumbing/plumbingsystem")(),
         require ("systems/crewmemberanimationsystem")(),
+        require ("systems/sirenanimationsystem")(),
         require ("systems/overlayInputSystem")(),
 
         -- draw systems
@@ -79,6 +81,7 @@ function Level:load()
     )
 
 
+    local screenWidth = love.graphics.getWidth()
 
     world:addEntity(Environment()) -- background layer, goes first
     world:addEntity(LevelProgression())
@@ -89,6 +92,12 @@ function Level:load()
     world:addEntity(CrewMemberDoctor())
     world:addEntity(CrewMemberSecurity())
     world:addEntity(CrewMemberPilot())
+    local sirenSideXOffset = 15
+    local sirenMidsideXOffset = 50
+    world:addEntity(Siren('sirens_side', sirenSideXOffset, 200, false))
+    world:addEntity(Siren('sirens_side', screenWidth - sirenSideXOffset, 200, true))
+    world:addEntity(Siren('sirens_midside', sirenMidsideXOffset, 90, false))
+    world:addEntity(Siren('sirens_midside', screenWidth - sirenMidsideXOffset, 90, true))
     world:addEntity(Panel({x = 10, y = 300, w = 100, h = 250}, "plumbing"))
     world:addEntity(Panel({x = 80, y = 160, w = 160, h = 220}, "ventgas"))
     world:addEntity(Panel({x = 560, y = 160, w = 160, h = 220}, "spinner"))
