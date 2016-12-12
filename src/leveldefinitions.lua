@@ -2,26 +2,31 @@ local levelDefinitions = {
     {
         activeGames = {"nav"},
         duration = 5,
+        nav = {fuckeryRate = 0.5},
     },
     {
         activeGames = {"nav", "ventgas"},
-        duration = 5,
+        duration = 10,
+        nav = {fuckeryRate = 0.01},
     },
     {
         activeGames = {"nav", "ventgas", "spinner"},
-        duration = 5,
+        duration = 25,
+        nav = {fuckeryRate = 0.01},
     },
     {
         activeGames = {"nav", "ventgas", "spinner", "misslowcommand"},
-        duration = 5,
+        duration = 25,
+        nav = {fuckeryRate = 0.01},
     },
     {
         activeGames = {"nav", "ventgas", "spinner", "misslowcommand", "plumbing"},
-        duration = 5
+        duration = 25,
+        nav = {fuckeryRate = 0.01},
     },
     {
         activeGames = {},
-        duration = 5
+        duration = 0,
     },
 }
 
