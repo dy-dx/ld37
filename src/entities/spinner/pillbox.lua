@@ -9,7 +9,7 @@ function Pillbox:init(pos, maxPills, padding)
     self.isDead = false
     self.isDraw = true
     self.pills = {}
-    self.sprite = love.graphics.newImage('assets/images/pilltube.png')
+    self.sprite = love.graphics.newImage('assets/images/pills/tube.png')
     self.maxPills = maxPills
     self.padding = padding
 end

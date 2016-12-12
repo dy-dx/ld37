@@ -15,7 +15,7 @@ function SpinnerFrame:init(pos)
         love.graphics.newImage('assets/images/pills/green.png'),
         love.graphics.newImage('assets/images/pills/indigo.png'),
         love.graphics.newImage('assets/images/pills/purple.png'),
-        love.graphics.newImage('assets/images/pills/aqua.png'),
+        love.graphics.newImage('assets/images/pills/hex.png'),
         love.graphics.newImage('assets/images/pills/grey.png'),
         love.graphics.newImage('assets/images/pills/yellow.png')
     }
