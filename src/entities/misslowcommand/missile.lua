@@ -3,7 +3,7 @@ local anim8 = require 'vendor/anim8'
 local Utils = (require 'utils')()
 
 local Missile = Class{}
-Missile.SPEED = 60
+Missile.SPEED = 50
 
 function Missile:init(src_x, src_y, dest_x, dest_y)
     self.misslowcommand = true
