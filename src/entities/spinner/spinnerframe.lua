@@ -3,7 +3,7 @@ local SpinnerFrame = Class{}
 function SpinnerFrame:init()
     self.spinner = true
     self.pos = {
-        x = 200,
+        x = 250,
         y = 250
     }
     self.sprite = love.graphics.newImage('assets/images/spinnerframe.png')
