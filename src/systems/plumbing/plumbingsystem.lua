@@ -36,7 +36,7 @@ function PlumbingSystem:preProcess(dt)
         -- Scrap pipe
         world:addEntity(randomPipe(11, 5))
         for y=0,6 do
-            for x=0,9 do
+            for x=1,9 do
                 local pipe = randomPipe(x, y)
                 world:addEntity(pipe)
             end
