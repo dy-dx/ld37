@@ -95,7 +95,7 @@ function SpinnerSystem:process(e, dt)
 
     self:dangerTick()
 
-    if self.input:released("mouse1") then
+    if self.input:pressed("mouse1") then
         clickX, clickY = love.mouse.getPosition()
         local position = {x = clickX, y = clickY}
         local spinnerBox = {x = self.spinnerPos.x - 100, y = self.spinnerPos.y - 100, w = 200, h = 200}
