@@ -1,6 +1,6 @@
 local Pillbox = Class{}
 
-local Utils = require('Utils')
+local Utils = require('utils')
 local Pill = require('entities/spinner/pill')
 
 function Pillbox:init(pos, maxPills, padding)

@@ -1,6 +1,6 @@
 local Pill = Class{}
 
-local Utils = require('Utils')
+local Utils = require('utils')
 
 function Pill:init(number, sprite, v, pos, endX, padding, queue)
     self.sprite = sprite
