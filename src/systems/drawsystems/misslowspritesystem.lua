@@ -1,23 +1,22 @@
-local SpriteSystem = Class{}
-SpriteSystem = tiny.processingSystem(SpriteSystem)
+local MislowSpriteSystem = Class{}
+MislowSpriteSystem = tiny.processingSystem(MislowSpriteSystem)
 
-function SpriteSystem:init()
+function MislowSpriteSystem:init()
     self.name = "misslowcommand"
     self.isDrawingSystem = true
     self.filter = tiny.requireAll('sprite', 'pos', self.name)
 end
 
-function SpriteSystem:preProcess(dt)
+function MislowSpriteSystem:preProcess(dt)
 end
 
-function SpriteSystem:postProcess(dt)
+function MislowSpriteSystem:postProcess(dt)
     love.graphics.setColor(255, 255, 255, 255)
 end
 
-function SpriteSystem:process(e, dt)
-    if Global.currentGame ~= self.name then
-        return
-    end
+function MislowSpriteSystem:process(e, dt)
+    if Global.currentGame ~= self.name then return end
+
     local an = e.animation
     local alpha = e.alpha or 1
     local pos, sprite, scale, rot, offset = e.pos, e.sprite, e.scale, e.rot, e.offset
@@ -37,4 +36,4 @@ function SpriteSystem:process(e, dt)
     end
 end
 
-return SpriteSystem
+return MislowSpriteSystem

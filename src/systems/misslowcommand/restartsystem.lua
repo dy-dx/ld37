@@ -11,18 +11,26 @@ function startLevel()
         return
     end
 
-    -- world:addEntity(Background())
     world:addEntity(Ship())
 end
 
 function RestartSystem:init()
     self.filter = tiny.requireAll('misslowcommand')
+
+    self.background = Background()
+    self.backgroundinit = false
     Signal.register('startLevel', function()
         self.rampage = true
     end)
 end
 
 function RestartSystem:preProcess(dt)
+    print("preprocess restart")
+    if(not self.backgroundinit) then
+        world:addEntity(self.background)
+        self.backgroundinit = true
+    end
+
 end
 
 function RestartSystem:postProcess(dt)
@@ -33,7 +41,7 @@ function RestartSystem:postProcess(dt)
 end
 
 function RestartSystem:process(e, dt)
-    if self.rampage then
+    if self.rampage and not e.isBackground then
         world:remove(e)
     end
 end

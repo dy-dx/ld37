@@ -13,5 +13,4 @@ end
 function Background:process(dt)
 end
 
-
 return Background

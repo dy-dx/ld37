@@ -8,6 +8,7 @@ function Background:init()
     }
     self.sprite = love.graphics.newImage('assets/images/misslowbg.png')
     self.isDead = false
+    self.isBackground = true
 end
 
 function Background:process(dt)
