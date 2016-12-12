@@ -22,32 +22,32 @@ function Pillbox:isFull(dt)
 end
 
 function Pillbox:addPill(pillNumber, pillColor)
-    local pill = Pill(pillNumber, pillColor)
+
+    local pillWidth = (self.pos.w)/self.maxPills
+
+    local pill = Pill(
+        pillNumber,
+        pillColor,
+        30,
+        {
+            x = self.pos.x,
+            y = self.pos.y,
+            w = pillWidth - 2 * self.padding,
+            h = self.pos.h
+        },
+        self.pos.x + self.pos.w - pillWidth,
+        self.padding,
+        table.getn(self.pills) + 1)
     lume.push(self.pills, pill)
-end
-
-function Pillbox:slidePill(cooldown, totalCooldown)
-    self.slide = cooldown/totalCooldown
-end
-
-function Pillbox:getPillPosition(num)
-    local slide = 0
-    if(table.getn(self.pills) == num) then
-        slide = self.slide
-    end
-
-    local pillSlotWidth = (self.pos.w) / self.maxPills;
-
-    return {
-        x = self.pos.x + ((pillSlotWidth) * self.maxPills + self.padding - (pillSlotWidth * num)) * (1 - slide),
-        y = self.pos.y,
-        w = pillSlotWidth - 2 * self.padding,
-        h = self.pos.h
-    }
+    return pill
 end
 
 function Pillbox:removePill()
-    table.remove(self.pills, 1)
+    self.pills = lume.map(self.pills, function(pill)
+        pill.queue = pill.queue - 1
+        return pill
+    end)
+    return table.remove(self.pills, 1)
 end
 
 function Pillbox:draw(dt)
@@ -63,14 +63,6 @@ function Pillbox:draw(dt)
         b = 0,
         a = 255
     })
-
-    local i = 1
-    lume.each(self.pills, function(pill)
-        local position = self:getPillPosition(i);
-        pill:render(position)
-        i = i + 1
-    end)
-
 end
 
 return Pillbox

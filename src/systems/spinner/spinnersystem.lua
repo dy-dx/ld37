@@ -30,6 +30,9 @@ end
 function SpinnerSystem:reset()
     if self.spinnerFrame then
         world:remove(self.spinnerFrame)
+        lume.map(self.pillBox.pills, function(pill)
+            world:removeEntity(pill)
+        end)
         world:remove(self.pillBox)
         self.spinnerFrame = nil;
         self.pillBox = nil;
@@ -59,8 +62,6 @@ function SpinnerSystem:preProcess(dt)
 
     self.cooldown = self.cooldown - dt
 
-    self.pillBox:slidePill(self.cooldown, self.totalCooldown)
-
     if self.cooldown <= 0 then
         self.cooldown = self.totalCooldown
 
@@ -71,10 +72,7 @@ function SpinnerSystem:preProcess(dt)
 
         local pillNumber = math.random(table.getn(self.spinnerFrame.colors))
         local pillColor = self.spinnerFrame.colors[pillNumber]
-        self.pillBox:addPill(pillNumber, pillColor)
-
-
-
+        world:addEntity(self.pillBox:addPill(pillNumber, pillColor))
     end
 end
 
@@ -82,6 +80,7 @@ function SpinnerSystem:postProcess(dt)
 end
 
 function SpinnerSystem:dangerTick()
+    if(not self.pillBox) then return end
     if(table.getn(self.pillBox.pills) >= self.pillBox.maxPills - 1) then return Signal.emit('dangerLevel', self.name, 3) end
     if(table.getn(self.pillBox.pills) >= self.pillBox.maxPills - 3) then return Signal.emit('dangerLevel', self.name, 2) end
     return Signal.emit('dangerLevel', self.name, 1)
@@ -106,7 +105,7 @@ function SpinnerSystem:process(e, dt)
             end
 
             if(lume.first(self.pillBox.pills).number == self.spinnerFrame:getSelected()) then
-                self.pillBox:removePill()
+                world:remove(self.pillBox:removePill())
             else
                 self.spinnerFrame:pause(1)
             end

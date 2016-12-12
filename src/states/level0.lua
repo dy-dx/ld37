@@ -65,6 +65,7 @@ function Level:load()
         require ("systems/misslowcommand/collisionsystem")(),
         require ("systems/ventgascontrolsystem")(),
         require ("systems/spinner/spinnersystem")(),
+        require ("systems/spinner/pillsystem")(),
         require ("systems/plumbing/plumbingsystem")(),
         require ("systems/crewmemberanimationsystem")(),
         require ("systems/overlayInputSystem")(),
