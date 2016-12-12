@@ -12,7 +12,7 @@ function PillSystem:postProcess(dt)
 end
 
 function PillSystem:suicidePosition(e)
-    return e.endX + 100;
+    return e.endX + 70;
 end
 
 function PillSystem:lastPosition(e)
@@ -25,7 +25,7 @@ end
 
 function PillSystem:velocity(e)
     if e.isSuicidal then
-        return e.velocity + 1000;
+        return e.velocity + 3000;
     else
         return e.velocity
     end

@@ -5,7 +5,7 @@ function SpinnerFrame:init(pos)
     self.pos = pos
     self.sprite = love.graphics.newImage('assets/images/edittedspinnerframe.png')
     self.offset = {
-        x = self.sprite:getWidth() / 2,
+        x = self.sprite:getWidth() / 2 + 1,
         y = self.sprite:getHeight() / 2
     }
     self.isDead = false

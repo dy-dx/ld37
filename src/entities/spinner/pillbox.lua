@@ -28,7 +28,7 @@ function Pillbox:addPill(pillNumber, pillColor)
     local pill = Pill(
         pillNumber,
         pillColor,
-        30,
+        50,
         {
             x = self.pos.x,
             y = self.pos.y,

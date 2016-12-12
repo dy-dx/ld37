@@ -104,6 +104,7 @@ function SpinnerSystem:process(e, dt)
 
             if(lume.first(self.pillBox.pills).number == self.spinnerFrame:getSelected()) then
                 local deadPill = self.pillBox:removePill();
+                self.spinnerFrame:pause(.1)
                 deadPill.isSuicidal = true
             else
                 self.spinnerFrame:pause(1)
