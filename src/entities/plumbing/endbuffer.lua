@@ -33,15 +33,4 @@ function EndBuffer:predraw(dt)
     love.graphics.setColor(0xFF, 0xFF, 0xFF, 0xFF)
 end
 
-function EndBuffer:acceptFrom(direction)
-    return {}
-    -- error("fuck shit up")
-    -- return {
-    --     x = 9,
-    --     y = 0,
-    --     dx = -1,
-    --     dy = 0
-    -- }
-end
-
 return EndBuffer
