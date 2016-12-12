@@ -8,7 +8,7 @@ function CrewMemberEngineer:init()
     self.global = true
     self.bobbingSheet = love.graphics.newImage('assets/images/characters/alien_bobbing_sheet.png')
     self.pressButtonSheet = love.graphics.newImage('assets/images/characters/alien_pressButton_sheet.png')
-    self.pos = {x = 94, y = 360}
+    self.pos = {x = 94, y = 368}
     self.bobRate = 0.9
     self.buttonPressAnimationRate = .2
     self.nframes = 8

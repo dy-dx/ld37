@@ -8,7 +8,7 @@ function CrewMemberDoctor:init()
     self.global = true
     self.bobbingSheet = love.graphics.newImage('assets/images/characters/doctor_bobbing_sheet.png')
     self.pressButtonSheet = love.graphics.newImage('assets/images/characters/doctor_pressButton_sheet.png')
-    self.pos = {x = 546, y = 242}
+    self.pos = {x = 546, y = 250}
     self.bobRate = 0.9
     self.buttonPressAnimationRate = .2
     self.nframes = 4
