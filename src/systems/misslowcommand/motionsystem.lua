@@ -4,7 +4,7 @@ local Missile = require 'entities/misslowcommand/missile'
 
 MisslowCommandSystem = tiny.processingSystem(Class{})
 
-local TIME_TO_MISSILE = 5  -- seconds
+local TIME_TO_MISSILE = 8  -- seconds
 
 local MISSILE_LENGTH = 35
 local WIDTH = 720
@@ -49,6 +49,7 @@ function MisslowCommandSystem:preProcess(dt)
             y = math.random() * (HEIGHT - MISSILE_LENGTH) + OFFSET + MISSILE_LENGTH / 2
         end
 
+        Signal.emit('writeMore', "Warning: new missile", 100000)
         world:add(Missile(
             x, y,
             400, 300
