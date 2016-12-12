@@ -1,3 +1,5 @@
+local Utils = require 'utils'
+
 local Background = require 'entities/plumbing/background'
 local EndBuffer = require 'entities/plumbing/endbuffer'
 local StartBuffer = require 'entities/plumbing/startbuffer'
@@ -26,6 +28,9 @@ PlumbingSystem = tiny.processingSystem(Class{})
 function restartLevel()
     -- the PlumbingSystem is smart enough to clean up after itself as new stuff comes up
 
+    if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'plumbing') then
+        return
+    end
     world:addEntity(Background())
     world:addEntity(StartBuffer())
     world:addEntity(EndBuffer())
