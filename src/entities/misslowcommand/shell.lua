@@ -16,18 +16,18 @@ function Shell:init(dest_x, dest_y)
 
     local offset_x = dest_x - start_x
     local offset_y = dest_y - start_y
-    angle = math.atan2(offset_y, offset_x)
+    self.rot = math.atan2(offset_y, offset_x)
 
     self.velocity = {
-        x = math.cos(angle) * Shell.SPEED,
-        y = math.sin(angle) * Shell.SPEED,
+        x = math.cos(self.rot) * Shell.SPEED,
+        y = math.sin(self.rot) * Shell.SPEED,
     }
     self.pos = {x = start_x, y = start_y}
-    self.sprite = love.graphics.newImage('assets/images/bomb_sheet.png')
+    self.sprite = love.graphics.newImage('assets/images/bomb2_sheet.png')
     self.target_sprite = love.graphics.newImage('assets/images/target.png')
 
     local g = anim8.newGrid(20, 20, self.sprite:getWidth(), self.sprite:getHeight())
-    self.animation = anim8.newAnimation(g('1-2', 1), 0.1)
+    self.animation = anim8.newAnimation(g(1, '1-2'), 0.1)
     self.offset = {
         x = 20 / 2,
         y = 20 / 2,
