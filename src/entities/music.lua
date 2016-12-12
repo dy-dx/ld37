@@ -20,7 +20,6 @@ function Music:init()
     self.themes.calm.audio:setVolume(0.9)
     --self.themes.calm.audio:setLooping(true)
     self.themes.calm.audio:play()
-    self.themes.calm.audio:seek(9) -- temp
     --for key,value in pairs(self.themes) do
     --    print(value)
     --    --if value ==  then
@@ -31,7 +30,7 @@ function Music:init()
     --end
     self.isMusic = true
 
-    self.transitionCooldown = 9
+    self.transitionCooldown = 0
     self.transitionTime = 0
     self.transitionTheme = nil
     self.transitionVolume = 0

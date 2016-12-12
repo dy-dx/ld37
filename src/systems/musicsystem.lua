@@ -1,6 +1,7 @@
 MusicSystem = tiny.processingSystem(Class{})
 
 function MusicSystem:init()
+    self.isCutsceneSystem = true
     self.filter = tiny.requireAll('isMusic')
 end
 
