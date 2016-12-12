@@ -23,6 +23,24 @@ end
 
 PlumbingSystem = tiny.processingSystem(Class{})
 
+function restartLevel()
+    -- the PlumbingSystem is smart enough to clean up after itself as new stuff comes up
+
+    world:addEntity(Background())
+    world:addEntity(StartBuffer())
+    world:addEntity(EndBuffer())
+    -- Scrap pipe
+    world:addEntity(randomPipe(11, 5))
+    for y=0,6 do
+        for x=1,9 do
+            local pipe = randomPipe(x, y)
+            world:addEntity(pipe)
+        end
+    end
+end
+
+Signal.register('startLevel', restartLevel)
+
 function PlumbingSystem:init()
     self.filter = tiny.requireAll('isDead', 'plumbing')
     Global.pipes = {}
@@ -30,21 +48,6 @@ function PlumbingSystem:init()
 end
 
 function PlumbingSystem:preProcess(dt)
-    if not self.loaded then
-        self.loaded = true
-
-        world:addEntity(Background())
-        world:addEntity(StartBuffer())
-        world:addEntity(EndBuffer())
-        -- Scrap pipe
-        world:addEntity(randomPipe(11, 5))
-        for y=0,6 do
-            for x=1,9 do
-                local pipe = randomPipe(x, y)
-                world:addEntity(pipe)
-            end
-        end
-    end
 end
 
 function PlumbingSystem:postProcess(dt)
@@ -56,7 +59,7 @@ function PlumbingSystem:process(e, dt)
         if e.fluidProgress == 1 then
             e.filling = false
             if e.type == 'endbuffer' then
-                self.loaded = false
+                restartLevel()
                 return
             end
             local outDir = e:outDirection()
