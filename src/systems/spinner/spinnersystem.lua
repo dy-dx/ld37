@@ -73,9 +73,7 @@ function SpinnerSystem:preProcess(dt)
         local pillColor = self.spinnerFrame.colors[pillNumber]
         self.pillBox:addPill(pillNumber, pillColor)
 
-        if(table.getn(self.pillBox.pills) == self.pillBox.maxPills - 2) then Signal.emit('dangerLevel', self.name, 1) end
-        if(table.getn(self.pillBox.pills) == self.pillBox.maxPills - 1) then Signal.emit('dangerLevel', self.name, 2) end
-        if(table.getn(self.pillBox.pills) == self.pillBox.maxPills - 0) then Signal.emit('dangerLevel', self.name, 3) end
+
 
     end
 end
@@ -83,11 +81,19 @@ end
 function SpinnerSystem:postProcess(dt)
 end
 
+function SpinnerSystem:dangerTick()
+    if(table.getn(self.pillBox.pills) >= self.pillBox.maxPills - 1) then return Signal.emit('dangerLevel', self.name, 3) end
+    if(table.getn(self.pillBox.pills) >= self.pillBox.maxPills - 3) then return Signal.emit('dangerLevel', self.name, 2) end
+    return Signal.emit('dangerLevel', self.name, 1)
+end
+
 function SpinnerSystem:process(e, dt)
     e:process(dt)
     if e.isDead then
         world:remove(e)
     end
+
+    self:dangerTick()
 
     if self.input:released("mouse1") then
         clickX, clickY = love.mouse.getPosition()
