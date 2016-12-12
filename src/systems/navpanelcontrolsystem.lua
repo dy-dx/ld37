@@ -66,6 +66,7 @@ function NavPanelControlSystem:process(e, dt)
 
     e.secondsSinceDeparture = e.secondsSinceDeparture + dt
     e.shipYOffset = e.shipYOffset + dt * e.rotation * 10 -- arbitrary magic number but it works
+    e.shipYOffset = lume.clamp(e.shipYOffset, -40, 40) -- temp -- just some huge number so it doesnt get drawn in the middle of nowhere
 
     if math.abs(e.shipYOffset) > e.lcdpos.h/2 then
         Signal.emit('gameover')
