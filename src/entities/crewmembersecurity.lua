@@ -4,10 +4,9 @@ local CrewMemberSecurity = Class{}
 
 function CrewMemberSecurity:init()
     self.isCrewMemberAnimationSystem=true
+    self.global = true
     self.bobbingSheet = love.graphics.newImage('assets/images/characters/security_bobbing_sheet.png')
     self.pressButtonSheet = love.graphics.newImage('assets/images/characters/security_pressButton_sheet.png')
-    self.sprite = self.pressButtonSheet
-    self.global = true
     self.pos = {x = 610, y = 355}
     self.bobRate = 0.9
     self.buttonPressAnimationRate = .2
