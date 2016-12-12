@@ -1,21 +1,27 @@
 local levelDefinitions = {
     {
-        activeGames = {}
+        activeGames = {},
+        duration = 5,
     },
     {
-        activeGames = {"ventgas"}
+        activeGames = {"ventgas"},
+        duration = 5,
     },
     {
-        activeGames = {"ventgas", "spinner"}
+        activeGames = {"ventgas", "spinner"},
+        duration = 5,
     },
     {
-        activeGames = {"ventgas", "spinner", "misslowcommand"}
+        activeGames = {"ventgas", "spinner", "misslowcommand"},
+        duration = 5,
     },
     {
-        activeGames = {"ventgas", "spinner", "misslowcommand", "plumbing"}
+        activeGames = {"ventgas", "spinner", "misslowcommand", "plumbing"},
+        duration = 5
     },
     {
-        activeGames = {}
+        activeGames = {},
+        duration = 5
     },
 }
 

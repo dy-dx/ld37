@@ -71,6 +71,12 @@ function NavPanelControlSystem:process(e, dt)
     if math.abs(e.shipYOffset) > e.lcdpos.h/2 then
         Signal.emit('gameover')
     end
+
+    -- todo: should do this in levelprogressionsystem
+    if e.secondsSinceDeparture >= Global.currentLevelDefinition.duration then
+        Global.currentLevel = Global.currentLevel + 1
+        Signal.emit('startLevel', Global.currentLevel)
+    end
 end
 
 return NavPanelControlSystem

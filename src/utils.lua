@@ -31,4 +31,15 @@ function Utils.pickRandom(arr)
     return arr[math.random(table.getn(arr))]
 end
 
+function Utils.has_value (tab, val)
+    for index, value in ipairs (tab) do
+        -- We grab the first index of our sub-table instead
+        if value == val then
+            return true
+        end
+    end
+
+    return false
+end
+
 return Utils

@@ -18,15 +18,18 @@ end
 -- Don't be tempted! Until Dec 12th
 Global = {
     currentGame = nil,
-    isDebug = true,
     isGameOver = false,
     isGameWon = false,
     timeSinceOverlayOpened = 0, -- hack for overlay
     isCutscene = false,
-    currentLevel = 5, -- todo: change to 1 when we ship
+    currentLevel = 1, -- todo: change to 1 when we ship
     currentLevelDefinition = nil,
-    levelDefinitions = require 'levelDefinitions'
+    levelDefinitions = require 'levelDefinitions',
+    -- debug stuff
+    isDebug = true,
+    isGodMode = false,
 }
+Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
 
 local text = Text('Hello Commander.', 100000);
 
@@ -52,6 +55,8 @@ function Level:load()
         require ("systems/spinner/spinnersystem")(),
         require ("systems/plumbing/plumbingsystem")(),
         require ("systems/crewmemberanimationsystem")(),
+        require ("systems/overlayInputSystem")(),
+
         -- draw systems
 
         require ("systems/drawsystems/spritesystem")(),
@@ -60,7 +65,6 @@ function Level:load()
         require ("systems/drawsystems/debughitboxsystem")(),
         require ("systems/drawsystems/drawnavpanelsystem")(),
 
-        require ("systems/overlayInputSystem")(),
         require ("systems/drawsystems/spinnerdrawsystem")(),
         require ("systems/drawsystems/plumbingsystem")(),
         require ("systems/drawsystems/drawventgassystem")(),
@@ -80,8 +84,6 @@ function Level:load()
     world:addEntity(Overlay())
     world:addEntity(text)
 
-    world:addEntity(NavPanel())
-    world:addEntity(VentGas())
     world:addEntity(CrewMemberEngineer())
     world:addEntity(CrewMemberDoctor())
     world:addEntity(CrewMemberSecurity())
@@ -91,12 +93,17 @@ function Level:load()
     world:addEntity(Panel({x = 560, y = 160, w = 160, h = 220}, "spinner"))
     world:addEntity(Panel({x = 690, y = 300, w = 100, h = 250}, "misslowcommand"))
 
+    world:addEntity(NavPanel())
+    world:addEntity(VentGas())
+
     if Global.isDebug then
         world:addEntity(DebugInfo())
     end
 
     -- todo
     require 'signalhandlers'
+
+    Signal.emit('startLevel', Global.currentLevel)
 end
 
 return Level

@@ -37,6 +37,11 @@ local function maintainVent(meter, dt)
 end
 
 function VentGasControlSystem:process(e, dt)
+    -- don't run the game if 'ventgas' is not in the list of currently active games
+    if not lume.any(Global.currentLevelDefinition.activeGames, function(x) return x == 'ventgas' end) then
+        return
+    end
+
     maintainVent(e.gasMeter, dt)
     maintainVent(e.wasteMeter, dt)
     if Global.currentGame == 'ventgas' and self.input:down('left_click') then

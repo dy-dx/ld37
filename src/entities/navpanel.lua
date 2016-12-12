@@ -4,14 +4,6 @@ local NavPanel = Class{}
 
 function NavPanel:init()
     self.isNavPanel = true
-    self.levelDuration = 30
-    self.secondsSinceDeparture = 0
-    self.rotation = 0
-    self.shipYOffset = 0
-
-    self.pos = {x = 100, y = 500, w = 600, h = 100}
-
-    self.lcdpos = {x = 250, y = 510, w = 400, h = 80}
 
     self.leftButton = {
         x = 150,
@@ -34,6 +26,21 @@ function NavPanel:init()
     self.rightButtonSprite = love.graphics.newImage('assets/images/navpanel/button_down.png')
     self.rightButtonDownSprite = love.graphics.newImage('assets/images/navpanel/button_downPressed.png')
     self.panelSprite = love.graphics.newImage('assets/images/navpanel/panel.png')
+
+    self:resetState()
+
+    Signal.register('startLevel', function(level)
+        self:resetState()
+    end)
+end
+
+function NavPanel:resetState()
+    self.pos = {x = 100, y = 500, w = 600, h = 100}
+    self.lcdpos = {x = 250, y = 510, w = 400, h = 80}
+    self.levelDuration = Global.currentLevelDefinition.duration
+    self.secondsSinceDeparture = 0
+    self.rotation = 0
+    self.shipYOffset = 0
 end
 
 return NavPanel
