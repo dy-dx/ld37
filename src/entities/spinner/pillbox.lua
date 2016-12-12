@@ -18,7 +18,7 @@ function Pillbox:process(dt)
 end
 
 function Pillbox:isFull(dt)
-    return table.getn(self.pills) == self.pillboxMaxSize
+    return table.getn(self.pills) == self.maxPills
 end
 
 function Pillbox:addPill(pillNumber, pillColor)

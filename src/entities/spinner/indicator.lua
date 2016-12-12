@@ -6,6 +6,7 @@ function Indicator:init()
     self.spinner = true
     self.isIndicator = true
     self.angle = 0
+    self.pauseTimer = 0;
     self.pos = {}
     self.sprite = love.graphics.newImage('assets/images/bullet.png')
     self.offset = {
@@ -27,7 +28,19 @@ function Indicator:getSelected()
     return math.ceil((table.getn(self.colors) * (math.pi * 2 - self.angle)) / (math.pi * 2))
 end
 
+function Indicator:pause(t)
+    self.pauseTimer = t
+end
+
 function Indicator:process(dt)
+    print("self.pauseTimer = " .. self.pauseTimer)
+    self.pauseTimer = self.pauseTimer - dt
+    if(self.pauseTimer < 0) then
+        self.pauseTimer = 0
+    end
+
+    if (not (self.pauseTimer == 0)) then return end
+
     self.angle = (self.angle + math.pi * 2 * dt) % (math.pi * 2)
     self.pos = {
         x = SPIN_RADIUS * math.cos(self.angle) + 250,

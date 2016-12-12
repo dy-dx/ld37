@@ -54,6 +54,8 @@ function SpinnerSystem:process(e, dt)
     end
 
     if self.input:released("mouse1") then
+        self.indicator:pause(5)
+
         if(0 == table.getn(self.pillBox.pills)) then return end
 
         if(lume.first(self.pillBox.pills).number == self.indicator:getSelected()) then
