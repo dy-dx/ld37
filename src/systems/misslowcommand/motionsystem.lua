@@ -17,9 +17,6 @@ local OFFSET = 40
 
 --     math.randomseed(os.time())
 --     self.cooldown = 0
---     if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'misslowcommand') then
---         return
---     end
 
 --     world:addEntity(Background())
 --     world:addEntity(Ship())
@@ -33,6 +30,10 @@ function MisslowCommandSystem:init()
 end
 
 function MisslowCommandSystem:preProcess(dt)
+    if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'misslowcommand') then
+        return
+    end
+
     self.cooldown = self.cooldown - dt
     if self.cooldown <= 0 then
         self.cooldown = TIME_TO_MISSILE
@@ -59,6 +60,10 @@ function MisslowCommandSystem:postProcess(dt)
 end
 
 function MisslowCommandSystem:process(e, dt)
+    if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'misslowcommand') then
+        return
+    end
+
     e.pos.x = e.velocity.x * dt + e.pos.x
     e.pos.y = e.velocity.y * dt + e.pos.y
 
