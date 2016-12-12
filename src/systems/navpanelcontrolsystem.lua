@@ -75,15 +75,23 @@ function NavPanelControlSystem:process(e, dt)
     if math.abs(e.shipYOffset) > e.lcdpos.h/2 then
         Signal.emit('gameover', 'nav')
     end
-    if e.shipTipX ~= nil and e.shipTipY ~= nil then
-        if (e.shipTipX - (e.lcdpos.x + e.lcdpos.w))^2 + (e.shipTipY - (e.lcdpos.y + e.lcdpos.h/2))^2 < e.planetRadius^2 then
+    --if e.shipTipX ~= nil and e.shipTipY ~= nil then
+    --    if (e.shipTipX - (e.lcdpos.x + e.lcdpos.w))^2 + (e.shipTipY - (e.lcdpos.y + e.lcdpos.h/2))^2 < e.planetRadius^2 then
+    --        Global.currentLevel = Global.currentLevel + 1
+    --        -- fixme
+    --        Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
+    --        Signal.emit('startLevel', Global.currentLevel)
+    --    end
+    --end
+
+    if e.shipTipX ~= nil then
+        if e.shipTipX >= e.lcdpos.x + e.lcdpos.w - e.planetRadius*2 then
             Global.currentLevel = Global.currentLevel + 1
             -- fixme
             Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
             Signal.emit('startLevel', Global.currentLevel)
         end
     end
-
     -- todo: should do this in levelprogressionsystem
     --if e.secondsSinceDeparture >= Global.currentLevelDefinition.duration then
     --    Global.currentLevel = Global.currentLevel + 1
