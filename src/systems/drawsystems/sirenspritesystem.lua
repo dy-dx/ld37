@@ -1,19 +1,19 @@
-local SpriteSystem = Class{}
-SpriteSystem = tiny.processingSystem(SpriteSystem)
+local SirenSpriteSystem = Class{}
+SirenSpriteSystem = tiny.processingSystem(SirenSpriteSystem)
 
-function SpriteSystem:init()
+function SirenSpriteSystem:init()
     self.isDrawingSystem = true
-    self.filter = tiny.requireAll('sprite', 'pos', 'global')
+    self.filter = tiny.requireAll('isSirenAnimationSystem')
 end
 
-function SpriteSystem:preProcess(dt)
+function SirenSpriteSystem:preProcess(dt)
 end
 
-function SpriteSystem:postProcess(dt)
+function SirenSpriteSystem:postProcess(dt)
     love.graphics.setColor(255, 255, 255, 255)
 end
 
-function SpriteSystem:process(e, dt)
+function SirenSpriteSystem:process(e, dt)
     -- hack for crew member visibility
     if e.assignedConsole and lume.any(Global.currentLevelDefinition.activeGames, function(x) return x == e.assignedConsole end) then
         return
@@ -44,4 +44,4 @@ function SpriteSystem:process(e, dt)
     end
 end
 
-return SpriteSystem
+return SirenSpriteSystem

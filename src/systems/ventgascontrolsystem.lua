@@ -37,19 +37,18 @@ local function maintainVent(meter, dt)
 end
 
 local function setDangerLevel(e)
-    local isGasLevel2 = e.gasMeter.currentPressure >= e.gasLevelTwoLowerBound and e.gasMeter.currentPressure < e.gasLevelThreeLowerBound
-    local isGasLevel3 = e.gasMeter.currentPressure >= e.gasLevelThreeLowerBound
-    local isWasteLevel2 = e.wasteMeter.currentPressure >= e.wasteLevelTwoLowerBound and e.wasteMeter.currentPressure < e.wasteLevelThreeLowerBound
-    local isWasteLevel3 = e.wasteMeter.currentPressure >= e.wasteLevelThreeLowerBound
-    if isGasLevel3 or isWasteLevel3 then
+    local totalGasTime = e.gasMeter.maxPressure/e.gasMeter.growthRate
+    local currentGasTimeLeft = totalGasTime - e.gasMeter.currentPressure/e.gasMeter.growthRate
+    local totalWasteTime = e.wasteMeter.maxPressure/e.wasteMeter.growthRate
+    local currentWasteTimeLeft = totalWasteTime - e.wasteMeter.currentPressure/e.wasteMeter.growthRate
+    if currentGasTimeLeft < e.timeLeftToTriggerDangerLevelThree or currentWasteTimeLeft < e.timeLeftToTriggerDangerLevelThree then
         e.dangerLevel = 3
-    elseif isGasLevel2 or isWasteLevel2 then
+    elseif currentGasTimeLeft < e.timeLeftToTriggerDangerLevelTwo or currentWasteTimeLeft < e.timeLeftToTriggerDangerLevelTwo then
         e.dangerLevel = 2
     else
         e.dangerLevel = 1
     end
 end
-
 function VentGasControlSystem:process(e, dt)
     -- don't run the game if 'ventgas' is not in the list of currently active games
     if not lume.any(Global.currentLevelDefinition.activeGames, function(x) return x == 'ventgas' end) then

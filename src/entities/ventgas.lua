@@ -11,9 +11,9 @@ function VentGas:init()
 
     self.isDrawVentGasSystem = true
     self.isVentGasControlSystem = true
-    -- percentages used to invoke danger signal switches
-    self.dangerLevelTwoPercentage = .6
-    self.dangerLevelThreePercentage = .8
+    -- time used to invoke danger signal switches
+    self.timeLeftToTriggerDangerLevelTwo = 5
+    self.timeLeftToTriggerDangerLevelThree = 3
     self.x = padding
     self.y = padding
     self.width = screenWidth - 2 * padding
@@ -37,7 +37,6 @@ function VentGas:init()
     }
 
     -- oxygen
-    self.maxOxygenPressure = maxPressure
     self.oxygenPressureBox = {x = self.width*2/4
         , y = self.y + barPadding, width = barWidth
         , height = barHeight, r=25, g=25, b=75
@@ -60,21 +59,25 @@ function VentGas:resetState()
     local gasMaxPressure = 300
     local wasteMaxPressure = 300
     -- Growth Rates - increase to make more difficult
-    local gasGrowthRate = 5
-    local wasteGrowthRate = 10
+    local gasGrowthRate = Global.currentLevelDefinition.ventgas.gasGrowthRate
+    local wasteGrowthRate = Global.currentLevelDefinition.ventgas.wasteGrowthRate
     -- Decrease Rates - decrease to make more difficult
-    local gasPressureDecrease = 50
-    local wastePressureDecrease = 50
+    local gasPressureDecrease = 100
+    local wastePressureDecrease = 100
+    -- Initial conditions
+    local initialGasPressure = Global.currentLevelDefinition.ventgas.initialGas
+    local initialWastePressure = Global.currentLevelDefinition.ventgas.initialWaste
+
+    -- defaults
+    if not initialGasPressure then initialGasPressure = 0 end
+    if not initialWastePressure then initialWastePressure = 0 end
+    if not gasGrowthRate then gasGrowthRate = 10 end
+    if not wasteGrowthRate then wasteGrowthRate = 10 end
 
     self.dangerLevel = 1
 
-    self.gasLevelTwoLowerBound = gasMaxPressure*self.dangerLevelTwoPercentage
-    self.gasLevelThreeLowerBound = gasMaxPressure*self.dangerLevelThreePercentage
-    self.wasteLevelTwoLowerBound = wasteMaxPressure*self.dangerLevelTwoPercentage
-    self.wasteLevelThreeLowerBound = wasteMaxPressure*self.dangerLevelThreePercentage
-
     self.gasMeter = {pressureDecrease = gasPressureDecrease, growthRate = gasGrowthRate
-        , maxPressure = gasMaxPressure, currentPressure = 0}
+        , maxPressure = gasMaxPressure, currentPressure = initialGasPressure}
     self.gasPressureButton = {x=self.gasPressureBox.x + buttonRadius
         , y=self.gasPressureBox.y + self.gasPressureBox.height + buttonYOffset
         , radius=buttonRadius, r=0, g=255, b=40, buttonDown = false, text = 'test'
@@ -88,7 +91,7 @@ function VentGas:resetState()
         , buttonType = 'oxygen'
     }
     self.wasteMeter = {pressureDecrease = wastePressureDecrease, growthRate = wasteGrowthRate
-        , maxPressure = wasteMaxPressure, currentPressure = 0}
+        , maxPressure = wasteMaxPressure, currentPressure = initialWastePressure}
     self.wastePressureButton = {x=self.wastePressureBox.x + buttonRadius
         , y=self.wastePressureBox.y + self.wastePressureBox.height + buttonYOffset
         , radius=buttonRadius, r=0, g=255, b=40, text = 'test'

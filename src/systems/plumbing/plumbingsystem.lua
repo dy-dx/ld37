@@ -25,6 +25,14 @@ function randomPipe(x, y)
     end
 end
 
+function pipeAtMouse()
+    local x, y = love.mouse.getPosition()
+    x = math.floor((x - 100) / 50)
+    y = math.floor((y - 100) / 50)
+    local key = getPipeKey(x, y)
+    return Global.pipes[key]
+end
+
 function getPipeKey(x, y)
     return x .. '_' .. y
 end
@@ -75,7 +83,7 @@ function healthCheck(currentPipe)
         end
         local key = getPipeKey(outDir.x, outDir.y)
         currentPipe = Global.pipes[key]
-        if not currentPipe then
+        if not currentPipe or not currentPipe:acceptFrom({x = -outDir.dx, y = -outDir.dy}) then
             if i <= DANGER_PIPES then
                 return 3  -- DANGER
             end
@@ -86,6 +94,11 @@ function healthCheck(currentPipe)
 end
 
 function PlumbingSystem:process(e, dt)
+    if e == pipeAtMouse() and not e.lifted then
+        e.highlighted = true
+    else
+        e.highlighted = false
+    end
     if e.filling then
         Signal.emit('dangerLevel', 'plumbing', healthCheck(e))
 

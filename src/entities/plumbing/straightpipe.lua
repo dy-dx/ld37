@@ -16,6 +16,8 @@ function StraightPipe:init(x, y, offsetX, offsetY, rotation)
     self.rotation = rotation  -- this is for the game logic stuff, [0, 1]
     self.rot = rotation * math.pi / 2  -- this is for the display stuff, [0, 2π)
     self.sprite = love.graphics.newImage('assets/images/pipeLR.png')
+    self.hilite = love.graphics.newImage('assets/images/highlight.png')
+    self.highlighted = false
     self.offset = {
         x = self.sprite:getWidth() / 2,
         y = self.sprite:getHeight() / 2
@@ -93,6 +95,13 @@ function StraightPipe:predraw(dt)
         love.graphics.polygon('fill', flattenedVertices)
     end
     love.graphics.setColor(0xFF, 0xFF, 0xFF, 0xFF)
+end
+
+function StraightPipe:draw()
+    if self.highlighted then
+        love.graphics.draw(self.hilite,
+            self.pos.x, self.pos.y, 0, 1, 1, 25, 25)
+    end
 end
 
 function StraightPipe:canMove()
