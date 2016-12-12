@@ -11,9 +11,9 @@ function VentGas:init()
 
     self.isDrawVentGasSystem = true
     self.isVentGasControlSystem = true
-    -- percentages used to invoke danger signal switches
-    self.dangerLevelTwoPercentage = .6
-    self.dangerLevelThreePercentage = .8
+    -- time used to invoke danger signal switches
+    self.timeLeftToTriggerDangerLevelTwo = 5
+    self.timeLeftToTriggerDangerLevelThree = 3
     self.x = padding
     self.y = padding
     self.width = screenWidth - 2 * padding
@@ -37,7 +37,6 @@ function VentGas:init()
     }
 
     -- oxygen
-    self.maxOxygenPressure = maxPressure
     self.oxygenPressureBox = {x = self.width*2/4
         , y = self.y + barPadding, width = barWidth
         , height = barHeight, r=25, g=25, b=75
@@ -76,11 +75,6 @@ function VentGas:resetState()
     if not wasteGrowthRate then wasteGrowthRate = 10 end
 
     self.dangerLevel = 1
-
-    self.gasLevelTwoLowerBound = gasMaxPressure*self.dangerLevelTwoPercentage
-    self.gasLevelThreeLowerBound = gasMaxPressure*self.dangerLevelThreePercentage
-    self.wasteLevelTwoLowerBound = wasteMaxPressure*self.dangerLevelTwoPercentage
-    self.wasteLevelThreeLowerBound = wasteMaxPressure*self.dangerLevelThreePercentage
 
     self.gasMeter = {pressureDecrease = gasPressureDecrease, growthRate = gasGrowthRate
         , maxPressure = gasMaxPressure, currentPressure = initialGasPressure}
