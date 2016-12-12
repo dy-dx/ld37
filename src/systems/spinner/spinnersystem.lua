@@ -61,7 +61,7 @@ function SpinnerSystem:preProcess(dt)
         self.cooldown = 5
 
         if(self.pillBox:isFull()) then
-            Signal.emit('gameover')
+            Signal.emit('gameover', "spinner")
             return;
         end
 
