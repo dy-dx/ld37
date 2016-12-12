@@ -1,4 +1,5 @@
-VentGasControlSystem = tiny.processingSystem(Class{})
+local Utils = require 'utils'
+local VentGasControlSystem = tiny.processingSystem(Class{})
 
 function VentGasControlSystem:init()
     self.filter = tiny.requireAll('isVentGasControlSystem')
@@ -51,9 +52,7 @@ local function setDangerLevel(e)
 end
 function VentGasControlSystem:process(e, dt)
     -- don't run the game if 'ventgas' is not in the list of currently active games
-    if not lume.any(Global.currentLevelDefinition.activeGames, function(x) return x == 'ventgas' end) then
-        return
-    end
+    if not Utils.isAnActiveGame('ventgas') then return end
 
     maintainVent(e.gasMeter, dt)
     maintainVent(e.wasteMeter, dt)

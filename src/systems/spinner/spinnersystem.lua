@@ -42,9 +42,7 @@ end
 
 
 function SpinnerSystem:preProcess(dt)
-    if not lume.any(Global.currentLevelDefinition.activeGames, function(x)
-        return x == 'spinner'
-    end) then return end
+    if not Utils.isAnActiveGame('spinner') then return end
 
     if(not backgroundInit) then
         world:addEntity(self.background)

@@ -22,6 +22,12 @@ function CutsceneDrawSystem:postProcess(dt)
 end
 
 function CutsceneDrawSystem:process(e, dt)
+    if not Global.isCutscene then return end
+
+    -- draw space
+    love.graphics.setColor(0, 0, 0, 255)
+    love.graphics.rectangle('fill', 0, 0, 800, 600)
+
     -- draw ship
     local sPos = {
         x = 340,

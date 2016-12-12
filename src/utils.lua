@@ -42,4 +42,10 @@ function Utils.has_value (tab, val)
     return false
 end
 
+function Utils.isAnActiveGame (gamename)
+    if not Global then return false end
+    if Global.isCutscene then return false end
+    return lume.any(Global.currentLevelDefinition.activeGames, function(x) return x == gamename end)
+end
+
 return Utils

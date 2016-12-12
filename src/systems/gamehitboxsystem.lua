@@ -1,6 +1,6 @@
 local Utils = require 'utils'
 
-GameHitboxSystem = tiny.processingSystem(Class{})
+local GameHitboxSystem = tiny.processingSystem(Class{})
 
 function GameHitboxSystem:init()
     self.filter = tiny.requireAll('hitbox', 'activatable')
@@ -23,7 +23,7 @@ function GameHitboxSystem:process(e, dt)
     local point = {x = clickX, y = clickY}
 
     if Utils.isInside(point, e.hitbox) then
-        if not lume.any(Global.currentLevelDefinition.activeGames, function(x) return x == e.gName end) then
+        if not Utils.isAnActiveGame(e.gName) then
             print("you can't play that game yet greg")
             Signal.emit('write', "you can't play that game yet GREG! press L to skip to the next level", 150000)
             return

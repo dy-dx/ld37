@@ -42,7 +42,7 @@ PlumbingSystem = tiny.processingSystem(Class{})
 function restartLevel()
     -- the PlumbingSystem is smart enough to clean up after itself as new stuff comes up
 
-    if not Utils.has_value(Global.currentLevelDefinition.activeGames, 'plumbing') then
+    if not Utils.isAnActiveGame('plumbing') then
         return
     end
     world:addEntity(Background())
