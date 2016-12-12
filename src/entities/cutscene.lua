@@ -15,6 +15,9 @@ function Cutscene:init()
 
     self.timer = Timer.new()
 
+    self.maxTextWidth = 500
+    self.speed = 10000
+    self:resetLine()
     self:resetState()
     Signal.register('startCutscene', function(cutsceneType)
         Global.isCutscene = true
@@ -23,16 +26,14 @@ function Cutscene:init()
     end)
 end
 
-function Cutscene:resetState(cutsceneType)
-    self.timer:clear()
-    self.sprite = self.shipSheet
-    self.animation = self.shipAnimation
-    self.pos = {x = 330, y = 340}
-    self.alpha = 1
-    self.rot = 0
-    self.offset = {x = 0, y = 0}
-    self.gameOverText = ''
-    self.cutsceneType = 'intro'
+function Cutscene:resetLine()
+    self.time = 0
+    self.currentCharacter = 1
+    self.drawRestOfText = false
+end
+
+function Cutscene:resetState()
+    self.shipPos = {x = 200, y = 400}
     self.currentDialogueIndex = 1
 
     -- explosion sequence

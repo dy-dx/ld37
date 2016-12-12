@@ -38,7 +38,9 @@ function CutsceneControlSystem:process(e, dt)
             print('endcutscene')
             endCutscene()
         else
+            e.drawRestOfText = true
             print('draw next dialogue')
+            e:resetLine()
             e.currentDialogueIndex = e.currentDialogueIndex + 1
         end
     end

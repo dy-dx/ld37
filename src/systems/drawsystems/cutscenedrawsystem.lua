@@ -30,6 +30,11 @@ local getCurrentDialogue = function(e)
     end
 end
 
+local function wrapText(e, toPrint)
+    if string.len(toPrint) > e.maxTextWidth then
+        return Text:setf(toPrint, 3)
+    end
+end
 function CutsceneDrawSystem:process(e, dt)
     if not Global.isCutscene then return end
     e.timer:update(dt)
@@ -54,12 +59,32 @@ function CutsceneDrawSystem:process(e, dt)
     love.graphics.draw(self.ps, love.graphics.getWidth(), love.graphics.getHeight() * 0.5)
 
     -- draw dialogue
-    local x = 400
-    local y = 300
     local line = getCurrentDialogue(e)
+    local x = 200
+    local y = 200
     local font = e.dialogueFont
-    local text = love.graphics.newText(font, line)
-    love.graphics.draw(text, x, y)
+    if not e.drawRestOfText then
+        e.time = e.time + dt
+        e.currentCharacter = math.floor((e.time * e.speed) / 1000)
+        local toPrint = string.sub(line, 0, e.currentCharacter) or ""
+        local newTextWidth, wrappedText = font:getWrap(toPrint, e.maxTextWidth)
+        local i = 1
+        lume.map(wrappedText, function(l)
+            local currentFont = love.graphics.newText(font, l)
+            love.graphics.draw(currentFont, x, y + i * currentFont:getHeight())
+            i = i + 1
+        end)
+        --love.graphics.draw(wrappedText, x, y)
+        e.currentCharacter = e.currentCharacter + 1
+    else
+        local newTextWidth, wrappedText = font:getWrap(line, e.maxTextWidth)
+        local i = 1
+        lume.map(wrappedText, function(l)
+            local currentFont = love.graphics.newText(font, l)
+            love.graphics.draw(currentFont, x, y + i * currentFont:getHeight())
+            i = i + 1
+        end)
+    end
 end
 
 return CutsceneDrawSystem
