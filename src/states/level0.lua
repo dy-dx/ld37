@@ -59,6 +59,7 @@ function Level:load()
     world = tiny.world(
         require ("systems/musicsystem")(),
         require ("systems/levelprogressionsystem")(), -- not a real system. let this run first tho
+        require ("systems/cutscenecontrolsystem")(),
         require ("systems/misslowcommand/playercontrolsystem")(),
         require ("systems/plumbing/playercontrolsystem")(),
         require ("systems/navpanelcontrolsystem")(),

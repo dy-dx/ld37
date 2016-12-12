@@ -6,7 +6,6 @@ function GameHitboxSystem:init()
     self.filter = tiny.requireAll('hitbox', 'activatable')
     self.input = Input()
     self.input:bind('mouse1', 'left_click')
-    print("init run")
 end
 
 function GameHitboxSystem:preProcess(dt)

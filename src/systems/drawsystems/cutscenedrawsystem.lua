@@ -42,6 +42,15 @@ function CutsceneDrawSystem:process(e, dt)
 
     self.ps:update(dt)
     love.graphics.draw(self.ps, love.graphics.getWidth(), love.graphics.getHeight() * 0.5)
+
+
+    -- draw dialogue
+    local x = 400
+    local y = 300
+    local line = Global.currentLevelDefinition.cutsceneDialogue[e.currentDialogueIndex]
+    local font = e.dialogueFont
+    local text = love.graphics.newText(font, line)
+    love.graphics.draw(text, x, y)
 end
 
 return CutsceneDrawSystem

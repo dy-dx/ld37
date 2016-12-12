@@ -5,7 +5,7 @@ local levelDefinitions = {
         nav = {fuckeryRate = 0.5},
         ventgas = {},
         cutsceneDialogue = {
-            'It is the year blah blah blah',
+            'It is the year 01',
             'you are the captain',
             'click to start',
         },
@@ -16,7 +16,7 @@ local levelDefinitions = {
         nav = {fuckeryRate = 0.01},
         ventgas = {gasGrowthRate = 20, wasteGrowthRate = 10, initialGas = 150, initialWaste = 100},
         cutsceneDialogue = {
-            'It is the year blah blah blah',
+            'It is the year 02',
             'you are the captain',
             'click to start',
         },
@@ -27,7 +27,7 @@ local levelDefinitions = {
         nav = {fuckeryRate = 0.01},
         ventgas = {gasGrowthRate = 20, wasteGrowthRate = 10},
         cutsceneDialogue = {
-            'It is the year blah blah blah',
+            'It is the year 03',
             'you are the captain',
             'click to start',
         },
@@ -38,7 +38,7 @@ local levelDefinitions = {
         nav = {fuckeryRate = 0.01},
         ventgas = {gasGrowthRate = 20, wasteGrowthRate = 10},
         cutsceneDialogue = {
-            'It is the year blah blah blah',
+            'It is the year 04',
             'you are the captain',
             'click to start',
         },
@@ -49,7 +49,7 @@ local levelDefinitions = {
         nav = {fuckeryRate = 0.01},
         ventgas = {gasGrowthRate = 20, wasteGrowthRate = 10},
         cutsceneDialogue = {
-            'It is the year blah blah blah',
+            'It is the year 05',
             'you are the captain',
             'click to start',
         },
