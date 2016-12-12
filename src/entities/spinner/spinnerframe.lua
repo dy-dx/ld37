@@ -12,13 +12,14 @@ function SpinnerFrame:init(pos)
     self.angle = 0
     self.pauseTimer = 0
     self.colors = {
-        { r = 95, g = 196, b = 84, a = 255 },
-        { r = 130, g = 150, b = 255, a = 255 },
-        { r = 186, g = 57, b = 175, a = 255 },
-        { r = 58, g = 187, b = 193, a = 255 },
-        { r = 130, g = 121, b = 168, a = 255 },
-        { r = 244, g = 197, b = 66, a = 255 },
+        love.graphics.newImage('assets/images/pills/green.png'),
+        love.graphics.newImage('assets/images/pills/indigo.png'),
+        love.graphics.newImage('assets/images/pills/purple.png'),
+        love.graphics.newImage('assets/images/pills/aqua.png'),
+        love.graphics.newImage('assets/images/pills/grey.png'),
+        love.graphics.newImage('assets/images/pills/yellow.png')
     }
+
     self.isSpinnerFrame = true
 
 end
