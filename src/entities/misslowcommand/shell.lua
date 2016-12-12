@@ -1,4 +1,5 @@
 -- local gamestate = require "lib.gamestate"
+local anim8 = require 'vendor/anim8'
 local Utils = (require 'utils')()
 local Explosion = require 'entities/misslowcommand/explosion'
 
@@ -22,8 +23,11 @@ function Shell:init(dest_x, dest_y)
         y = math.sin(angle) * Shell.SPEED,
     }
     self.pos = {x = start_x, y = start_y}
-    self.sprite = love.graphics.newImage('assets/images/bullet.png')
+    self.sprite = love.graphics.newImage('assets/images/bomb_sheet.png')
     self.target_sprite = love.graphics.newImage('assets/images/target.png')
+
+    local g = anim8.newGrid(20, 20, self.sprite:getWidth(), self.sprite:getHeight())
+    self.animation = anim8.newAnimation(g('1-2', 1), 0.1)
     self.offset = {
         x = self.sprite:getWidth() / 2,
         y = self.sprite:getHeight() / 2,

@@ -1,4 +1,5 @@
 -- local gamestate = require "lib.gamestate"
+local anim8 = require 'vendor/anim8'
 local Utils = (require 'utils')()
 
 local Missile = Class{}
@@ -20,7 +21,9 @@ function Missile:init(src_x, src_y, dest_x, dest_y)
         y = math.sin(self.rot) * Missile.SPEED,
     }
     self.pos = {x = src_x, y = src_y}
-    self.sprite = love.graphics.newImage('assets/images/missile.png')
+    self.sprite = love.graphics.newImage('assets/images/missile_sheet.png')
+    local g = anim8.newGrid(35, 15, self.sprite:getWidth(), self.sprite:getHeight())
+    self.animation = anim8.newAnimation(g(1, '1-2'), 0.1)
     self.offset = {
         x = self.sprite:getWidth() / 2,
         y = self.sprite:getHeight() / 2,
