@@ -19,6 +19,7 @@ function SpriteSystem:process(e, dt)
     local pos, sprite, scale, rot, offset = e.pos, e.sprite, e.scale, e.rot, e.offset
     local sx, sy, r, ox, oy = scale and scale.x or 1, scale and scale.y or 1, rot or 0, offset and offset.x or 0, offset and offset.y or 0
     -- love.graphics.setColor(255, 255, 255, math.max(0, math.min(1, alpha)) * 255)
+
     if an then
         an.flippedH = e.flippedH or false
         an.flippedV = e.flippedV or false
