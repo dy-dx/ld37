@@ -72,9 +72,11 @@ function NavPanelControlSystem:process(e, dt)
     e.shipYOffset = e.shipYOffset + dt * e.rotation * 10 -- arbitrary magic number but it works
     -- e.shipYOffset = lume.clamp(e.shipYOffset, -40, 40) -- temp -- just some huge number so it doesnt get drawn in the middle of nowhere
 
-    if math.abs(e.shipYOffset) > e.lcdpos.h/2 then
+    -- uncomment out latter condition to change loss condition to leaving bounds on right side
+    if (math.abs(e.shipYOffset) > e.lcdpos.h/2) then -- or (e.shipTipX ~= nil and e.shipTipX  >= (e.lcdpos.x + e.lcdpos.w)) then
         Signal.emit('gameover', 'nav')
     end
+    -- uncomment out to change win condition to tip of ship hitting planet
     --if e.shipTipX ~= nil and e.shipTipY ~= nil then
     --    if (e.shipTipX - (e.lcdpos.x + e.lcdpos.w))^2 + (e.shipTipY - (e.lcdpos.y + e.lcdpos.h/2))^2 < e.planetRadius^2 then
     --        Global.currentLevel = Global.currentLevel + 1
