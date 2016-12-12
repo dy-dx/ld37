@@ -17,27 +17,38 @@ function SpinnerSystem:init()
     self.pillBoxPos = { x = 90, y = 240, w = 280, h = 60 }
     self.maxPills = 5
     self.pillPadding = 5
+    self.background = Background()
+    self.backgroundInit = false
 
-    self:reset()
+    Signal.register('startLevel', function(level)
+        self:reset()
+    end)
 end
 
 function SpinnerSystem:reset()
-    print("reset run")
     if self.spinnerFrame then
-        world:remove(Background())
         world:remove(self.spinnerFrame)
         world:remove(self.pillBox)
+        self.spinnerFrame = nil;
+        self.pillBox = nil;
     end
-    self.spinnerFrame = nil;
-    self.pillBox = nil;
 end
 
 
 function SpinnerSystem:preProcess(dt)
+    if not lume.any(Global.currentLevelDefinition.activeGames, function(x)
+        return x == 'spinner'
+    end) then return end
+
+    if(not backgroundInit) then
+        world:addEntity(self.background)
+    end
+
+
     if not self.spinnerFrame then
         self.spinnerFrame = SpinnerFrame(self.spinnerPos)
         self.pillBox = Pillbox(self.pillBoxPos, self.maxPills, self.pillPadding)
-        world:addEntity(Background())
+
         world:addEntity(self.spinnerFrame)
         world:addEntity(self.pillBox)
     end
@@ -62,8 +73,6 @@ function SpinnerSystem:postProcess(dt)
 end
 
 function SpinnerSystem:process(e, dt)
-    if Global.currentGame ~= self.name then return end
-
     e:process(dt)
     if e.isDead then
         world:remove(e)
