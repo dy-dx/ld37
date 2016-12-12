@@ -52,7 +52,6 @@ function Level:load()
         require ("systems/spinner/spinnersystem")(),
         require ("systems/plumbing/plumbingsystem")(),
         require ("systems/crewmemberanimationsystem")(),
-
         -- draw systems
 
         require ("systems/drawsystems/spritesystem")(),
