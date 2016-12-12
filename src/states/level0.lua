@@ -44,6 +44,7 @@ function Level:load()
         require ("systems/ventgascontrolsystem")(),
         require ("systems/spinner/spinnersystem")(),
         require ("systems/plumbing/plumbingsystem")(),
+        require ("systems/crewmemberanimationsystem")(),
 
         -- draw systems
 
