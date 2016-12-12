@@ -1,10 +1,10 @@
 -- globals
-lume = require '../vendor/lume'
-Class = require '../vendor/hump.class'
-Input = require '../vendor/input'
-Timer = require '../vendor/hump.timer'
-Signal = require '../vendor/hump.signal'
-tiny = require '../vendor/tiny'
+lume = require 'vendor/lume'
+Class = require 'vendor/hump.class'
+Input = require 'vendor/input'
+Timer = require 'vendor/hump.timer'
+Signal = require 'vendor/hump.signal'
+tiny = require 'vendor/tiny'
 require 'sounds'
 
 function printTable(mytable)

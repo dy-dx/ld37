@@ -1,5 +1,3 @@
-local multisource = require '../vendor/multisource'
-
 local assets = {}
 
 love.graphics.setDefaultFilter("nearest", "nearest")

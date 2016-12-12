@@ -1,5 +1,5 @@
 -- local gamestate = require "lib.gamestate"
-local anim8 = require '../../vendor/anim8'
+local anim8 = require 'vendor/anim8'
 
 local Explosion = Class{}
 
