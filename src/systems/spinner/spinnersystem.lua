@@ -19,7 +19,7 @@ function SpinnerSystem:init()
     self.background = Background()
     self.backgroundInit = false
 
-    self.totalCooldown = 1
+    self.totalCooldown = 5
     self.cooldown = 0
 
     Signal.register('startLevel', function(level)
