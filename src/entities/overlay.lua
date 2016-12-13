@@ -14,6 +14,7 @@ function Overlay:init(hitbox, closeHitboxes)
     local largCloseButtonHeight = 20;
 
     self.sprite = love.graphics.newImage("assets/images/monitor.png")
+    self.xButton = love.graphics.newImage("assets/images/close.png")
 
     self.closeHitboxes = {
         {
@@ -46,10 +47,17 @@ function Overlay:draw(dt)
         self.hitbox.h/self.sprite:getHeight(),
         0,
         0)
-
     lume.each(self.closeHitboxes, function(cHitbox)
-        Utils.printFilled(cHitbox, {r = 255, g = 0, b = 0, a = 255})
+        love.graphics.draw(
+            self.xButton,
+            cHitbox.x,
+            cHitbox.y)
     end)
+
+
+    --lume.each(self.closeHitboxes, function(cHitbox)
+    --    Utils.printFilled(cHitbox, {r = 255, g = 0, b = 0, a = 255})
+    --end)
 end
 
 return Overlay
