@@ -5,20 +5,20 @@ local Music = Class{}
 function Music:init()
     self.themes = {
         intense = {
-            audio = love.audio.newSource('assets/sounds/loop_intense.mp3'),
+            audio = love.audio.newSource('assets/sounds/intense10min.mp3'),
             volume = 0
         },
         calm = {
-            audio = love.audio.newSource('assets/sounds/loop_calm.mp3'),
+            audio = love.audio.newSource('assets/sounds/calm10min.mp3'),
             volume = 0.4
         }
     };
-    self.calmDuration = self.themes.calm.audio:getDuration() - 0.13
+    self.calmDuration = self.themes.calm.audio:getDuration()
     self.intenseDuration = self.themes.intense.audio:getDuration()
     print("calm: " .. self.themes.calm.audio:getDuration())
     print("intense: " .. self.themes.intense.audio:getDuration())
     self.themes.calm.audio:setVolume(0.4)
-    --self.themes.calm.audio:setLooping(true)
+    self.themes.calm.audio:setLooping(true)
     self.themes.calm.audio:play()
     --for key,value in pairs(self.themes) do
     --    print(value)
