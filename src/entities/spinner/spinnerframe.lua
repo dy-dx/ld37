@@ -3,7 +3,7 @@ local SpinnerFrame = Class{}
 function SpinnerFrame:init(pos)
     self.spinner = true
     self.pos = pos
-    self.sprite = love.graphics.newImage('assets/images/spinner.png')
+    self.sprite = love.graphics.newImage('assets/images/pills/wheel.png')
     self.offset = {
         x = self.sprite:getWidth() / 2 + 1,
         y = self.sprite:getHeight() / 2
@@ -12,12 +12,12 @@ function SpinnerFrame:init(pos)
     self.angle = 0
     self.pauseTimer = 0
     self.colors = {
-        love.graphics.newImage('assets/images/pills/square.png'),
-        love.graphics.newImage('assets/images/pills/oval.png'),
-        love.graphics.newImage('assets/images/pills/sphere.png'),
-        love.graphics.newImage('assets/images/pills/hex.png'),
         love.graphics.newImage('assets/images/pills/triangle.png'),
-        love.graphics.newImage('assets/images/pills/donut.png')
+        love.graphics.newImage('assets/images/pills/square.png'),
+        love.graphics.newImage('assets/images/pills/sphere.png'),
+        love.graphics.newImage('assets/images/pills/oval.png'),
+        love.graphics.newImage('assets/images/pills/donut.png'),
+        love.graphics.newImage('assets/images/pills/hex.png')
     }
 
     self.isSpinnerFrame = true
