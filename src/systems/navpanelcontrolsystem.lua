@@ -33,11 +33,8 @@ function NavPanelControlSystem:process(e, dt)
     if self.input:down('left_click') then
         local x, y = love.mouse.getPosition()
         if x >= e.leftButton.x and x <= e.leftButton.x + e.leftButton.w and y >= e.leftButton.y and y <= e.leftButton.y + e.leftButton.h then
-            Signal.emit('consoleButton')
-
             cursorOverLeftButton = true
         elseif x >= e.rightButton.x and x <= e.rightButton.x + e.rightButton.w and y >= e.rightButton.y and y <= e.rightButton.y + e.rightButton.h then
-            Signal.emit('consoleButton')
             cursorOverRightButton = true
         end
     end
@@ -58,8 +55,10 @@ function NavPanelControlSystem:process(e, dt)
     -- rotate the ship via user input
     local rotationStep = 0.15
     if leftClicked then
+        Signal.emit('consoleButton')
         e.rotation = e.rotation - rotationStep
     elseif rightClicked then
+        Signal.emit('consoleButton')
         e.rotation = e.rotation + rotationStep
     end
 
