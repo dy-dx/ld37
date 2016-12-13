@@ -16,7 +16,7 @@ function Cutscene:init()
     self.timer = Timer.new()
 
     self.maxTextWidth = 500
-    self.speed = 10000
+    self.speed = 500000
     self:resetState()
     Signal.register('startCutscene', function(cutsceneType)
         Global.isCutscene = true

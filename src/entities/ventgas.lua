@@ -22,6 +22,7 @@ function VentGas:init()
     self.g = 198
     self.b = 204
 
+    self.panelSprite = love.graphics.newImage('assets/images/ventgas/panel2.png')
     self.gasButtonSprite = love.graphics.newImage('assets/images/ventgas/button_left.png')
     self.gasButtonPressedSprite = love.graphics.newImage('assets/images/ventgas/button_left_pressed.png')
     self.oxygenButtonSprite = love.graphics.newImage('assets/images/ventgas/button_middle.png')

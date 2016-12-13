@@ -55,6 +55,9 @@ function DrawVentGasSystem:process(e, dt)
         love.graphics.setColor(e.r, e.g, e.b)
         love.graphics.rectangle('fill', e.x, e.y, e.width, e.height)
 
+        love.graphics.setColor(255, 255, 255, 255)
+        love.graphics.draw(e.panelSprite, e.x, e.y)
+
         -- drawing gas pressure box
         drawBox(e.gasPressureBox)
         -- drawing gas pressure button

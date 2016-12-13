@@ -38,15 +38,17 @@ function Overlay:init(hitbox, closeHitboxes)
 end
 
 function Overlay:draw(dt)
-    love.graphics.draw(
-        self.sprite,
-        self.hitbox.x,
-        self.hitbox.y,
-        0,
-        self.hitbox.w/self.sprite:getWidth(),
-        self.hitbox.h/self.sprite:getHeight(),
-        0,
-        0)
+    if Global.currentGame ~= 'ventgas' then
+        love.graphics.draw(
+            self.sprite,
+            self.hitbox.x,
+            self.hitbox.y,
+            0,
+            self.hitbox.w/self.sprite:getWidth(),
+            self.hitbox.h/self.sprite:getHeight(),
+            0,
+            0)
+    end
     lume.each(self.closeHitboxes, function(cHitbox)
         love.graphics.draw(
             self.xButton,
