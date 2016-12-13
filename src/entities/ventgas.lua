@@ -6,8 +6,8 @@ function VentGas:init()
     local screenHeight = love.graphics.getHeight()
     local padding = 40
     local barPadding = 60
-    local barWidth = 60
-    local barHeight = 280
+    local barWidth = 70
+    local barHeight = 325
 
     self.isDrawVentGasSystem = true
     self.isVentGasControlSystem = true
@@ -32,20 +32,20 @@ function VentGas:init()
     self.tapeSprite = love.graphics.newImage('assets/images/ventgas/tape.png')
 
     -- gas
-    self.gasPressureBox = {x = self.width*1/4
-        , y = self.y + barPadding, width = barWidth
+    self.gasPressureBox = {x = self.width*1/5
+        , y = self.y + barPadding - 45, width = barWidth
         , height = barHeight, r=25, g=25, b=75
     }
 
     -- oxygen
-    self.oxygenPressureBox = {x = self.width*2/4
-        , y = self.y + barPadding, width = barWidth
+    self.oxygenPressureBox = {x = 353
+        , y = self.y + barPadding - 45, width = barWidth
         , height = barHeight, r=25, g=25, b=75
     }
 
     -- waste
-    self.wastePressureBox = {x = self.width*3/4
-        , y = self.y + barPadding, width = barWidth
+    self.wastePressureBox = {x = 561
+        , y = self.y + barPadding - 45, width = barWidth
         , height = barHeight, r=25, g=25, b=75
     }
     self:resetState()
