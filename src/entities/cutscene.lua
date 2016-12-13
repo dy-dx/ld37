@@ -33,7 +33,15 @@ function Cutscene:resetLine()
 end
 
 function Cutscene:resetState()
-    self.shipPos = {x = 200, y = 400}
+    self.timer:clear()
+    self.sprite = self.shipSheet
+    self.animation = self.shipAnimation
+    self.pos = {x = 330, y = 340}
+    self.alpha = 1
+    self.rot = 0
+    self.offset = {x = 0, y = 0}
+    self.gameOverText = ''
+    self.cutsceneType = 'intro'
     self.currentDialogueIndex = 1
 
     -- explosion sequence
