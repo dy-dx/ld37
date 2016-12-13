@@ -16,3 +16,4 @@ zip -9 -r SpacePals.love .
 ```
 
 SpacePals.love into doctored SpacePals.app (Should be zipped in Dropbox)
+`cp SpacePals.love ./SpacePals.app/Contents/Resources/`
