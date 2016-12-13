@@ -17,7 +17,6 @@ function Cutscene:init()
 
     self.maxTextWidth = 500
     self.speed = 10000
-    self:resetLine()
     self:resetState()
     Signal.register('startCutscene', function(cutsceneType)
         Global.isCutscene = true
@@ -32,7 +31,8 @@ function Cutscene:resetLine()
     self.drawRestOfText = false
 end
 
-function Cutscene:resetState()
+function Cutscene:resetState(cutsceneType)
+    self:resetLine()
     self.timer:clear()
     self.sprite = self.shipSheet
     self.animation = self.shipAnimation
