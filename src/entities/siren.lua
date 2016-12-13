@@ -18,6 +18,7 @@ function Siren:init(sirenType, xPos, yPos, flipHorizontally, gamename)
     self.animation = nil
     self.dangerLevel = 1
     Signal.register('dangerLevel', function(gamename, level)
+        if (level == 3) then Signal.emit("alarm") end
         if gamename == self.gamename then
             self.dangerLevel = level
         end

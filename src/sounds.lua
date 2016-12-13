@@ -2,6 +2,9 @@ local explosion = love.audio.newSource('assets/sounds/Explosion10.wav')
 local fire = love.audio.newSource('assets/sounds/Laser_Shoot48.wav')
 local ded = love.audio.newSource('assets/sounds/ShipHit15.wav')
 local talk = love.audio.newSource('assets/sounds/Talk41.wav')
+local alarm = love.audio.newSource('assets/sounds/alarm.wav')
+alarm:setVolume(.2)
+
 local blip = love.audio.newSource('assets/sounds/Blip_Select67.wav')
 local failBlip = love.audio.newSource('assets/sounds/Blip_Select72.wav')
 local consoleButton = love.audio.newSource('assets/sounds/Blip_Select48.wav')
@@ -23,6 +26,10 @@ end)
 
 Signal.register('fire', function ()
     fire:play()
+end)
+
+Signal.register('alarm', function ()
+    alarm:play()
 end)
 
 Signal.register('ded', function ()
