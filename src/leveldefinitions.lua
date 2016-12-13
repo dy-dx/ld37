@@ -67,9 +67,9 @@ local levelDefinitions = {
         misslowcommand = {speed = 30, timeToMissile = 12},
         plumbing = {fluidRate = 0.10, startBufferFluidRate = 0.03},
         cutsceneDialogue = {
-            'Cheif Engineer: Now that there are only two of us, we\'ll be splitting this payload 50/50, right? ... WHAT? What do you mean I still only get 10%?? That\'s it, I’m out of here.',
+            'Chief Engineer: Now that there are only two of us, we\'ll be splitting this payload 50/50, right? ... WHAT? What do you mean I still only get 10%?? That\'s it, I\'m out of here.',
             'Almost there! As I would be wiped if the ship were to explode, you have my sincere thanks for getting us this far...',
-            'Well, you\'ve got 99 problems but a crew ain’t one. It\'s all up to you, now. In addition to your other work, you\'ll need to take on the Chief Engineer\'s main task of ensuring the pipe system allows for the coolant to flow through.',
+            'Well, you\'ve got 99 problems but a crew ain\'t one. It\'s all up to you, now. In addition to your other work, you\'ll need to take on the Chief Engineer\'s main task of ensuring the pipe system allows for the coolant to flow through.',
             'You\'ll have to move the pipes around to make sure the path connects, and feel free to use the spare pipe.',
         },
     },
@@ -79,7 +79,7 @@ local levelDefinitions = {
         ventgas = {},
         cutsceneDialogue = {
             'Alright, we\'re almost in range of our last delivery. Good work. ',
-            'Because your whole crew has already left, you don’t have anything new to do this time around except get SPACEPAL to its final destination.',
+            'Because your whole crew has already left, you don\'t have anything new to do this time around except get SPACEPAL to its final destination.',
             'Congratulations! Thank you for playing.',
         },
     },
