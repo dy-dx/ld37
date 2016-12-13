@@ -7,7 +7,8 @@ local CurvedPipe = require 'entities/plumbing/curvedpipe'
 local StraightPipe = require 'entities/plumbing/straightpipe'
 
 -- DIFFICULTY PARAMS
-local FLUID_RATE = 0.1  -- Larger number -> faster flow. See also startBuffer.fluidRate
+-- local FLUID_RATE = 0.1  -- Larger number -> faster flow. See also startBuffer.fluidRate
+-- ^ moved that to levelDefinitions
 local WARNING_PIPES = 1  -- Number of pipes ahead of current one to trigger WARNING
 local DANGER_PIPES = 0
 local RESTART_ON_WIN = true  -- Reshuffle board when game is won. Otherwise, just leave "won"
@@ -94,6 +95,7 @@ function healthCheck(currentPipe)
 end
 
 function PlumbingSystem:process(e, dt)
+    local FLUID_RATE = Global.currentLevelDefinition.plumbing.fluidRate
     if e == pipeAtMouse() and not e.lifted then
         e.highlighted = true
     else
