@@ -10,14 +10,14 @@ function Music:init()
         },
         calm = {
             audio = love.audio.newSource('assets/sounds/loop_calm.mp3'),
-            volume = 0.05
+            volume = 0.03
         }
     };
     self.calmDuration = self.themes.calm.audio:getDuration() - 0.13
     self.intenseDuration = self.themes.intense.audio:getDuration()
     print("calm: " .. self.themes.calm.audio:getDuration())
     print("intense: " .. self.themes.intense.audio:getDuration())
-    self.themes.calm.audio:setVolume(0.05)
+    self.themes.calm.audio:setVolume(0.03)
     --self.themes.calm.audio:setLooping(true)
     self.themes.calm.audio:play()
     --for key,value in pairs(self.themes) do
