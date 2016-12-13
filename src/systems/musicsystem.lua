@@ -42,12 +42,12 @@ function MusicSystem:process(e, dt)
     --        value.audio:setVolume(fromVolume * (1 - transitionPercent) + toVolume * transitionPercent)
     --    end
     --end
-    e.transitionCooldown = e.transitionCooldown + dt
-    if e.transitionCooldown >= e.calmDuration then -- time passed since our e.calmDuration second long song
-        e.themes.calm.audio:play() -- force song to replay
-        e.themes.calm.audio:seek(e.transitionCooldown - e.calmDuration, 'seconds') -- jump to position
-        e.transitionCooldown = e.transitionCooldown - e.calmDuration
-    end
+    -- e.transitionCooldown = e.transitionCooldown + dt
+    -- if e.transitionCooldown >= e.calmDuration then -- time passed since our e.calmDuration second long song
+    --     e.themes.calm.audio:play() -- force song to replay
+    --     e.themes.calm.audio:seek(e.transitionCooldown - e.calmDuration, 'seconds') -- jump to position
+    --     e.transitionCooldown = e.transitionCooldown - e.calmDuration
+    -- end
 end
 
 return MusicSystem

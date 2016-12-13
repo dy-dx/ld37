@@ -18,7 +18,7 @@ function LevelProgressionSystem:process(e, dt)
     -- mind your step
 
     -- cheat code skip level
-    if self.input:released('skiplevel') then
+    if self.input:released('skiplevel') and Global.isDebug then
         Global.isGameOver = false
         Global.currentGame = nil
         if Global.isCutscene then
@@ -41,7 +41,7 @@ function LevelProgressionSystem:process(e, dt)
 
     if Global.currentLevel == finalLevel and not Global.isGameWon then
         Global.isGameWon = true
-        Signal.emit('write', "you won", 150000)
+        -- Signal.emit('write', "you won", 150000)
     end
 end
 

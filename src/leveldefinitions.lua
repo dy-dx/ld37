@@ -8,7 +8,7 @@ local levelDefinitions = {
             'After 20 years captaining your own ship, the SPACEPAL, you may have finally run out of luck.',
             'Like usual, you\'re currently trying to deliver supplies across the galaxy ...',
             'and, like usual, you may not get the job done in time.',
-            'SPACEPAL is on it\'s last legs and might not make it.',
+            'SPACEPAL is on its last legs and might not make it.',
             'Your crew is tired of not getting paid and may leave mid-trip.',
             'No matter what, you have to keep the ship moving and complete your deliveries.',
             'If you don\'t, you won\'t have enough money to pay the intergalactic bank and they\'ll repo your beloved pal.',
@@ -34,7 +34,7 @@ local levelDefinitions = {
         duration = 30,
         nav = {fuckeryRate = 0.1},
         ventgas = {gasGrowthRate = 20, wasteGrowthRate = 10},
-        spinner = {timeToPill = 4},
+        spinner = {timeToPill = 3},
         cutsceneDialogue = {
             'Doctor: Look Captain, I appreciate you getting us in safely, but during all of that turbulence my life flashed before my eyes ...',
             'Doctor: and, to be honest, I\'m not happy with what I saw. Whatever happened to my childhood dream of becoming a folk musician? When did I decide to throw that all away for a doctor?',
@@ -49,7 +49,7 @@ local levelDefinitions = {
         duration = 30,
         nav = {fuckeryRate = 0.14},
         ventgas = {gasGrowthRate = 15, wasteGrowthRate = 8},
-        spinner = {timeToPill = 5},
+        spinner = {timeToPill = 4},
         misslowcommand = {speed = 50, timeToMissile = 6},
         cutsceneDialogue = {
             'Three deliveries down, one to go... ',
@@ -61,9 +61,9 @@ local levelDefinitions = {
     {
         activeGames = {"nav", "ventgas", "spinner", "misslowcommand", "plumbing"},
         duration = 30,
-        nav = {fuckeryRate = 0.1},
+        nav = {fuckeryRate = 0.9},
         ventgas = {gasGrowthRate = 10, wasteGrowthRate = 5},
-        spinner = {timeToPill = 6},
+        spinner = {timeToPill = 5},
         misslowcommand = {speed = 30, timeToMissile = 12},
         plumbing = {fluidRate = 0.10, startBufferFluidRate = 0.03},
         cutsceneDialogue = {
