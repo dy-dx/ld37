@@ -56,14 +56,14 @@ function NavPanelControlSystem:process(e, dt)
     end
 
     -- rotate the ship via user input
-    local rotationStep = 0.1
+    local rotationStep = 0.15
     if leftClicked then
         e.rotation = e.rotation - rotationStep
     elseif rightClicked then
         e.rotation = e.rotation + rotationStep
     end
 
-    local maxRotation = 1
+    local maxRotation = 0.9
     local minRotation = 0.03
     local fuckeryRate = Global.currentLevelDefinition.nav.fuckeryRate
     if e.rotation == 0 then

@@ -12,8 +12,8 @@ function VentGas:init()
     self.isDrawVentGasSystem = true
     self.isVentGasControlSystem = true
     -- time used to invoke danger signal switches
-    self.timeLeftToTriggerDangerLevelTwo = 5
-    self.timeLeftToTriggerDangerLevelThree = 3
+    self.timeLeftToTriggerDangerLevelTwo = 8
+    self.timeLeftToTriggerDangerLevelThree = 5
     self.x = padding
     self.y = padding
     self.width = screenWidth - 2 * padding

@@ -3,7 +3,7 @@ local anim8 = require 'vendor/anim8'
 local Utils = (require 'utils')()
 
 local Missile = Class{}
-Missile.SPEED = 50
+-- Missile.SPEED = 50
 
 function Missile:init(src_x, src_y, dest_x, dest_y)
     self.misslowcommand = true
@@ -12,13 +12,19 @@ function Missile:init(src_x, src_y, dest_x, dest_y)
     self.destination = {x = dest_x, y = dest_y}
     self.isDead = false
 
+
+    self.speed = 50 -- default
+    if Global and Global.currentLevelDefinition.misslowcommand then
+        self.speed = Global.currentLevelDefinition.misslowcommand.speed
+    end
+
     local offset_x = dest_x - src_x
     local offset_y = dest_y - src_y
     self.rot = math.atan2(offset_y, offset_x)
 
     self.velocity = {
-        x = math.cos(self.rot) * Missile.SPEED,
-        y = math.sin(self.rot) * Missile.SPEED,
+        x = math.cos(self.rot) * self.speed,
+        y = math.sin(self.rot) * self.speed,
     }
     self.pos = {x = src_x, y = src_y}
     self.sprite = love.graphics.newImage('assets/images/missile_sheet.png')
@@ -33,7 +39,7 @@ end
 function Missile:process(dt)
     local ox = self.pos.x - self.destination.x
     local oy = self.pos.y - self.destination.y
-    if Utils.isInCircle(ox, oy, dt * Missile.SPEED) then
+    if Utils.isInCircle(ox, oy, dt * self.speed) then
         self.isDead = true
         Signal.emit('ded')
         Signal.emit('gameover', 'misslowcommand')

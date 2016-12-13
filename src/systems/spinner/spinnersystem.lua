@@ -19,7 +19,7 @@ function SpinnerSystem:init()
     self.background = Background()
     self.backgroundInit = false
 
-    self.totalCooldown = 5
+    -- self.totalCooldown = 5 -- moved to levelDefinitions
     self.cooldown = 0.1
 
     Signal.register('startLevel', function(level)
@@ -62,7 +62,8 @@ function SpinnerSystem:preProcess(dt)
     self.cooldown = self.cooldown - dt
 
     if self.cooldown <= 0 then
-        self.cooldown = self.totalCooldown
+        -- self.cooldown = self.totalCooldown
+        self.cooldown = Global.currentLevelDefinition.spinner.timeToPill
 
         if(self.pillBox:isFull()) then
             Signal.emit('gameover', self.name)
