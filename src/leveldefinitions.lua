@@ -8,7 +8,7 @@ local levelDefinitions = {
             'After 20 years captaining your own ship, the SPACEPAL, you may have finally run out of luck.',
             'Like usual, you\'re currently trying to deliver supplies across the galaxy ...',
             'and, like usual, you may not get the job done in time.',
-            'SPACEPAL is on it\'s last legs and might not make it.',
+            'SPACEPAL is on its last legs and might not make it.',
             'Your crew is tired of not getting paid and may leave mid-trip.',
             'No matter what, you have to keep the ship moving and complete your deliveries.',
             'If you don\'t, you won\'t have enough money to pay the intergalactic bank and they\'ll repo your beloved pal.',
