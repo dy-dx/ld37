@@ -14,7 +14,7 @@ function Overlay:init(hitbox, closeHitboxes)
     local largCloseButtonHeight = 20;
 
     self.sprite = love.graphics.newImage("assets/images/monitor.png")
-    self.xButton = love.graphics.newImage("assets/images/close.png")
+    self.xButton = love.graphics.newImage("assets/images/close2.png")
 
     self.closeHitboxes = {
         {
