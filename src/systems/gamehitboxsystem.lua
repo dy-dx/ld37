@@ -24,7 +24,6 @@ function GameHitboxSystem:process(e, dt)
     if Utils.isInside(point, e.hitbox) then
         if not Utils.isAnActiveGame(e.gName) then
             print("you can't play that game yet greg")
-            Signal.emit('write', "you can't play that game yet GREG! press L to skip to the next level", 150000)
             return
         end
 

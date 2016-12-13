@@ -4,5 +4,5 @@ Signal.register('gameover', function(gamename)
     Signal.emit('startCutscene', 'gameover')
     -- todo
     print("Game Over! you lost the " .. tostring(gamename) .. " game")
-    Signal.emit('write', "You lost the " .. tostring(gamename) .. " game", 150000)
+    -- Signal.emit('write', "You lost the " .. tostring(gamename) .. " game", 150000)
 end)
