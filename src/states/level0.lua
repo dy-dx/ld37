@@ -86,6 +86,7 @@ function Level:load()
         require ("systems/drawsystems/drawnavpanelsystem")(),
 
         require ("systems/drawsystems/spinnerdrawsystem")(),
+        require ("systems/drawsystems/spinnertubedrawsystem")(),
         require ("systems/drawsystems/plumbingsystem")(),
         require ("systems/drawsystems/drawventgassystem")(),
         require ("systems/drawsystems/misslowspritesystem")(),
@@ -135,7 +136,11 @@ function Level:load()
     -- todo
     require 'signalhandlers'
 
-    Signal.emit('startCutscene', Global.currentLevel)
+    if Global.isCutscene then
+        Signal.emit('startCutscene', 'intro', Global.currentLevel)
+    else
+        Signal.emit('startLevel', Global.currentLevel)
+    end
 end
 
 return Level

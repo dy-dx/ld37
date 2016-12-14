@@ -40,7 +40,9 @@ function SpinnerFrame:process(dt)
 
     if (not (self.pauseTimer == 0)) then return end
 
-    self.angle = (self.angle + math.pi * 2 * dt) % (math.pi * 2)
+    local wheelSpeed = Global.currentLevelDefinition.spinner.wheelSpeed * 0.1
+    -- wheelSpeed == 1 was the default
+    self.angle = (self.angle + wheelSpeed * math.pi * 2 * dt) % (math.pi * 2)
     self.rot = (math.pi * 2) - self.angle
 end
 

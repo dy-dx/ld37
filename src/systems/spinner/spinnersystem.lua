@@ -32,8 +32,8 @@ function SpinnerSystem:reset()
         end)
         Signal.emit("stopwoosh")
         world:remove(self.pillBox)
-        self.spinnerFrame = nil;
-        self.pillBox = nil;
+        self.spinnerFrame = nil
+        self.pillBox = nil
     end
     self.cooldown = 0.1
 end
@@ -58,7 +58,7 @@ function SpinnerSystem:preProcess(dt)
 
         if(self.pillBox:isFull()) then
             Signal.emit('gameover', self.name)
-            return;
+            return
         end
 
         local pillNumber = math.random(table.getn(self.spinnerFrame.colors))
@@ -78,6 +78,7 @@ function SpinnerSystem:dangerTick()
 end
 
 function SpinnerSystem:process(e, dt)
+    if not Utils.isAnActiveGame('spinner') then return end
     e:process(dt)
     if e.isDead then
         world:remove(e)
@@ -97,7 +98,7 @@ function SpinnerSystem:process(e, dt)
             end
 
             if(lume.first(self.pillBox.pills).number == self.spinnerFrame:getSelected()) then
-                local deadPill = self.pillBox:removePill();
+                local deadPill = self.pillBox:removePill()
                 self.spinnerFrame:pause(.1)
                 deadPill.isSuicidal = true
                 Signal.emit("woosh")
