@@ -59,8 +59,8 @@ function CutsceneDrawSystem:process(e, dt)
     local y = 200
     local font = e.dialogueFont
     if not e.drawRestOfText then
-        e.time = e.time + dt
-        e.currentCharacter = math.floor((e.time * e.speed) / 1000)
+        e.textTime = e.textTime + dt
+        e.currentCharacter = math.floor((e.textTime * e.textSpeed) / 1000)
         local newTextWidth, wrappedText = font:getWrap(line, e.maxTextWidth)
         local toPrint = {}
         local ncharCounter = 0
