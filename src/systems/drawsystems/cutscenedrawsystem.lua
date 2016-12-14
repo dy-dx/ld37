@@ -23,11 +23,11 @@ end
 
 local getCurrentDialogue = function(e)
     -- print(e.cutsceneType)
-    if e.cutsceneType == 'intro' then
-        return Global.currentLevelDefinition.cutsceneDialogue[e.currentDialogueIndex]
-    else
-        return e.gameOverText
-    end
+    local text = nil
+    -- if e.cutsceneType == 'intro' then
+        text = Global.currentLevelDefinition.cutsceneDialogue[e.currentDialogueIndex]
+    -- end
+    if text then return text else return '' end
 end
 
 function CutsceneDrawSystem:process(e, dt)
@@ -55,10 +55,10 @@ function CutsceneDrawSystem:process(e, dt)
 
     -- draw dialogue
     local line = getCurrentDialogue(e)
-    local x = 200
-    local y = 200
+    local x = 180
+    local y = 180
     local font = e.dialogueFont
-    if not e.drawRestOfText then
+    if e.behavior.state == 'printNarrativeLine' then
         e.textTime = e.textTime + dt
         e.currentCharacter = math.floor((e.textTime * e.textSpeed) / 1000)
         local newTextWidth, wrappedText = font:getWrap(line, e.maxTextWidth)
@@ -83,8 +83,11 @@ function CutsceneDrawSystem:process(e, dt)
             love.graphics.draw(currentFont, x, y + i * currentFont:getHeight())
             i = i + 1
         end)
-        e.currentCharacter = e.currentCharacter + 1
-    else
+        -- if we got to the last char, then skip to the clickable state
+        if e.currentCharacter > string.len(line) then
+            e.behavior.setState(e.behavior, e.behavior.frame.skipTo)
+        end
+    elseif e.behavior.state == 'narrativeLineWaiting' then
         local newTextWidth, wrappedText = font:getWrap(line, e.maxTextWidth)
         local i = 1
         lume.map(wrappedText, function(l)
@@ -92,6 +95,12 @@ function CutsceneDrawSystem:process(e, dt)
             love.graphics.draw(currentFont, x, y + i * currentFont:getHeight())
             i = i + 1
         end)
+    elseif e.behavior.state == 'gameoverWaiting' then
+        local text = love.graphics.newText(e.gameoverFont, 'Game Over')
+        love.graphics.draw(text, 305, 220)
+        local tryAgainText = love.graphics.newText(e.dialogueFont, 'Click to Retry Level')
+        love.graphics.draw(tryAgainText, 304, 440)
+
     end
 end
 

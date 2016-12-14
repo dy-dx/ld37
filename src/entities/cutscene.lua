@@ -1,9 +1,11 @@
 local anim8 = require 'vendor/anim8'
+local Behavior = require 'vendor/knife.behavior'
 local Cutscene = Class{}
 
 function Cutscene:init()
     self.isCutscene = true
     self.dialogueFont = love.graphics.newFont(20)
+    self.gameoverFont = love.graphics.newFont(32)
     self.sprite = nil
     self.animation = nil
     self.shipSheet = love.graphics.newImage('assets/images/ship_sheet.png')
@@ -15,20 +17,74 @@ function Cutscene:init()
 
     self.timer = Timer.new()
 
-    self.maxTextWidth = 500
-    self.textSpeed = 20000
+    self.maxTextWidth = 480
+    self.textSpeed = 25000
     self:resetState()
     Signal.register('startCutscene', function(cutsceneType)
-        Global.isCutscene = true
-        print('resetState', cutsceneType)
         self:resetState(cutsceneType)
+        if cutsceneType == 'gameover' then
+            self.behavior.setState(self.behavior, 'enterGameover')
+        else
+            self.behavior.setState(self.behavior, 'enterNarrative')
+        end
     end)
+
+    -- knife.behavior state machine
+    self.states = {
+        default = {
+            { duration = 0, after = 'intro' },
+        },
+        intro = {
+            { duration = 0, after = 'enterNarrative' },
+        },
+        enterNarrative = {
+            { duration = 0.4, after = 'enterPrintNarrativeLine' },
+        },
+        -- during text printing sequence
+        enterPrintNarrativeLine = {
+            { duration = math.huge, action = function()
+                self:resetLine()
+                self.currentDialogueIndex = self.currentDialogueIndex + 1
+                if self.currentDialogueIndex >= table.getn(Global.currentLevelDefinition.cutsceneDialogue) then
+                    self.behavior.setState(self.behavior, 'enterOutro')
+                else
+                    self.behavior.setState(self.behavior, 'printNarrativeLine')
+                end
+            end },
+        },
+        printNarrativeLine = {
+            { duration = math.huge, skipTo = 'narrativeLineWaiting' },
+        },
+        -- when entire line is printed out
+        narrativeLineWaiting = {
+            { duration = math.huge, skipTo = 'enterPrintNarrativeLine' },
+        },
+        enterOutro = {
+            { duration = 0, after = 'outro' },
+        },
+        outro = {
+            { duration = 0, after = 'endCutscene' },
+        },
+        endCutscene = {
+            { duration = math.huge },
+        },
+        enterGameover = {
+            { duration = 0, after = 'gameover' },
+        },
+        gameover = {
+            { duration = 0.4 },
+            { duration = 2.6, after = 'gameoverWaiting', skipTo = 'gameoverWaiting' },
+        },
+        gameoverWaiting = {
+            { duration = math.huge, skipTo = 'endCutscene' }
+        },
+    }
+    self.behavior = Behavior(self.states)
 end
 
 function Cutscene:resetLine()
     self.textTime = 0
     self.currentCharacter = 1
-    self.drawRestOfText = false
 end
 
 function Cutscene:resetState(cutsceneType)
@@ -36,7 +92,7 @@ function Cutscene:resetState(cutsceneType)
     self.timer:clear()
     self.sprite = self.shipSheet
     self.animation = self.shipAnimation
-    self.pos = {x = 330, y = 340}
+    self.pos = {x = 330, y = 330}
     self.alpha = 1
     self.rot = 0
     self.offset = {x = 0, y = 0}
@@ -51,7 +107,7 @@ function Cutscene:resetState(cutsceneType)
             self.timer:tween(
                 2, -- seconds
                 self.pos,
-                { x = self.pos.x + 20 },
+                { x = self.pos.x + 40 },
                 'linear'
             )
             wait(2)

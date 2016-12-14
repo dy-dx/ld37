@@ -29,20 +29,17 @@ end
 
 function CutsceneControlSystem:process(e, dt)
     if not Global.isCutscene then return end
+    e.behavior:update(dt)
 
     if self.input:released('left_click') then
-        if e.cutsceneType == 'gameover' then
-            endCutscene()
-        -- go to next dialogue line. if we already displayed the last line, then end cutscene
-        elseif e.currentDialogueIndex >= table.getn(Global.currentLevelDefinition.cutsceneDialogue) then
-            print('endcutscene')
-            endCutscene()
-        else
-            e.drawRestOfText = true
-            print('draw next dialogue')
-            e:resetLine()
-            e.currentDialogueIndex = e.currentDialogueIndex + 1
+        if e.behavior.frame.skipTo then
+            e.behavior.setState(e.behavior, e.behavior.frame.skipTo)
+            return
         end
+    end
+
+    if e.behavior.state == 'endCutscene' then
+        endCutscene()
     end
 end
 
