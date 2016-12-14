@@ -41,7 +41,7 @@ local function drawButtonSprite(button)
 end
 
 local function drawMeter(box, meter)
-    love.graphics.setColor(255, 0, 0)
+    love.graphics.setColor(250, 20, 20, 255)
     local pressurePercentage = meter.currentPressure / meter.maxPressure
     local meterHeight = box.height * pressurePercentage
     love.graphics.rectangle('fill', box.x
@@ -52,8 +52,8 @@ end
 function DrawVentGasSystem:process(e, dt)
     if Global.currentGame == 'ventgas' then
         -- drawing background
-        love.graphics.setColor(e.r, e.g, e.b)
-        love.graphics.rectangle('fill', e.x, e.y, e.width, e.height)
+        -- love.graphics.setColor(e.r, e.g, e.b)
+        -- love.graphics.rectangle('fill', e.x, e.y, e.width, e.height)
 
         love.graphics.setColor(255, 255, 255, 255)
         love.graphics.draw(e.panelSprite, e.x, e.y)
@@ -72,6 +72,8 @@ function DrawVentGasSystem:process(e, dt)
         -- drawing gas pressure button
         --drawButton(e.oxygenPressureButton)
         drawButtonSprite(e.oxygenPressureButton)
+        -- drawing oxygen meter
+        drawMeter(e.oxygenPressureBox, e.oxygenMeter)
 
         -- drawing waste pressure box
         drawBox(e.wastePressureBox)
@@ -80,8 +82,9 @@ function DrawVentGasSystem:process(e, dt)
         drawButtonSprite(e.wastePressureButton)
         -- drawing waste meter
         drawMeter(e.wastePressureBox, e.wasteMeter)
+        love.graphics.setColor(255, 255, 255, 255)
         love.graphics.draw(e.tapeSprite, e.oxygenPressureBox.x - 70
-            , e.oxygenPressureBox.y + 140)
+            , e.oxygenPressureBox.y + 180)
     end
 end
 

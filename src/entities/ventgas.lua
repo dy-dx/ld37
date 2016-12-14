@@ -6,8 +6,8 @@ function VentGas:init()
     local screenHeight = love.graphics.getHeight()
     local padding = 40
     local barPadding = 60
-    local barWidth = 70
-    local barHeight = 325
+    local barWidth = 69
+    local barHeight = 323
 
     self.isDrawVentGasSystem = true
     self.isVentGasControlSystem = true
@@ -32,21 +32,22 @@ function VentGas:init()
     self.tapeSprite = love.graphics.newImage('assets/images/ventgas/tape.png')
 
     -- gas
-    self.gasPressureBox = {x = self.width*1/5
-        , y = self.y + barPadding - 45, width = barWidth
-        , height = barHeight, r=25, g=25, b=75
+    self.gasPressureBox = {x = 146
+        , y = self.y + barPadding - 44, width = barWidth
+        , height = barHeight, r=30, g=30, b=50
     }
+    printTable(self.gasPressureBox)
 
     -- oxygen
-    self.oxygenPressureBox = {x = 353
-        , y = self.y + barPadding - 45, width = barWidth
-        , height = barHeight, r=25, g=25, b=75
+    self.oxygenPressureBox = {x = 354
+        , y = self.y + barPadding - 42, width = barWidth
+        , height = barHeight, r=30, g=30, b=50
     }
 
     -- waste
-    self.wastePressureBox = {x = 561
-        , y = self.y + barPadding - 45, width = barWidth
-        , height = barHeight, r=25, g=25, b=75
+    self.wastePressureBox = {x = 564
+        , y = self.y + barPadding - 44, width = barWidth
+        , height = barHeight, r=30, g=30, b=50
     }
     self:resetState()
     Signal.register('startLevel', function(level)
@@ -85,6 +86,8 @@ function VentGas:resetState()
         , buttonSprite = self.gasButtonSprite, buttonPressedSprite = self.gasButtonPressedSprite
         , buttonType = 'gas'
     }
+    self.oxygenMeter = {pressureDecrease = 0, growthRate = 0
+        , maxPressure = 300, currentPressure = 140}
     self.oxygenPressureButton = {x=self.oxygenPressureBox.x + buttonRadius
         , y=self.oxygenPressureBox.y + self.oxygenPressureBox.height + buttonYOffset
         , radius=buttonRadius, r=0, g=255, b=40, buttonDown = false, text= 'test'
