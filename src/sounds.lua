@@ -1,3 +1,5 @@
+local defaultVolume = 0.5
+
 local explosion = love.audio.newSource('assets/sounds/Explosion10.wav')
 local fire = love.audio.newSource('assets/sounds/Laser_Shoot48.wav')
 local ded = love.audio.newSource('assets/sounds/ShipHit15.wav')
@@ -6,8 +8,11 @@ local alarm = love.audio.newSource('assets/sounds/alarm.wav')
 alarm:setVolume(.2)
 
 local blip = love.audio.newSource('assets/sounds/Blip_Select67.wav')
+blip:setVolume(defaultVolume)
 local failBlip = love.audio.newSource('assets/sounds/Blip_Select72.wav')
+failBlip:setVolume(defaultVolume)
 local consoleButton = love.audio.newSource('assets/sounds/Blip_Select48.wav')
+consoleButton:setVolume(defaultVolume)
 local spray = love.audio.newSource('assets/sounds/spray.wav')
 spray:setLooping(true)
 spray:setVolume(1)

@@ -5,7 +5,7 @@ local Text = Class{}
 
 function Text:init(text, speed)
     self.text = text
-    self.speed = speed or 1000
+    self.speed = speed or 20000
     self:reset()
 end
 
@@ -23,7 +23,7 @@ function Text:write(text, speed)
     if(self.charactersDisplayed < string.len(self.text)) then return end
     self:reset()
     self.text = text
-    self.speed = speed or 1000
+    self.speed = speed or 20000
 end
 
 function Text:writeMore(text, speed)
@@ -32,7 +32,7 @@ function Text:writeMore(text, speed)
     self:reset()
     self.savedText = tmpText
     self.text = text
-    self.speed = speed or 1000
+    self.speed = speed or 20000
 end
 
 return Text

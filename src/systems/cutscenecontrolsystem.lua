@@ -6,7 +6,7 @@ function CutsceneControlSystem:init()
     self.input = Input()
     self.input:bind('mouse1', 'left_click')
 
-    Signal.register('startCutscene', function(level)
+    Signal.register('startCutscene', function(cutsceneType)
         Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
         Global.isCutscene = true
         Global.currentGame = nil
@@ -25,6 +25,7 @@ local endCutscene = function()
     Global.isCutscene = false
     Global.isGameOver = false
     Signal.emit('startLevel', Global.currentLevel)
+    Signal.emit('transitionMusic', 'intense', 1)
 end
 
 function CutsceneControlSystem:process(e, dt)

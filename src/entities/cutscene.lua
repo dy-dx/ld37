@@ -23,8 +23,10 @@ function Cutscene:init()
     Signal.register('startCutscene', function(cutsceneType)
         self:resetState(cutsceneType)
         if cutsceneType == 'gameover' then
+            Signal.emit('transitionMusic', 'calm', 1.0)
             self.behavior.setState(self.behavior, 'enterGameover')
         else
+            Signal.emit('transitionMusic', 'calm', 0.5)
             self.behavior.setState(self.behavior, 'enterNarrative')
         end
     end)

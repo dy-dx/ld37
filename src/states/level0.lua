@@ -35,7 +35,7 @@ Global = {
 }
 Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
 
-local text = Text('Hello Commander.', 100000);
+local text = Text('');
 
 Signal.register('write', function(s, speed)
     text:write(s, speed)
@@ -47,11 +47,11 @@ end)
 
 local music = Music()
 
-Signal.register('tranistionMusic', function (theme, time, volume)
+Signal.register('transitionMusic', function (theme, time, volume)
     music:transition(theme, time, volume)
 end)
 -- example increase intensity
--- Signal.emit('tranistionMusic', 'intense', 5, .9)
+-- Signal.emit('transitionMusic', 'intense', 1)
 
 
 function Level:load()
