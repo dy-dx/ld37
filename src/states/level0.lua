@@ -30,7 +30,7 @@ Global = {
     currentLevelDefinition = nil,
     levelDefinitions = require 'leveldefinitions',
     -- debug stuff
-    isDebug = false,
+    isDebug = true,
     isGodMode = false,
 }
 Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
