@@ -10,6 +10,7 @@ function Text:init(text, speed)
 end
 
 function Text:reset()
+    self.charactersDisplayed = 0
     self.time = 0
     self.textX = 270
     self.textY = 40
