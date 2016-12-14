@@ -77,8 +77,9 @@ function Level:load()
 
         -- draw systems
 
+        require ("systems/drawsystems/preenvfx")(),
         require ("systems/drawsystems/spritesystem")(),
-        require ("systems/alertSystem")(),
+        require ("systems/drawsystems/alertsystem")(),
         require ("systems/drawsystems/sirenspritesystem")(), --welcome to the game
         require ("systems/drawsystems/textsystem")(),
 

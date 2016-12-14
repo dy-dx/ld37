@@ -15,6 +15,7 @@ function Siren:init(sirenType, xPos, yPos, flipHorizontally, gamename)
     self.animationSirenOn = anim8.newAnimation(sirenOnGrid('1-' .. self.nframes, 1), self.sirenRate)
     self.isAnimated = false
     self.sprite = self.sirenOffImage
+    self.alpha = 0.85
     self.animation = nil
     self.dangerLevel = 1
     Signal.register('dangerLevel', function(gamename, level)

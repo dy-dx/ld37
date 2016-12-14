@@ -36,7 +36,6 @@ function VentGas:init()
         , y = self.y + barPadding - 44, width = barWidth
         , height = barHeight, r=30, g=30, b=50
     }
-    printTable(self.gasPressureBox)
 
     -- oxygen
     self.oxygenPressureBox = {x = 354

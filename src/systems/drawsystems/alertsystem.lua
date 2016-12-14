@@ -1,4 +1,4 @@
-AlertSystem = tiny.processingSystem(Class{})
+local AlertSystem = tiny.processingSystem(Class{})
 
 local mask_effect = love.graphics.newShader[[
   vec4 effect (vec4 color, Image texture, vec2 texture_coords, vec2 screen_coords) {
@@ -20,6 +20,7 @@ function AlertSystem:preProcess(dt)
 end
 
 function AlertSystem:postProcess(dt)
+    love.graphics.setColor(255, 255, 255, 255)
 end
 
 function AlertSystem:overlayActive(e, dt)
@@ -31,10 +32,7 @@ function AlertSystem:overlayNotActive(e, dt)
 end
 
 function AlertSystem:process(e, dt)
-  alertChallenge(e.alertMask, e.dangerLevel)
-
-
-  -- if(Global.currentGame) then self:overlayActive(e, dt) else self:overlayNotActive(e, dt) end
+    alertChallenge(e.alertMask, e.dangerLevel)
 end
 
 function maskStencil(mask)
@@ -52,16 +50,16 @@ function alertChallenge(mask, dangerLevel)
 
   love.graphics.stencil(maskStencil(mask), "replace", 1)
   love.graphics.setStencilTest("greater", 0)
-
-  if dangerLevel == 2 then
-    love.graphics.setColor(164, 131, 91, 255)
+  if dangerLevel == 1 then
+    love.graphics.setColor(105, 183, 52, 255)
+  elseif dangerLevel == 2 then
+    love.graphics.setColor(251, 198, 32, 255)
   elseif dangerLevel == 3 then
-    love.graphics.setColor(164, 91, 131, 255)
+    love.graphics.setColor(184, 31, 40, 255)
   end
 
   love.graphics.rectangle("fill", 0, 0, 800, 600)
   love.graphics.setStencilTest()
-  love.graphics.setColor(255, 255, 255, 255)
 end
 
 return AlertSystem
