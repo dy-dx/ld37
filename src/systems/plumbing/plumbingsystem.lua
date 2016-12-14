@@ -95,6 +95,9 @@ function healthCheck(currentPipe)
 end
 
 function PlumbingSystem:process(e, dt)
+    if not Utils.isAnActiveGame('plumbing') then
+        return
+    end
     local FLUID_RATE = Global.currentLevelDefinition.plumbing.fluidRate
     if e == pipeAtMouse() and not e.lifted then
         e.highlighted = true
