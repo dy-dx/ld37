@@ -1,7 +1,6 @@
 local SpinnerFrame = require 'entities/spinner/spinnerframe'
 local Pillbox = require 'entities/spinner/pillbox'
 local Pill = require 'entities/spinner/pill'
-local Background = require 'entities/spinner/background'
 local Utils = require 'utils'
 
 SpinnerSystem = tiny.processingSystem(Class{})
@@ -16,8 +15,6 @@ function SpinnerSystem:init()
     self.pillBoxPos = { x = 90, y = 240, w = 280, h = 60 }
     self.maxPills = 5
     self.pillPadding = 5
-    self.background = Background()
-    self.backgroundInit = false
 
     -- self.totalCooldown = 5 -- moved to levelDefinitions
     self.cooldown = 0.1
@@ -44,12 +41,6 @@ end
 
 function SpinnerSystem:preProcess(dt)
     if not Utils.isAnActiveGame('spinner') then return end
-
-    if(not backgroundInit) then
-        world:addEntity(self.background)
-        backgroundInit = true
-    end
-
 
     if not self.spinnerFrame then
         self.spinnerFrame = SpinnerFrame(self.spinnerPos)

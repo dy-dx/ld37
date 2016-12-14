@@ -1,23 +1,20 @@
-local SpinnerDrawSystem = Class{}
-SpinnerDrawSystem = tiny.processingSystem(SpinnerDrawSystem)
+local SpinnerTubeDrawSystem = Class{}
+SpinnerTubeDrawSystem = tiny.processingSystem(SpinnerTubeDrawSystem)
 
-function SpinnerDrawSystem:init()
+function SpinnerTubeDrawSystem:init()
     self.name = "spinner"
     self.isDrawingSystem = true
-    self.filter = tiny.requireAll('pos', self.name)
+    self.filter = tiny.requireAll('pos', 'sprite', 'pills')
 end
 
-function SpinnerDrawSystem:preProcess(dt)
-    if Global.currentGame ~= self.name then return end
-    love.graphics.setColor(14, 15, 15, 255)
-    love.graphics.rectangle('fill', 90, 78, 622, 384)
+function SpinnerTubeDrawSystem:preProcess(dt)
 end
 
-function SpinnerDrawSystem:postProcess(dt)
+function SpinnerTubeDrawSystem:postProcess(dt)
     love.graphics.setColor(255, 255, 255, 255)
 end
 
-function SpinnerDrawSystem:process(e, dt)
+function SpinnerTubeDrawSystem:process(e, dt)
     if Global.currentGame ~= self.name then return end
 
     if e.sprite then
@@ -41,4 +38,4 @@ function SpinnerDrawSystem:process(e, dt)
     end
 end
 
-return SpinnerDrawSystem
+return SpinnerTubeDrawSystem
