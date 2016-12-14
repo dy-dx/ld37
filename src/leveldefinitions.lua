@@ -34,7 +34,7 @@ local levelDefinitions = {
         duration = 30,
         nav = {fuckeryRate = 0.1},
         ventgas = {gasGrowthRate = 20, wasteGrowthRate = 10},
-        spinner = {timeToPill = 3, wheelSpeed = 9},
+        spinner = {timeToPill = 3, wheelSpeed = 8},
         cutsceneDialogue = {
             'Doctor: Look Captain, I appreciate you getting us in safely, but during all of that turbulence my life flashed before my eyes ...',
             'Doctor: and, to be honest, I\'m not happy with what I saw. Whatever happened to my childhood dream of becoming a folk musician? When did I decide to throw that all away for a doctor?',
@@ -49,7 +49,7 @@ local levelDefinitions = {
         duration = 30,
         nav = {fuckeryRate = 0.14},
         ventgas = {gasGrowthRate = 15, wasteGrowthRate = 8},
-        spinner = {timeToPill = 4, wheelSpeed = 9},
+        spinner = {timeToPill = 4, wheelSpeed = 8},
         misslowcommand = {speed = 50, timeToMissile = 6},
         cutsceneDialogue = {
             'Three deliveries down, one to go... ',
@@ -63,7 +63,7 @@ local levelDefinitions = {
         duration = 30,
         nav = {fuckeryRate = 0.9},
         ventgas = {gasGrowthRate = 10, wasteGrowthRate = 5},
-        spinner = {timeToPill = 5, wheelSpeed = 9},
+        spinner = {timeToPill = 5, wheelSpeed = 8},
         misslowcommand = {speed = 30, timeToMissile = 12},
         plumbing = {fluidRate = 0.10, startBufferFluidRate = 0.03},
         cutsceneDialogue = {
