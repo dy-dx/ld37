@@ -63,8 +63,8 @@ function VentGas:resetState()
     local gasGrowthRate = Global.currentLevelDefinition.ventgas.gasGrowthRate
     local wasteGrowthRate = Global.currentLevelDefinition.ventgas.wasteGrowthRate
     -- Decrease Rates - decrease to make more difficult
-    local gasPressureDecrease = 100
-    local wastePressureDecrease = 100
+    local gasPressureDecrease = 120
+    local wastePressureDecrease = 120
     -- Initial conditions
     local initialGasPressure = Global.currentLevelDefinition.ventgas.initialGas
     local initialWastePressure = Global.currentLevelDefinition.ventgas.initialWaste

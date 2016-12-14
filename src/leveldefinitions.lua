@@ -19,8 +19,8 @@ local levelDefinitions = {
     {
         activeGames = {"nav", "ventgas"},
         duration = 20,
-        nav = {fuckeryRate = 0.3},
-        ventgas = {gasGrowthRate = 20, wasteGrowthRate = 10, initialGas = 180, initialWaste = 100},
+        nav = {fuckeryRate = 0.4},
+        ventgas = {gasGrowthRate = 30, wasteGrowthRate = 15, initialGas = 180, initialWaste = 100},
         cutsceneDialogue = {
             'So, now you have no pilot. Good riddance, I say -- turns out the autopilot was doing most of his work anyway.',
             'After initial analysis I\'ve determined that his main job was to maintain the ship\'s stabilization levels.',
@@ -32,7 +32,7 @@ local levelDefinitions = {
     {
         activeGames = {"nav", "ventgas", "spinner"},
         duration = 30,
-        nav = {fuckeryRate = 0.1},
+        nav = {fuckeryRate = 0.2},
         ventgas = {gasGrowthRate = 20, wasteGrowthRate = 10},
         spinner = {timeToPill = 3, wheelSpeed = 8},
         cutsceneDialogue = {
@@ -47,9 +47,9 @@ local levelDefinitions = {
     {
         activeGames = {"nav", "ventgas", "spinner", "misslowcommand"},
         duration = 30,
-        nav = {fuckeryRate = 0.14},
+        nav = {fuckeryRate = 0.1},
         ventgas = {gasGrowthRate = 15, wasteGrowthRate = 8},
-        spinner = {timeToPill = 4, wheelSpeed = 8},
+        spinner = {timeToPill = 5, wheelSpeed = 8},
         misslowcommand = {speed = 50, timeToMissile = 6},
         cutsceneDialogue = {
             'Three deliveries down, one to go... ',
@@ -60,12 +60,12 @@ local levelDefinitions = {
     },
     {
         activeGames = {"nav", "ventgas", "spinner", "misslowcommand", "plumbing"},
-        duration = 30,
-        nav = {fuckeryRate = 0.9},
+        duration = 45,
+        nav = {fuckeryRate = 0.1},
         ventgas = {gasGrowthRate = 10, wasteGrowthRate = 5},
-        spinner = {timeToPill = 5, wheelSpeed = 8},
-        misslowcommand = {speed = 30, timeToMissile = 12},
-        plumbing = {fluidRate = 0.10, startBufferFluidRate = 0.03},
+        spinner = {timeToPill = 7, wheelSpeed = 8},
+        misslowcommand = {speed = 30, timeToMissile = 15},
+        plumbing = {fluidRate = 0.30, startBufferFluidRate = 0.10},
         cutsceneDialogue = {
             'Chief Engineer: Now that there are only two of us, we\'ll be splitting this payload 50/50, right? ... WHAT? What do you mean I still only get 10%?? That\'s it, I\'m out of here.',
             'Almost there! As I would be wiped if the ship were to explode, you have my sincere thanks for getting us this far...',

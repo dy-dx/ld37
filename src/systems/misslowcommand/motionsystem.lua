@@ -54,7 +54,7 @@ function MisslowCommandSystem:preProcess(dt)
             y = math.random() * (HEIGHT - MISSILE_LENGTH) + OFFSET + MISSILE_LENGTH / 2
         end
 
-        Signal.emit('writeMore', "Warning: new missile", 100000)
+        -- Signal.emit('writeMore', "Warning: new missile", 100000)
         world:add(Missile(
             x, y,
             400, 300
