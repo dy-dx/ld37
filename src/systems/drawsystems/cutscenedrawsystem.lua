@@ -100,7 +100,9 @@ function CutsceneDrawSystem:process(e, dt)
         love.graphics.draw(text, 305, 220)
         local tryAgainText = love.graphics.newText(e.dialogueFont, 'Click to Retry Level')
         love.graphics.draw(tryAgainText, 304, 440)
-
+    elseif e.behavior.state == 'theEnd' then
+        local text = love.graphics.newText(e.gameoverFont, 'The End')
+        love.graphics.draw(text, 335, 220)
     end
 end
 

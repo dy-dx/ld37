@@ -39,7 +39,11 @@ function CutsceneControlSystem:process(e, dt)
     end
 
     if e.behavior.state == 'endCutscene' then
-        endCutscene()
+        if Global.isGameWon then
+            e.behavior.setState(e.behavior, 'enterTheEnd')
+        else
+            endCutscene()
+        end
     end
 end
 

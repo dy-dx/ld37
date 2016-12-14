@@ -78,9 +78,9 @@ local levelDefinitions = {
         duration = 0,
         ventgas = {},
         cutsceneDialogue = {
-            'Alright, we\'re almost in range of our last delivery. Good work. ',
+            'Congratulations! We\'re almost in range of our last delivery.',
             'Because your whole crew has already left, you don\'t have anything new to do this time around except get SPACEPAL to its final destination.',
-            'Congratulations! Thank you for playing.',
+            'Thank you for playing!',
         },
     },
 }

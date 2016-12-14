@@ -45,7 +45,7 @@ function Cutscene:init()
             { duration = math.huge, action = function()
                 self:resetLine()
                 self.currentDialogueIndex = self.currentDialogueIndex + 1
-                if self.currentDialogueIndex >= table.getn(Global.currentLevelDefinition.cutsceneDialogue) then
+                if self.currentDialogueIndex > table.getn(Global.currentLevelDefinition.cutsceneDialogue) then
                     self.behavior.setState(self.behavior, 'enterOutro')
                 else
                     self.behavior.setState(self.behavior, 'printNarrativeLine')
@@ -78,6 +78,12 @@ function Cutscene:init()
         gameoverWaiting = {
             { duration = math.huge, skipTo = 'endCutscene' }
         },
+        enterTheEnd = {
+            { duration = 0, after = 'theEnd' }
+        },
+        theEnd = {
+            { duration = math.huge }
+        },
     }
     self.behavior = Behavior(self.states)
 end
@@ -98,7 +104,7 @@ function Cutscene:resetState(cutsceneType)
     self.offset = {x = 0, y = 0}
     self.gameOverText = ''
     self.cutsceneType = 'intro'
-    self.currentDialogueIndex = 1
+    self.currentDialogueIndex = 0
 
     -- explosion sequence
     if cutsceneType == 'gameover' then
