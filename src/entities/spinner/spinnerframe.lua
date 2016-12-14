@@ -5,8 +5,8 @@ function SpinnerFrame:init(pos)
     self.pos = pos
     self.sprite = love.graphics.newImage('assets/images/pills/wheel.png')
     self.offset = {
-        x = self.sprite:getWidth() / 2 + 1,
-        y = self.sprite:getHeight() / 2
+        x = self.sprite:getWidth() / 2 ,
+        y = self.sprite:getHeight() / 2 - 1
     }
     self.isDead = false
     self.angle = 0
