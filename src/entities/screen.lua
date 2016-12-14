@@ -5,6 +5,7 @@ function Screen:init(mask, gamename)
   self.dangerLevel = 1
   self.alertMask = love.graphics.newImage(mask)
   self.gamename = gamename
+  self.time = 0
 
   Signal.register(
     'dangerLevel',
