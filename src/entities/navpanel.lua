@@ -26,7 +26,7 @@ function NavPanel:init()
     self.leftButtonDownSprite = love.graphics.newImage('assets/images/navpanel/button_upPressed.png')
     self.rightButtonSprite = love.graphics.newImage('assets/images/navpanel/button_down.png')
     self.rightButtonDownSprite = love.graphics.newImage('assets/images/navpanel/button_downPressed.png')
-    self.panelSprite = love.graphics.newImage('assets/images/navpanel/panel.png')
+    self.panelSprite = love.graphics.newImage('assets/images/navpanel/panel_transparent.png')
     self.lcdpos = {x = 253, y = 511, w = 400, h = 80}
     self.shipTipX = nil
     self.shipTipY = nil

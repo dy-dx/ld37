@@ -33,16 +33,38 @@ local function drawDottedLine(x1, y1, x2, y2)
 end
 
 function DrawNavPanelSystem:process(e, dt)
+    -- "lcd" display bg
+    love.graphics.setColor(0, 0, 0, 255)
+    love.graphics.rectangle('fill', e.lcdpos.x, e.lcdpos.y, e.lcdpos.w, e.lcdpos.h)
+
+    -- calculate ship triangle points
+    local progressPct = e.secondsSinceDeparture / e.levelDuration
+    local sPos = {
+        x = (e.lcdpos.x + progressPct * e.lcdpos.w),
+        y = e.lcdpos.y + e.lcdpos.h/2 + e.shipYOffset
+    }
+    local sx0, sy0 = rotatePoint(sPos.x, sPos.y - 14, e.rotation, sPos.x, sPos.y)
+    local sx1, sy1 = rotatePoint(sPos.x, sPos.y + 14, e.rotation, sPos.x, sPos.y)
+    local sx2, sy2 = rotatePoint(sPos.x + 30, sPos.y, e.rotation, sPos.x, sPos.y)
+    -- for later use in gameplay logic, shhh is ok
+    e.shipTipX = sx2
+    e.shipTipY = sy2
+    -- a hack so we dont draw the tip of the ship outside of the panel
+    sy0 = math.max(sy0, e.pos.y)
+    sy2 = math.max(sy2, e.pos.y)
+
+    love.graphics.setColor(255, 255, 255, 255)
+
+    drawDottedLine(e.lcdpos.x, e.lcdpos.y + e.lcdpos.h/2, e.lcdpos.x + e.lcdpos.w, e.lcdpos.y + e.lcdpos.h/2)
+    love.graphics.circle('fill', e.lcdpos.x + e.lcdpos.w - e.planetRadius, e.lcdpos.y + e.lcdpos.h/2, e.planetRadius)
+    -- draw ship
+    love.graphics.polygon('fill', sx0, sy0, sx1, sy1, sx2, sy2)
+
+    love.graphics.setColor(255, 255, 255, 255)
+
     -- panel sprite
     love.graphics.draw(e.panelSprite, e.pos.x, e.pos.y)
-    -- debug panel gfx
-    -- love.graphics.setColor(255, 255, 255, 255)
-    -- love.graphics.rectangle('fill', e.pos.x, e.pos.y, e.pos.w, e.pos.h)
-    -- love.graphics.setColor(100, 100, 0, 255)
-    -- love.graphics.rectangle('fill', e.lcdpos.x, e.lcdpos.y, e.lcdpos.w, e.lcdpos.h)
-
     -- buttons
-    love.graphics.setColor(255, 255, 255, 255)
     local scaleHack = 0.9
     if e.leftButtonDown then
         love.graphics.draw(e.leftButtonDownSprite, e.leftButton.x, e.leftButton.y)
@@ -54,27 +76,12 @@ function DrawNavPanelSystem:process(e, dt)
     else
         love.graphics.draw(e.rightButtonSprite, e.rightButton.x, e.rightButton.y)
     end
+    -- debug panel gfx
+    -- love.graphics.setColor(255, 255, 255, 255)
+    -- love.graphics.rectangle('fill', e.pos.x, e.pos.y, e.pos.w, e.pos.h)
     -- debug button gfx
     -- love.graphics.rectangle('fill', e.leftButton.x, e.leftButton.y, e.leftButton.w, e.leftButton.h)
     -- love.graphics.rectangle('fill', e.rightButton.x, e.rightButton.y, e.rightButton.w, e.rightButton.h)
-
-    -- draw ship
-    local progressPct = e.secondsSinceDeparture / e.levelDuration
-    local sPos = {
-        x = (e.lcdpos.x + progressPct * e.lcdpos.w),
-        y = e.lcdpos.y + e.lcdpos.h/2 + e.shipYOffset
-    }
-    sx0, sy0 = rotatePoint(sPos.x, sPos.y - 15, e.rotation, sPos.x, sPos.y)
-    sx1, sy1 = rotatePoint(sPos.x, sPos.y + 15, e.rotation, sPos.x, sPos.y)
-    sx2, sy2 = rotatePoint(sPos.x + 30, sPos.y, e.rotation, sPos.x, sPos.y)
-    love.graphics.setColor(255, 255, 255)
-    drawDottedLine(e.lcdpos.x, e.lcdpos.y + e.lcdpos.h/2, e.lcdpos.x + e.lcdpos.w, e.lcdpos.y + e.lcdpos.h/2)
-    love.graphics.setColor(255, 255, 255)
-    love.graphics.circle('fill', e.lcdpos.x + e.lcdpos.w - e.planetRadius, e.lcdpos.y + e.lcdpos.h/2, e.planetRadius)
-    love.graphics.setColor(255, 0, 0, 255)
-    love.graphics.polygon('fill', sx0, sy0, sx1, sy1, sx2, sy2)
-    e.shipTipX = sx2
-    e.shipTipY = sy2
 end
 
 return DrawNavPanelSystem
