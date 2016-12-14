@@ -21,6 +21,7 @@ function DrawDebugInfoSystem:process(e, dt)
         "Entity Count: " .. world:getEntityCount(),
         "isGameOver: " .. tostring(Global.isGameOver),
         "isCutscene: " .. tostring(Global.isCutscene),
+        "isGodMode: " .. tostring(Global.isGodMode),
         "currentLevel: " .. tostring(Global.currentLevel),
     }
     for name, level in pairs(e.dangerLevels) do

@@ -5,6 +5,7 @@ function LevelProgressionSystem:init()
     self.filter = tiny.requireAll('isLevelProgression')
     self.input = Input()
     self.input:bind('l', 'skiplevel')
+    self.input:bind('g', 'toggleGodMode')
 end
 
 function LevelProgressionSystem:preProcess(dt)
@@ -16,6 +17,11 @@ end
 function LevelProgressionSystem:process(e, dt)
     -- welcome to hack land
     -- mind your step
+
+    -- cheat code toggle godmode
+    if self.input:released('toggleGodMode') and Global.isDebug then
+        Global.isGodMode = not Global.isGodMode
+    end
 
     -- cheat code skip level
     if self.input:released('skiplevel') and Global.isDebug then
