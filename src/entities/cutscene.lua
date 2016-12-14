@@ -119,6 +119,7 @@ function Cutscene:resetState(cutsceneType)
                 'linear'
             )
             wait(2)
+            Signal.emit('ded')
 
             self.offset = {x = 25, y = 30}
             self.sprite = self.explosionSheet

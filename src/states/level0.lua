@@ -35,7 +35,7 @@ Global = {
 }
 Global.currentLevelDefinition = Global.levelDefinitions[Global.currentLevel]
 
-local text = Text('');
+local text = Text('')
 
 Signal.register('write', function(s, speed)
     text:write(s, speed)
