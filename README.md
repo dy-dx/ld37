@@ -8,11 +8,10 @@ To install dependencies with luarocks
 
 https://luarocks.org/ for packages that can be added
 
-To build:
+To build for OS X and Windows:
 
 ```
-cd src
-zip -9 -r SpacePals.love .
+./scripts/build.sh
 ```
 
 SpacePals.love into doctored SpacePals.app (Should be zipped in Dropbox)
