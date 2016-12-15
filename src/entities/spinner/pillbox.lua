@@ -26,12 +26,14 @@ function Pillbox:addPill(pillNumber, pillColor)
 
     local pillWidth = (self.pos.w)/self.maxPills
 
+    local pillStartX = self.pos.x - pillWidth + 10
+
     local pill = Pill(
         pillNumber,
         pillColor,
         50,
         {
-            x = self.pos.x,
+            x = pillStartX,
             y = self.pos.y,
             w = pillWidth - 2 * self.padding,
             h = self.pos.h
