@@ -13,7 +13,8 @@ function Pillbox:init(pos, maxPills, padding)
     self.alpha = 0.5
     self.maxPills = maxPills
     self.padding = padding
-    self.initialPills = 2
+    -- self.initialPills = 2
+    self.initialPills = Global.currentLevelDefinition.spinner.initialPills
 end
 
 function Pillbox:startingPills(colors)

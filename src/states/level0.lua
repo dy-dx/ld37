@@ -26,7 +26,7 @@ Global = {
     isGameWon = false,
     timeSinceOverlayOpened = 0, -- hack for overlay
     isCutscene = true,
-    currentLevel = 1, -- todo: change to 1 when we ship
+    currentLevel = 1, -- change to 1 when we ship
     currentLevelDefinition = nil,
     levelDefinitions = require 'leveldefinitions',
     -- debug stuff
