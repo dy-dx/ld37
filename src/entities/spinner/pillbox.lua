@@ -13,6 +13,15 @@ function Pillbox:init(pos, maxPills, padding)
     self.alpha = 0.6
     self.maxPills = maxPills
     self.padding = padding
+    self.initialPills = 2
+end
+
+function Pillbox:startingPills(colors)
+    for i=1, self.initialPills do
+        local pillNumber = math.random(table.getn(colors))
+        local pillColor = colors[pillNumber]
+        self:addPill(pillNumber, pillColor, true)
+    end
 end
 
 function Pillbox:process(dt)
@@ -22,11 +31,16 @@ function Pillbox:isFull(dt)
     return table.getn(self.pills) == self.maxPills
 end
 
-function Pillbox:addPill(pillNumber, pillColor)
+function Pillbox:addPill(pillNumber, pillColor, isEnd)
 
     local pillWidth = (self.pos.w)/self.maxPills
 
     local pillStartX = self.pos.x - pillWidth + 10
+
+    if (isEnd) then
+        pillStartX = self.pos.x + self.pos.w - pillWidth;
+    end
+
 
     local pill = Pill(
         pillNumber,

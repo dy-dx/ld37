@@ -49,7 +49,14 @@ function SpinnerSystem:preProcess(dt)
 
         world:addEntity(self.spinnerFrame)
         world:addEntity(self.pillBox)
+
+        self.pillBox:startingPills(self.spinnerFrame.colors)
+        lume.map(self.pillBox.pills, function(pill)
+            world:addEntity(pill)
+        end)
     end
+
+
 
     self.cooldown = self.cooldown - dt
 
