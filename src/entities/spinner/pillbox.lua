@@ -10,7 +10,7 @@ function Pillbox:init(pos, maxPills, padding)
     self.isDraw = true
     self.pills = {}
     self.sprite = love.graphics.newImage('assets/images/pills/tube.png')
-    self.alpha = 0.6
+    self.alpha = 0.5
     self.maxPills = maxPills
     self.padding = padding
     self.initialPills = 2
@@ -48,7 +48,7 @@ function Pillbox:addPill(pillNumber, pillColor, isEnd)
         50,
         {
             x = pillStartX,
-            y = self.pos.y,
+            y = self.pos.y+4,
             w = pillWidth - 2 * self.padding,
             h = self.pos.h
         },
