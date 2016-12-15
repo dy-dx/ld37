@@ -29,7 +29,7 @@ Global = {
     currentLevel = 1, -- change to 1 when we ship
     currentLevelDefinition = nil,
     levelDefinitions = require 'leveldefinitions',
-    -- debug stuff
+    -- debug stuff, change to false when we ship
     isDebug = true,
     isGodMode = false,
 }
