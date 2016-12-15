@@ -32,7 +32,7 @@ function CutsceneControlSystem:process(e, dt)
     if not Global.isCutscene then return end
     e.behavior:update(dt)
 
-    if self.input:released('left_click') then
+    if self.input:pressed('left_click') then
         if e.behavior.frame.skipTo then
             e.behavior.setState(e.behavior, e.behavior.frame.skipTo)
             return

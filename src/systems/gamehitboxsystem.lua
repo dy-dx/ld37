@@ -15,7 +15,7 @@ function GameHitboxSystem:postProcess(dt)
 end
 
 function GameHitboxSystem:process(e, dt)
-    if Global.currentGame or not self.input:released('left_click') then return end
+    if Global.currentGame or not self.input:pressed('left_click') then return end
 
     local clickX, clickY = love.mouse.getPosition()
 

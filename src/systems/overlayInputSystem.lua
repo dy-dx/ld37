@@ -20,7 +20,7 @@ function overlayInputSystem:overlayActive(e, dt)
         Global.currentGame = nil
     end
 
-  if self.input:released('left_click') then
+  if self.input:pressed('left_click') then
     clickX, clickY = love.mouse.getPosition()
     local position = {x = clickX, y = clickY}
 

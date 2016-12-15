@@ -33,11 +33,12 @@ end
 function CutsceneDrawSystem:process(e, dt)
     if not Global.isCutscene then return end
     e.timer:update(dt)
+    e.wobbleTimer:update(dt)
 
     -- draw space
-    love.graphics.setColor(0, 0, 0, 255)
+    love.graphics.setColor(0, 0, 0, e.cutsceneAlpha)
     love.graphics.rectangle('fill', 0, 0, 800, 600)
-    love.graphics.setColor(255, 255, 255, 255)
+    love.graphics.setColor(255, 255, 255, e.cutsceneAlpha)
 
     -- draw ship
     -- local sPos = {
@@ -53,15 +54,22 @@ function CutsceneDrawSystem:process(e, dt)
     self.ps:update(dt)
     love.graphics.draw(self.ps, love.graphics.getWidth(), love.graphics.getHeight() * 0.5)
 
+    love.graphics.setColor(255, 255, 255, 255)
     -- draw dialogue
     local line = getCurrentDialogue(e)
     local x = 180
-    local y = 180
+    local y = 130
+    local maxTextWidth = e.maxTextWidth
+    if e.isBridgeRevealed then
+        x = 260
+        y = 46
+        maxTextWidth = 288
+    end
     local font = e.dialogueFont
     if e.behavior.state == 'printNarrativeLine' then
         e.textTime = e.textTime + dt
         e.currentCharacter = math.floor((e.textTime * e.textSpeed) / 1000)
-        local newTextWidth, wrappedText = font:getWrap(line, e.maxTextWidth)
+        local newTextWidth, wrappedText = font:getWrap(line, maxTextWidth)
         local toPrint = {}
         local ncharCounter = 0
         for row, l in ipairs(wrappedText) do
@@ -88,7 +96,7 @@ function CutsceneDrawSystem:process(e, dt)
             e.behavior.setState(e.behavior, e.behavior.frame.skipTo)
         end
     elseif e.behavior.state == 'narrativeLineWaiting' then
-        local newTextWidth, wrappedText = font:getWrap(line, e.maxTextWidth)
+        local newTextWidth, wrappedText = font:getWrap(line, maxTextWidth)
         local i = 1
         lume.map(wrappedText, function(l)
             local currentFont = love.graphics.newText(font, l)

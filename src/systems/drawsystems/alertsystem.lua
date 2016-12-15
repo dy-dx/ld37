@@ -59,7 +59,7 @@ function alertChallenge(e, dt, mask, dangerLevel)
     return
   end
 
-  if dangerLevel == 1 then
+  if dangerLevel == -1 then
     love.graphics.setColor(105, 183, 52, 255)
     mask_effect:send('addRandomNoise', 0.0)
   elseif dangerLevel == 2 then

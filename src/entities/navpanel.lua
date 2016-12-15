@@ -32,6 +32,9 @@ function NavPanel:init()
     self.shipTipY = nil
     self:resetState()
 
+    Signal.register('startCutscene', function()
+        self:resetState()
+    end)
     Signal.register('startLevel', function(level)
         self:resetState()
     end)
