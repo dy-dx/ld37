@@ -1,9 +1,10 @@
 local SpinnerFrame = Class{}
 
-function SpinnerFrame:init(pos)
+function SpinnerFrame:init(center)
     self.spinner = true
-    self.pos = pos
     self.sprite = love.graphics.newImage('assets/images/pills/wheel.png')
+    self.pos = center;
+
     self.offset = {
         x = self.sprite:getWidth() / 2 ,
         y = self.sprite:getHeight() / 2 - 1
@@ -22,6 +23,10 @@ function SpinnerFrame:init(pos)
 
     self.isSpinnerFrame = true
 
+    self.buttonUpSprite = love.graphics.newImage('assets/images/pills/wheelbutton_off.png')
+    self.buttonDownSprite = love.graphics.newImage('assets/images/pills/wheelbutton_on.png')
+    self.buttonCenter = center
+    self.buttonCooldownTimer = 0
 end
 
 function SpinnerFrame:getSelected()

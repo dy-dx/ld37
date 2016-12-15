@@ -18,6 +18,7 @@ function SpinnerSystem:init()
 
     -- self.totalCooldown = 5 -- moved to levelDefinitions
     self.cooldown = 0.1
+    self.buttonCooldown = 1
 
     Signal.register('startLevel', function(level)
         self:reset()
@@ -77,37 +78,56 @@ function SpinnerSystem:dangerTick()
     return Signal.emit('dangerLevel', self.name, 1)
 end
 
-function SpinnerSystem:process(e, dt)
-    if not Utils.isAnActiveGame('spinner') then return end
-    e:process(dt)
-    if e.isDead then
-        world:remove(e)
-    end
+function SpinnerSystem:pressedButton(e)
+    clickX, clickY = love.mouse.getPosition()
 
-    self:dangerTick()
+    local radius = e.buttonUpSprite:getWidth() / 2
+    return (e.buttonCenter.x - clickX) * (e.buttonCenter.x - clickX) +
+        (e.buttonCenter.y - clickY) * (e.buttonCenter.y - clickY)
+        < radius * radius
+end
 
+function SpinnerSystem:startCooldown(e, cooldown)
+    e.buttonCooldownTimer = cooldown
+    self.spinnerFrame:pause(cooldown)
+end
+
+function SpinnerSystem:clickScreen(e)
     if self.input:pressed("mouse1") then
-        clickX, clickY = love.mouse.getPosition()
-        local position = {x = clickX, y = clickY}
-        local spinnerBox = {x = self.spinnerPos.x - 100, y = self.spinnerPos.y - 100, w = 200, h = 200}
-        if(Utils.isInside(position, spinnerBox)) then
+        if(SpinnerSystem:pressedButton(e)) then
             if(0 == table.getn(self.pillBox.pills)) then
                 Signal.emit("failBlip")
-                self.spinnerFrame:pause(1)
+                self:startCooldown(e, self.buttonCooldown)
                 return
             end
 
             if(lume.first(self.pillBox.pills).number == self.spinnerFrame:getSelected()) then
+                self:startCooldown(e, .1)
                 local deadPill = self.pillBox:removePill()
-                self.spinnerFrame:pause(.1)
                 deadPill.isSuicidal = true
                 Signal.emit("woosh")
             else
                 Signal.emit("failBlip")
-                self.spinnerFrame:pause(1)
+                self:startCooldown(e, self.buttonCooldown)
+                return
             end
         end
     end
+end
+
+function SpinnerSystem:process(e, dt)
+    if not Utils.isAnActiveGame('spinner') then return end
+    e:process(dt)
+    if e.isDead then world:remove(e) end
+
+    e.buttonCooldownTimer = e.buttonCooldownTimer - dt
+    if(e.buttonCooldownTimer < 0) then
+        e.buttonCooldownTimer = 0
+    end
+
+    self:dangerTick()
+    self:clickScreen(e)
+
 end
 
 return SpinnerSystem
