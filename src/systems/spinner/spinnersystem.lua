@@ -103,7 +103,7 @@ function SpinnerSystem:clickScreen(e)
     if self.input:pressed("mouse1") then
         if(SpinnerSystem:pressedButton(e)) then
             if(0 == table.getn(self.pillBox.pills)) then
-                Signal.emit("failBlip")
+                Signal.emit("failBuzzer")
                 self:startCooldown(e, self.buttonCooldown)
                 return
             end
@@ -114,7 +114,7 @@ function SpinnerSystem:clickScreen(e)
                 deadPill.isSuicidal = true
                 Signal.emit("woosh")
             else
-                Signal.emit("failBlip")
+                Signal.emit("failBuzzer")
                 self:startCooldown(e, self.buttonCooldown)
                 return
             end

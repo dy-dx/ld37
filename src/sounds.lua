@@ -29,6 +29,9 @@ local loopwoosh = love.audio.newSource('assets/sounds/loopwoosh.wav')
 loopwoosh:setLooping(true)
 loopwoosh:setVolume(1)
 
+local failBuzzer = love.audio.newSource('assets/sounds/wrongbuzzer.wav')
+failBuzzer:setVolume(0.3)
+
 Signal.register('explosion', function ()
     explosion:play()
 end)
@@ -53,8 +56,8 @@ Signal.register('blip', function ()
     blip:play()
 end)
 
-Signal.register('failBlip', function ()
-    failBlip:play()
+Signal.register('failBuzzer', function ()
+    failBuzzer:play()
 end)
 
 Signal.register('consoleButton', function ()
