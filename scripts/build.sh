@@ -7,7 +7,7 @@ cd $PROJECT_DIR
 
 mkdir -p dist
 rm -rf dist/SpacePals.love
-cd src && zip -0 -r SpacePals.love .
+cd src && zip -9 -r SpacePals.love .
 cd ..
 mv src/SpacePals.love dist/
 
