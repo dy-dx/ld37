@@ -23,8 +23,8 @@ function SpinnerFrame:init(center)
 
     self.isSpinnerFrame = true
 
-    self.buttonUpSprite = love.graphics.newImage('assets/images/pills/wheelbutton_off.png')
-    self.buttonDownSprite = love.graphics.newImage('assets/images/pills/wheelbutton_on.png')
+    self.buttonUpSprite = love.graphics.newImage('assets/images/pills/wheelbutton_on.png')
+    self.buttonDownSprite = love.graphics.newImage('assets/images/pills/wheelbutton_off_fixed.png')
     self.buttonCenter = center
     self.buttonCooldownTimer = 0
 end
