@@ -81,7 +81,7 @@ end
 function SpinnerSystem:dangerTick()
     if(not self.pillBox) then return end
     if(table.getn(self.pillBox.pills) >= self.pillBox.maxPills - 1) then return Signal.emit('dangerLevel', self.name, 3) end
-    if(table.getn(self.pillBox.pills) >= self.pillBox.maxPills - 3) then return Signal.emit('dangerLevel', self.name, 2) end
+    if(table.getn(self.pillBox.pills) >= self.pillBox.maxPills - 2) then return Signal.emit('dangerLevel', self.name, 2) end
     return Signal.emit('dangerLevel', self.name, 1)
 end
 

@@ -78,25 +78,18 @@ function VentGasControlSystem:process(e, dt)
         end
     end
 
-    if Global.currentGame == 'ventgas' and self.input:down('left_click') then
-        local x, y = love.mouse.getPosition()
-        checkButton(e.gasPressureButton, e.gasMeter, x, y, dt)
-        checkButton(e.wastePressureButton, e.wasteMeter, x, y, dt)
-        checkButton(e.oxygenPressureButton, e.oxygenMeter, x, y, dt)
-    end
-    if Global.currentGame == 'ventgas' and self.input:released('left_click') then
-        toggleButtonOff(e.gasPressureButton)
-        toggleButtonOff(e.oxygenPressureButton)
-        toggleButtonOff(e.wastePressureButton)
+    if Global.currentGame == 'ventgas' then
+        if self.input:down('left_click') then
+            local x, y = love.mouse.getPosition()
+            checkButton(e.gasPressureButton, e.gasMeter, x, y, dt)
+            checkButton(e.wastePressureButton, e.wasteMeter, x, y, dt)
+            checkButton(e.oxygenPressureButton, e.oxygenMeter, x, y, dt)
+        else
+            toggleButtonOff(e.gasPressureButton)
+            toggleButtonOff(e.oxygenPressureButton)
+            toggleButtonOff(e.wastePressureButton)
 
-        local x, y = love.mouse.getPosition()
-        local buttonType = insideButton(e.gasPressureButton, x, y) or insideButton(e.wastePressureButton, x, y)
-
-        if(buttonType == "gas") then
             Signal.emit("stopspray")
-        end
-
-        if(buttonType == "waste") then
             Signal.emit("stopsludge")
         end
     end

@@ -76,7 +76,7 @@ local levelDefinitions = {
         ventgas = {gasGrowthRate = 8, wasteGrowthRate = 5},
         spinner = {initialPills = 0, timeToPill = 8, wheelSpeed = 7},
         misslowcommand = {speed = 30, timeToMissile = 18},
-        plumbing = {fluidRate = 0.25, startBufferFluidRate = 0.08},
+        plumbing = {fluidRate = 0.23, startBufferFluidRate = 0.08},
         cutsceneDialogue = {
             'Chief Engineer: "Now that there are only two of us, we\'ll be splitting this payload 50/50, right? ... WHAT? What do you mean I still only get 10%?? That\'s it, I\'m out of here."',
             'Well, you\'ve got 99 problems but a crew ain\'t one. It\'s all up to you, now. In addition to your other work, you\'ll need to take on the Chief Engineer\'s main task of maintaining the ship\'s plumbing system.',

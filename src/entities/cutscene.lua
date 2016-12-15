@@ -121,6 +121,10 @@ function Cutscene:init()
 end
 
 function Cutscene:revealBridge(time)
+    if Global.isGameWon then
+        -- sorry, not sorry
+        return
+    end
     self.isBridgeRevealed = true
     self.timer:tween(time or 0.5, self, {alpha = 0, cutsceneAlpha = 0}, 'linear')
 end
